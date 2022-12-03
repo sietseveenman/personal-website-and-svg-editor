@@ -1,6 +1,4 @@
 <template>
-    <div>
-        <span>Layout</span>
-        <slot />
-    </div>
+    <span>Layout</span>
+    <slot />
 </template>
