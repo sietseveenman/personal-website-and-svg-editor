@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useGlobalStore = defineStore('global', {
 		
 	state: () =>  ({
+
 		activePath: undefined,
 		activeAnchor: undefined,
 		
@@ -17,17 +18,19 @@ export const useGlobalStore = defineStore('global', {
 				x:800, y:590
 			},
 			a1: {
-            x: 0, y: 640
+				x: 0, y: 640
 			},
 			c1: {
 				x: 490, y: 550
 			},
 			c2: {
-            x: 176, y: 158
+				x: 176, y: 158
 			},
-		}
-
+		},
+		
 	}),
+
+	persist: true,
 
 	actions: {
 		resetDrag() {
