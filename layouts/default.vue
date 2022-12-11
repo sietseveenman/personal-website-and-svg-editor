@@ -4,41 +4,6 @@
 
 <script setup>
 
-    import { onMounted } from 'vue'
-    import { useGlobalStore } from '@/stores/globalStore'
-
-    const store = useGlobalStore()
-    let prev = null
-
-    onMounted(() => {
-        document.addEventListener('mouseup', resetDrag)
-        document.addEventListener('mousemove', handleDrag )
-    })
-
-    function resetDrag () {
-        store.resetDrag(undefined)
-        prev = null
-    }
-
-    function handleDrag (e) {
-
-        if ( !store.activePath && !store.activeAnchor ) return
-
-        const point = store[store.activePath][store.activeAnchor]
-
-        const mx = e.clientX
-        const my = e.clientY
-
-        if ( prev ) {
-            point.x -= (prev.x - mx)
-            point.y -= (prev.y - my)
-        }
-
-        prev = {
-            x: mx,
-            y: my
-        }
-    }
 </script>
 
 <style lang="scss">
@@ -48,9 +13,10 @@
         --background: var(--black);
         --c-primary: #FC5FFF;
         --c-secondary: #29E818;
+        --c-tertiary: blue;
 
-        --hover-anchor-color: #29E818;
-        --hover-anchor-stroke-width: 1;
+        --hover-anchor-color: white;
+        --hover-anchor-stroke-width: 0.6;
     }
 
     html {

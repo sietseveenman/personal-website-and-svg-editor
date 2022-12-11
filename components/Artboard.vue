@@ -4,23 +4,60 @@
         
             <LayersLogo />
             
-           <!-- 
+            <LayersNose />
+
+            <!-- 
             <RectRadius originalCoords={{x: 1380, y: 920}} />
         
             <RectStretch originalCoords={{x: 460, y: 1190}} />
         
-            <Nose originalCoords={{x:800, y:590}} />
         
             <Board originalCoords={{x:920, y:1290}} /> -->
         
         </svg>
     </div>
 </template>
-<script>
-// export default {
-    
-// }
+
+<script setup>
+
+    import { onMounted } from 'vue'
+    import { useGlobalStore } from '@/stores/globalStore'
+
+    const store = useGlobalStore()
+    let prev = null
+
+    onMounted(() => {
+        document.addEventListener('mouseup', resetDrag)
+        document.addEventListener('mousemove', handleDrag )
+    })
+
+    function resetDrag () {
+        store.resetDrag(undefined)
+        prev = null
+    }
+
+    function handleDrag (e) {
+
+        if ( !store.activePath && !store.activeAnchor ) return
+
+        const point = store[store.activePath][store.activeAnchor]
+
+        const mx = e.clientX
+        const my = e.clientY
+
+        if ( prev ) {
+            point.x -= (prev.x - mx)
+            point.y -= (prev.y - my)
+        }
+
+        prev = {
+            x: mx,
+            y: my
+        }
+    }
+
 </script>
+
 <style lang="scss">
     .artboard {
         width: 100%;
