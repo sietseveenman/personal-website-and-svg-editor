@@ -11,16 +11,28 @@
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
+        <button @click="store.$reset()">reset</button>
     </div>  
 
 
 </template>
 <script>
+
+    import { useGlobalStore } from '@/stores/globalStore'
+
     export default {
-        mounted() {
-            window.scrollTo(340, 615)
+        setup() {
+            const store = useGlobalStore()
+            return { store }
         },
+        computed: {
+            logo(){ return this.store.logo }
+        },
+        beforeMount() {
+            window.scrollTo(340, 615)
+        }
     }
+   
 </script>
 <style lang="scss" scoped>
     .me {
@@ -31,7 +43,19 @@
         pointer-events: none;
         padding: 265px 20px 20px;
     }
-    .follow a{
+    .follow a, 
+    button {
         pointer-events: all;
+    }
+    button {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: var(--c-secondary);
+        font-family: inherit;
+        pointer-events: all;
+        &:hover {
+            color: red;
+        }
     }
 </style>
