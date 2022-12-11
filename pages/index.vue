@@ -34,6 +34,15 @@
     }
    
 </script>
+<style lang="scss">
+    .follow a {
+        pointer-events: all;
+        &:hover svg path {
+            fill: var(--c-primary);
+        }
+    }
+</style>
+
 <style lang="scss" scoped>
     .me {
         position: absolute;
@@ -43,10 +52,7 @@
         pointer-events: none;
         padding: 265px 20px 20px;
     }
-    .follow a, 
-    button {
-        pointer-events: all;
-    }
+    
     button {
         cursor: pointer;
         border: none;
@@ -54,6 +60,7 @@
         color: var(--c-secondary);
         font-family: inherit;
         pointer-events: all;
+
         &:hover {
             color: red;
         }
