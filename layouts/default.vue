@@ -2,8 +2,17 @@
     <slot />
 </template>
 
-<script setup>
+<script> 
+    export default{
+        mounted() {
+            console.log('lets go')
+            setTimeout(() => {
+                window.scrollTo(340, 615)
+                document.getElementById('__cake')?.classList.add('show')
+            }, 0);
+        }
 
+    }
 </script>
 
 <style lang="scss">
@@ -11,9 +20,12 @@
         --font-read: 'Roboto Mono', monospace;
         --black: #000C22;
         --background: var(--black);
-        --c-primary: #FC5FFF;
-        --c-secondary: #29E818;
-        --c-tertiary: blue;
+        --c-one: #FC5FFF;
+        --c-two: #29E818;
+        --c-three: #608CFF;
+        --c-four: #FF6F6F;
+        --c-five: #fcff55;
+        --c-six: #ff1515;
 
         --hover-anchor-color: white;
         --hover-anchor-stroke-width: 0.6;
@@ -23,7 +35,7 @@
         font-family: var(--font-read);
         letter-spacing: 0.025em;
         font-size: 62.5%;
-        color: var(--c-primary);
+        color: var(--c-one);
         -ms-text-size-adjust: 100%;
         -webkit-text-size-adjust: 100%;
         -moz-osx-font-smoothing: grayscale;
@@ -35,6 +47,13 @@
         overscroll-behavior: contain;
         background: var(--background);
         position: relative;
+    }
+    #__cake {
+        opacity: 0;
+        transition: 0.35s ease-in-out 0.2s;
+        &.show {
+            opacity: 1;
+        }
     }
 
     *,
@@ -62,7 +81,7 @@
             top: 58%;
             transform: translateY(-50%);
             height: 0.12em;
-            background: var(--c-secondary);
+            background: var(--c-two);
         }
     }
  

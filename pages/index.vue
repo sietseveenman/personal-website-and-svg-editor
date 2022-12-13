@@ -6,7 +6,7 @@
 
     <div class="me">
         <h2 class="tags">[Dude, Dutch, Dad, <span class="strike">Designer</span>, Developer, ...]</h2>
-        <div class="flex follow" style="color:{ $colors.two }">
+        <div class="follow" style="color:{ $colors.two }">
             <span>Find me on</span>
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
@@ -16,48 +16,44 @@
 
 
 </template>
-<script>
+<script setup>
 
     import { useGlobalStore } from '@/stores/globalStore'
-
-    export default {
-        setup() {
-            const store = useGlobalStore()
-            return { store }
-        },
-        computed: {
-            logo(){ return this.store.logo }
-        },
-        beforeMount() {
-            window.scrollTo(340, 615)
-        }
-    }
+    const store = useGlobalStore()
    
 </script>
 <style lang="scss">
-    .follow a {
-        pointer-events: all;
-        &:hover svg path {
-            fill: var(--c-primary);
+    .follow {
+        padding: 0.75em 0;
+        display: flex;
+        gap: 0.5em; 
+        a {
+            display: block;
+            transform: translateY(0.04em);
+            pointer-events: all;
+            &:hover svg path {
+                fill: var(--c-one);
+            }
         }
     }
 </style>
 
 <style lang="scss" scoped>
     .me {
-        position: absolute;
-        left: 420px;
-        top: 690px;
-        z-index: 2;
         pointer-events: none;
+        position: absolute;
+        top: 690px;
+        left: 400px;
+        width: 100%;
         padding: 265px 20px 20px;
+        z-index: 2;
     }
     
     button {
         cursor: pointer;
         border: none;
         background: transparent;
-        color: var(--c-secondary);
+        color: var(--c-two);
         font-family: inherit;
         pointer-events: all;
 

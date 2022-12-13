@@ -6,10 +6,9 @@
             
             <LayersNose />
 
-            <!-- 
-            <RectRadius originalCoords={{x: 1380, y: 920}} />
+            <LayersRectRadius />
         
-            <RectStretch originalCoords={{x: 460, y: 1190}} />
+            <!-- <RectStretch originalCoords={{x: 460, y: 1190}} />
         
         
             <Board originalCoords={{x:920, y:1290}} /> -->
@@ -38,12 +37,17 @@
 
     function handleDrag (e) {
 
+        const mx = e.clientX
+        const my = e.clientY
+
+        store.mouse = {
+            x: mx,
+            y: my
+        }
+
         if ( !store.activePath && !store.activeAnchor ) return
 
         const point = store[store.activePath][store.activeAnchor]
-
-        const mx = e.clientX
-        const my = e.clientY
 
         if ( prev ) {
             point.x -= (prev.x - mx)
@@ -69,6 +73,7 @@
         z-index: 999;
         cursor: pointer;
         transition: 
+            r 0.42s cubic-bezier(0.785, 0.220, 0.260, 1.420),
             stroke 0.2s ease-in-out,
             stroke-width 0.2s ease-in-out;
         &:hover {

@@ -24,7 +24,7 @@
             stroke-opacity="1"
             @mousedown.prevent="store.setActiveAnchor('logo', 'a1')"
             stroke-width="1"
-            stroke="var(--c-tertiary)"
+            stroke="var(--c-three)"
             id="a1"/>
     </g>
 </template>

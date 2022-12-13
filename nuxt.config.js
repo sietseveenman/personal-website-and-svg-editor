@@ -12,7 +12,6 @@ export default defineNuxtConfig({
   app: {
     rootId: '__cake', // replacing __nuxt id on root element
   },
-
   googleFonts: {
     families: {
       'Roboto+Mono': true,
