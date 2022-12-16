@@ -42,67 +42,6 @@
         computed: {
             nose(){ return this.store.nose }
         },
-        // mounted() {
-        //     // console.log(this)
-        // }
     }
-
-    // import { colors } from '../../../stores/state.js'
-    // import { onMount } from 'svelte'
-
-    // export let originalCoords = { x: 0, y: 0}
-
-    // let handles = {
-    //     c1: {
-    //         x: 490,
-    //         y: 550
-    //     },
-    //     c2: {
-    //         x: 176,
-    //         y: 158
-    //     },
-    //     a1: {
-    //         x: 0,
-    //         y: 640
-    //     }
-    // }
-
-    // let prev = null
-    // let draggingPoint = false
-    // let dragTarget = null
-
-    // function handleDown (e) {
-    //     dragTarget = e.target.id
-    //     draggingPoint = true
-    // }
-
-    // function handleDrag (e) {
-    //     if ( draggingPoint && dragTarget ) {
-            
-    //         let mx = e.clientX
-    //         let my = e.clientY
-
-    //         if ( prev ) {
-    //             handles[dragTarget].x -= (prev.x - mx)
-    //             handles[dragTarget].y -= (prev.y - my)
-    //         }
-
-    //         prev = {
-    //             x: mx,
-    //             y: my
-    //         }
-    //     }
-    // }
-    
-    // function resetDrag(){
-    //     draggingPoint = false
-    //     prev = null
-    // }
-
-    // onMount(() => {
-    //     document.addEventListener('mouseup', resetDrag)
-    //     document.addEventListener('mousemove', handleDrag)
-	// })
-
 
 </script>

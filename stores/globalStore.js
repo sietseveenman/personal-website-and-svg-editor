@@ -7,6 +7,8 @@ export const useGlobalStore = defineStore('global', {
 		activePath: undefined,
 		activeAnchor: undefined,
 		mouse: null,
+		// diff: null,
+
 		logo: {
 			a1: { x: 506, y: 218.168 }
 		},
@@ -18,10 +20,17 @@ export const useGlobalStore = defineStore('global', {
 			c2: 		{ x: 176, y: 158 },
 		},
 		
-		rectRadius: {
+		rectRadiusOne: {
 			position: 	{ x: 1380, y: 920 },
-			radius: 20,
-			h1: { x: 0, y: 138 }
+			size: 140,
+			h1: { x: 0, y: 16 }
+		},
+		
+		rectRadiusTwo: {
+			position: 	{ x: 460, y: 1220 },
+
+			size: 140,
+			h1: { x: 16, y: 0 }
 		}
 	}),
 
@@ -30,11 +39,13 @@ export const useGlobalStore = defineStore('global', {
 	actions: {
 		resetDrag() {
 			this.activePath = undefined
-			this. activeAnchor = undefined
+			this.activeAnchor = undefined
 		},
 		setActiveAnchor(path, id) {
 			this.activePath = path
 			this.activeAnchor = id
-		}
+		},
+		// updateLayer() {
+		// }
 	}
 })

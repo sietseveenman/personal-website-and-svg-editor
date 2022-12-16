@@ -1,18 +1,18 @@
 <template>
-    <g :transform="`translate(${rect.position.x}, ${rect.position.y})`">
+    <g :transform="`translate(${path.position.x}, ${path.position.y})`">
         <rect x="0" y="0" fill="transparent"
-            width="140" height="140" :rx="rect.radius <= 0 ? 0 : rect.radius"
+            :width="path.size" :height="path.size" :rx="radius <= 0 ? 0 : radius"
             transform-origin="70 70"
             transform="rotate(-45  0 0)"
             stroke="var(--c-five)" />
         
         <circle class="handle handle--s"
-            @mousedown.prevent="store.setActiveAnchor('rectRadius', 'h1')"
+            @mousedown.prevent="store.setActiveAnchor(pathName, 'h1')"
             fill="transparent"
             stroke="var(--c-four)"
             stroke-opacity="1"
             stroke-width="1" r="7"
-            :cx="70" :cy="rect.h1.y" />
+            :cx="axis === 'x' ? path.h1.x : 70" :cy="axis === 'y' ? path.h1.y : 70" />
     </g>
 </template>
 
@@ -29,12 +29,16 @@
 
     import { useGlobalStore } from '@/stores/globalStore'
 
+    const props = defineProps({
+        axis: String,
+        pathName: String
+    })
+    
+    const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
+
     const store = useGlobalStore()
-    const rect = computed(() => store.rectRadius)
+    const path = computed( () => store[props.pathName] )
 
-    watch(() => store.rectRadius.h1.y, (newY, oldY) => {
-        store.rectRadius.radius += (oldY - newY) * 0.75
-    }, {deep:true});
-
+    const radius = computed( () => clamp( store[props.pathName].h1[props.axis], 0, 160) ) 
 
 </script>

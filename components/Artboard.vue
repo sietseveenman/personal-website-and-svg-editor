@@ -6,7 +6,9 @@
             
             <LayersNose />
 
-            <LayersRectRadius />
+            <LayersRectRadius axis="y" pathName="rectRadiusOne"/>
+
+            <LayersRectRadius axis="x" pathName="rectRadiusTwo"/>
         
             <!-- <RectStretch originalCoords={{x: 460, y: 1190}} />
         
@@ -18,6 +20,9 @@
 </template>
 
 <script setup>
+
+
+    // TODO: Double click to move layers
 
     import { onMounted } from 'vue'
     import { useGlobalStore } from '@/stores/globalStore'
@@ -50,8 +55,8 @@
         const point = store[store.activePath][store.activeAnchor]
 
         if ( prev ) {
-            point.x -= (prev.x - mx)
-            point.y -= (prev.y - my)
+            point.x -= prev.x - mx
+            point.y -= prev.y - my
         }
 
         prev = {
