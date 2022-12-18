@@ -6,9 +6,9 @@
             
             <LayersNose />
 
-            <LayersRectRadius axis="y" pathName="rectRadiusOne"/>
+            <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-three)"/>
 
-            <LayersRectRadius axis="x" pathName="rectRadiusTwo"/>
+            <LayersRectRadius pathName="rectRadiusTwo"/>
         
             <!-- <RectStretch originalCoords={{x: 460, y: 1190}} />
         
@@ -35,21 +35,21 @@
         document.addEventListener('mousemove', handleDrag )
     })
 
-    function resetDrag () {
+    function resetDrag (e) {
+        e.target.classList.remove('dragging')
         store.resetDrag(undefined)
         prev = null
     }
-
+    
     function handleDrag (e) {
-
         const mx = e.clientX
         const my = e.clientY
-
+        
         store.mouse = {
             x: mx,
             y: my
         }
-
+        
         if ( !store.activePath && !store.activeAnchor ) return
 
         const point = store[store.activePath][store.activeAnchor]
@@ -74,13 +74,16 @@
         position: relative;
         z-index: 2;
     }
+
     .handle {
+        cursor: grab;
         z-index: 999;
-        cursor: pointer;
+
         transition: 
             r 0.42s cubic-bezier(0.785, 0.220, 0.260, 1.420),
             stroke 0.2s ease-in-out,
             stroke-width 0.2s ease-in-out;
+
         &:hover {
             stroke: var(--hover-anchor-color);
             stroke-width: var(--hover-anchor-stroke-width);

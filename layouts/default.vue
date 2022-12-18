@@ -5,84 +5,10 @@
 <script> 
     export default{
         mounted() {
-            console.log('lets go')
             setTimeout(() => {
-                window.scrollTo(340, 615)
-                document.getElementById('__cake')?.classList.add('show')
-            }, 0);
+                window.scrollTo(375, 355)
+                document.body.classList.add('show')
+            }, 350);
         }
-
     }
 </script>
-
-<style lang="scss">
-    :root {
-        --font-read: 'Roboto Mono', monospace;
-        --black: #000C22;
-        --background: var(--black);
-        --c-one: #FC5FFF;
-        --c-two: #29E818;
-        --c-three: #608CFF;
-        --c-four: #FF6F6F;
-        --c-five: #fcff55;
-        --c-six: #ff1515;
-
-        --hover-anchor-color: white;
-        --hover-anchor-stroke-width: 0.6;
-    }
-
-    html {
-        font-family: var(--font-read);
-        letter-spacing: 0.025em;
-        font-size: 62.5%;
-        color: var(--c-one);
-        -ms-text-size-adjust: 100%;
-        -webkit-text-size-adjust: 100%;
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    body {
-        font-size: 1.6rem;
-        overscroll-behavior: contain;
-        background: var(--background);
-        position: relative;
-    }
-    #__cake {
-        opacity: 0;
-        transition: 0.35s ease-in-out 0.2s;
-        &.show {
-            opacity: 1;
-        }
-    }
-
-    *,
-    *::before,
-    *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    h1,h2,h3,h4,h5 {
-        font-size: 100%;
-        font-weight: inherit;
-    }
-    #__cake {
-        position: relative;
-    } 
-    .strike {
-        position: relative;
-        &:after {
-            position: absolute;
-            content:'';
-            left: -0.1em;
-            right: -0.1em;
-            top: 58%;
-            transform: translateY(-50%);
-            height: 0.12em;
-            background: var(--c-two);
-        }
-    }
- 
-</style>

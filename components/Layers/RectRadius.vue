@@ -2,20 +2,22 @@
     <g :transform="`translate(${path.position.x}, ${path.position.y})`">
         <rect x="0" y="0" fill="transparent"
             :width="path.size" :height="path.size" :rx="radius <= 0 ? 0 : radius"
-            transform-origin="70 70"
+            :transform-origin="`${half} ${half}`"
             transform="rotate(-45  0 0)"
             stroke="var(--c-five)" />
         
         <circle class="handle handle--s"
-            @mousedown.prevent="store.setActiveAnchor(pathName, 'h1')"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e, pathName, 'h1')"
             fill="transparent"
             stroke="var(--c-four)"
             stroke-opacity="1"
             stroke-width="1" r="7"
-            :cx="axis === 'x' ? path.h1.x : 70" :cy="axis === 'y' ? path.h1.y : 70" />
+            :cx="'x' === path.axis ? path.h1.x : half" 
+            :cy="'y' === path.axis ? path.h1.y : half" />
     </g>
 </template>
-
+<!-- :cx="path.axis === 'x' ? path.h1.x : half" 
+:cy="path.axis === 'y' ? path.h1.y : half" /> -->
 
 <style scoped lang="scss">
     .handle--s {
@@ -30,7 +32,6 @@
     import { useGlobalStore } from '@/stores/globalStore'
 
     const props = defineProps({
-        axis: String,
         pathName: String
     })
     
@@ -38,7 +39,11 @@
 
     const store = useGlobalStore()
     const path = computed( () => store[props.pathName] )
+    const half = computed( () => store[props.pathName].size / 2 )
 
-    const radius = computed( () => clamp( store[props.pathName].h1[props.axis], 0, 160) ) 
+    const radius = computed( () => {
+        let path = store[props.pathName]
+        return clamp( path.h1[path.axis], 0, path.size)
+    } ) 
 
 </script>

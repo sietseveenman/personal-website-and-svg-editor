@@ -20,7 +20,7 @@
 
     import { useGlobalStore } from '@/stores/globalStore'
     const store = useGlobalStore()
-   
+    
 </script>
 <style lang="scss">
     .follow {
@@ -42,10 +42,10 @@
     .me {
         pointer-events: none;
         position: absolute;
-        top: 690px;
+        top: 400px;
         left: 400px;
         width: 100%;
-        padding: 265px 20px 20px;
+        padding: 330px 10px 30px 30px;
         z-index: 2;
     }
     

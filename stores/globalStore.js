@@ -1,47 +1,50 @@
 import { defineStore } from 'pinia'
 
 export const useGlobalStore = defineStore('global', {
-		
+	persist: true,
+	
 	state: () =>  ({
 
 		activePath: undefined,
 		activeAnchor: undefined,
 		mouse: null,
-		// diff: null,
 
 		logo: {
+			position: { x: 430, y: 460 },
 			a1: { x: 506, y: 218.168 }
 		},
 
 		nose: {
-			position: 	{ x:800, y:590 },
+			position: 	{ x: 760, y: 260 },
 			a1: 		{ x: 0, y: 640 },
-			c1: 		{ x: 490, y: 550 },
-			c2: 		{ x: 176, y: 158 },
+			a2: 		{ x: 590, y: 0 },
+			c1: 		{ x: 508, y: 557 },
+			c2: 		{ x: 124, y: 184 },
 		},
 		
 		rectRadiusOne: {
-			position: 	{ x: 1380, y: 920 },
-			size: 140,
-			h1: { x: 0, y: 16 }
+			position: 	{ x: 1420, y: 540 },
+			size: 180,
+			axis: 'x',
+			h1: { x: 18, y: 0 }
 		},
 		
 		rectRadiusTwo: {
-			position: 	{ x: 460, y: 1220 },
-
+			position: 	{ x: 500, y: 960 },
 			size: 140,
-			h1: { x: 16, y: 0 }
+			axis: 'y',
+			h1: { x: 0, y: 18 }
 		}
 	}),
 
-	persist: true,
-
 	actions: {
 		resetDrag() {
+			document.body.classList.remove('dragging')
 			this.activePath = undefined
 			this.activeAnchor = undefined
 		},
-		setActiveAnchor(path, id) {
+		setActiveAnchor(e, path, id) {
+			document.body.classList.add('dragging')
 			this.activePath = path
 			this.activeAnchor = id
 		},
