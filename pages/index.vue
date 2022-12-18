@@ -11,7 +11,7 @@
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
-        <button @click="store.$reset()">reset</button>
+        <button @click="store.rewind()">reset</button>
     </div>  
 
 
