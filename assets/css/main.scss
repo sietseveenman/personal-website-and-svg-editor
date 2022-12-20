@@ -1,7 +1,7 @@
 :root {
     --font-read: 'Roboto Mono', monospace;
-    --black: #000C22;
-    --background: var(--black);
+    --c-black: #000C22;
+    --background: var(--c-black);
     --c-one: #FC5FFF;
     --c-two: #29E818;
     --c-three: #608CFF;
@@ -31,6 +31,7 @@ body {
     position: relative;
     min-width: 101vw;
     min-height: 101vh;
+    overflow: hidden;
     
     &.dragging, 
     &.dragging  * {
@@ -60,6 +61,16 @@ h1,h2,h3,h4,h5 {
     font-size: 100%;
     font-weight: inherit;
 }
+::selection {
+    background: var(--c-three);
+    color: var(--c-black)!important;
+    text-shadow: none;
+}
+
+// h2::selection, h1::selection {
+//     background: var(--green);
+//     color: var(--black);
+// }
 
 .strike {
     position: relative;

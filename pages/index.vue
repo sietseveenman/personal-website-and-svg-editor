@@ -11,7 +11,7 @@
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
-        <button @click="store.rewind()">reset</button>
+        <button @click="store.rewind()" :class="{'disabled': !store.hasChanged}">reset</button>
     </div>  
 
 
@@ -50,15 +50,19 @@
     }
     
     button {
-        cursor: pointer;
         border: none;
         background: transparent;
         color: var(--c-two);
         font-family: inherit;
         pointer-events: all;
-
-        &:hover {
+        transition: opacity 0.4s ease-in-out;
+        
+        &:not(.disabled):hover {
+            cursor: pointer;
             color: red;
+        }
+        &.disabled {
+            opacity: 0.15;
         }
     }
 </style>

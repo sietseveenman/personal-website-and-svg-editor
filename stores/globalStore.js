@@ -34,15 +34,32 @@ const initialLayers = JSON.stringify({
 export const useGlobalStore = defineStore('global', {
 
 	state: () => ({ 
+		hasChanged: false,
 		activePath: undefined,
 		activeAnchor: undefined,
 		mouse: null,
+		keysDown: [],
 		... JSON.parse(initialLayers)
 	}),
 
 	persist: true,
 
 	actions: {
+		keyDown(e) {
+	
+			// prevent scrolling on space press
+			if (e.keyCode == 32 && e.target == document.body) {
+				e.preventDefault();
+			} 
+
+			if ( this.keysDown.includes(e.code) ) return
+			this.keysDown.push(e.code) 
+		},
+		
+		keyUp(e) {
+			this.keysDown.splice( this.keysDown.indexOf(e.code), 1 )
+		},
+
 		resetDrag() {
 			document.body.classList.remove('dragging')
 			this.mouse = undefined
@@ -57,6 +74,9 @@ export const useGlobalStore = defineStore('global', {
 		},
 		
 		rewind() {
+			
+			this.hasChanged = false
+
 			const initial = JSON.parse(initialLayers)
 
 			for (const layer in initial) {
@@ -100,8 +120,12 @@ export const useGlobalStore = defineStore('global', {
 				}
 			}
 		},
-	}
+	},
 })
+
+window.addEventListener('blur', () => useGlobalStore().keysDown = []);
+document.addEventListener('load', useGlobalStore().keysDown = []);
+
 function easeInOutExpo (t, b, c, d) {
     if (t == 0) return b
     if (t == d) return b + c

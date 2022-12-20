@@ -33,6 +33,9 @@
     onMounted(() => {
         document.addEventListener('mouseup', resetDrag)
         document.addEventListener('mousemove', handleDrag )
+
+        window.addEventListener('keydown',(e)=> store.keyDown(e))
+        window.addEventListener('keyup',(e)=> store.keyUp(e))
     })
 
     function resetDrag (e) {
@@ -55,6 +58,7 @@
         const point = store[store.activePath][store.activeAnchor]
 
         if ( prev ) {
+            store.hasChanged = true
             point.x -= prev.x - mx
             point.y -= prev.y - my
         }
