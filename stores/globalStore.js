@@ -32,32 +32,43 @@ const initialLayers = JSON.stringify({
 })
 
 export const useGlobalStore = defineStore('global', {
-
+	
 	state: () => ({ 
 		hasChanged: false,
 		activePath: undefined,
 		activeAnchor: undefined,
+		mouseDown: false,
+		artBoardPosition: {
+			x: 375,
+			y: 355
+		},
 		mouse: null,
 		keysDown: [],
 		... JSON.parse(initialLayers)
 	}),
-
+	
 	persist: true,
 
 	actions: {
 		keyDown(e) {
 	
-			// prevent scrolling on space press
-			if (e.keyCode == 32 && e.target == document.body) {
-				e.preventDefault();
+			if (e.keyCode == 32 && e.target == document.body) { // prevent scrolling on space press
+				e.preventDefault()
 			} 
 
-			if ( this.keysDown.includes(e.code) ) return
-			this.keysDown.push(e.code) 
+			if ( ! this.keysDown.includes(e.code) ) {
+				this.keysDown.push(e.code) 
+			}
+			
+			if (e.keyCode == 32 && !this.activePath ) {
+				document.body.classList.add('grabbable')
+			}
+
 		},
 		
 		keyUp(e) {
 			this.keysDown.splice( this.keysDown.indexOf(e.code), 1 )
+			document.body.classList.remove('grabbable')
 		},
 
 		resetDrag() {
@@ -123,8 +134,8 @@ export const useGlobalStore = defineStore('global', {
 	},
 })
 
-window.addEventListener('blur', () => useGlobalStore().keysDown = []);
-document.addEventListener('load', useGlobalStore().keysDown = []);
+// window.addEventListener('blur', () => useGlobalStore().keysDown = []);
+// document.addEventListener('load', useGlobalStore().keysDown = []);
 
 function easeInOutExpo (t, b, c, d) {
     if (t == 0) return b

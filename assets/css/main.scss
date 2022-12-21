@@ -33,6 +33,10 @@ body {
     min-height: 101vh;
     overflow: hidden;
     
+    &.grabbable {
+        cursor: grab;
+    }
+
     &.dragging, 
     &.dragging  * {
         cursor: grabbing!important;

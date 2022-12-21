@@ -3,10 +3,19 @@
 </template>
 
 <script> 
-    export default{
+    import { useGlobalStore } from '@/stores/globalStore'
+
+    export default {
+        setup() {
+            const store = useGlobalStore()
+            return { store }
+        },
+        computed: {
+            artboardPos() { return this.store.artBoardPosition }
+        },  
         mounted() {
             setTimeout(() => {
-                window.scrollTo(375, 355)
+                window.scrollTo(this.artboardPos.x, this.artboardPos.y)
                 document.body.classList.add('show')
             }, 350);
         }

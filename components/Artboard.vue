@@ -32,15 +32,23 @@
 
     onMounted(() => {
         document.addEventListener('mouseup', resetDrag)
+        document.addEventListener('mousedown', handleMouseDown)
         document.addEventListener('mousemove', handleDrag )
 
         window.addEventListener('keydown',(e)=> store.keyDown(e))
         window.addEventListener('keyup',(e)=> store.keyUp(e))
     })
 
+    function handleMouseDown(e) {
+        if (e.target.closest('.handle')) return
+        e.preventDefault()
+        store.mouseDown = true
+    }
+
     function resetDrag (e) {
         e.target.classList.remove('dragging')
         store.resetDrag(undefined)
+        store.mouseDown = false
         prev = null
     }
     
@@ -53,14 +61,24 @@
             y: my
         }
         
-        if ( !store.activePath && !store.activeAnchor ) return
-
-        const point = store[store.activePath][store.activeAnchor]
-
         if ( prev ) {
-            store.hasChanged = true
-            point.x -= prev.x - mx
-            point.y -= prev.y - my
+            let diff = {
+                x: prev.x - mx,
+                y: prev.y - my,
+
+            }
+            if ( store.activePath && store.activeAnchor ) {
+                const point = store[store.activePath][store.activeAnchor]
+                store.hasChanged = true
+                point.x -= diff.x
+                point.y -= diff.y
+            }
+            
+            else if ( store.mouseDown && store.keysDown.includes('Space')) {
+                store.artBoardPosition.x += diff.x
+                store.artBoardPosition.y += diff.y
+                window.scrollTo(store.artBoardPosition.x, store.artBoardPosition.y)
+            }
         }
 
         prev = {

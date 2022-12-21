@@ -11,7 +11,8 @@
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
-        <button @click="store.rewind()" :class="{'disabled': !store.hasChanged}">reset</button>
+        <small>hold spacebar to drag</small><br/>
+        <button @click="store.rewind()" :class="{'disabled': !store.hasChanged}">reset anchors</button>
     </div>  
 
 
@@ -24,7 +25,7 @@
 </script>
 <style lang="scss">
     .follow {
-        padding: 0.75em 0;
+        padding: 0.75em 0 1.35em;
         display: flex;
         gap: 0.5em; 
         a {
@@ -48,7 +49,10 @@
         padding: 330px 10px 30px 30px;
         z-index: 2;
     }
-    
+    small {
+        color: var(--c-two);
+        opacity: 0.55;
+    }
     button {
         border: none;
         background: transparent;
@@ -56,6 +60,7 @@
         font-family: inherit;
         pointer-events: all;
         transition: opacity 0.4s ease-in-out;
+        opacity: 0.55;
         
         &:not(.disabled):hover {
             cursor: pointer;
