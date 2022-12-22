@@ -11,7 +11,7 @@
             <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
-        <small>hold spacebar to drag</small><br/>
+        <small>hold down spacebar and mouse to drag</small><br/>
         <button @click="store.rewind()" :class="{'disabled': !store.hasChanged}">reset anchors</button>
     </div>  
 
@@ -51,7 +51,7 @@
     }
     small {
         color: var(--c-two);
-        opacity: 0.55;
+        opacity: 0.8;
     }
     button {
         border: none;
@@ -60,8 +60,8 @@
         font-family: inherit;
         pointer-events: all;
         transition: opacity 0.4s ease-in-out;
-        opacity: 0.55;
-        
+        opacity: 0.8;
+
         &:not(.disabled):hover {
             cursor: pointer;
             color: red;

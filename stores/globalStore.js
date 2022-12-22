@@ -2,6 +2,10 @@ import { defineStore } from 'pinia'
 import gsap from 'gsap'
 
 const initialLayers = JSON.stringify({
+	artBoardPosition: {
+		x: 375,
+		y: 355
+	},
 
 	logo: {
 		position: { x: 430, y: 460 },
@@ -38,10 +42,7 @@ export const useGlobalStore = defineStore('global', {
 		activePath: undefined,
 		activeAnchor: undefined,
 		mouseDown: false,
-		artBoardPosition: {
-			x: 375,
-			y: 355
-		},
+
 		mouse: null,
 		keysDown: [],
 		... JSON.parse(initialLayers)
@@ -90,6 +91,7 @@ export const useGlobalStore = defineStore('global', {
 
 			const initial = JSON.parse(initialLayers)
 
+			
 			for (const layer in initial) {
 			
 				const layerObj = initial[layer]

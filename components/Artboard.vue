@@ -42,11 +42,13 @@
     function handleMouseDown(e) {
         if (e.target.closest('.handle')) return
         e.preventDefault()
+        if ( store.keysDown.includes('Space') ) document.body.classList.add('dragging')
         store.mouseDown = true
     }
 
     function resetDrag (e) {
         e.target.classList.remove('dragging')
+        document.body.classList.remove('dragging')
         store.resetDrag(undefined)
         store.mouseDown = false
         prev = null
