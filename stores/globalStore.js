@@ -16,7 +16,7 @@ const initialLayers = JSON.stringify({
 		position: 	{ x: 760, y: 260 },
 		a1: 		{ x: 0, y: 640 },
 		a2: 		{ x: 590, y: 0 },
-		c1: 		{ x: 508, y: 557 },
+		c1: 		{ x: 330, y: 800 },
 		c2: 		{ x: 124, y: 184 },
 	},
 	
