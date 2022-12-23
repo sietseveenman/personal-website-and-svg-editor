@@ -10,6 +10,20 @@
 
             <LayersRectRadius pathName="rectRadiusTwo"/>
         
+
+            <!-- 
+                Circel waarvan je alleen de straal als lijn zichtbaar is. Die straal kun je rond draggen om de circel vol te laten lopen
+                <PieSlice />
+            -->
+
+            <!-- 
+               Lijn met een aantal anker punten, als je die versleept gebeurt het zelfde aan de spiegel zijde (zelfde als board)
+                <Mirror />
+            -->
+
+
+            <LayersSkateboard />
+
             <!-- <RectStretch originalCoords={{x: 460, y: 1190}} />
         
         

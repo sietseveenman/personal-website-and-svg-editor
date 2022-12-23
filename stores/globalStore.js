@@ -21,17 +21,34 @@ const initialLayers = JSON.stringify({
 	},
 	
 	rectRadiusOne: {
-		position: 	{ x: 1420, y: 540 },
+		position: 	{ x: 760, y: 1150 },
 		size: 180,
 		axis: 'x',
 		h1: { x: 18, y: 0 }
 	},
 	
 	rectRadiusTwo: {
-		position: 	{ x: 500, y: 960 },
+		position: 	{ x: 500, y: 1000 },
 		size: 140,
 		axis: 'y',
 		h1: { x: 0, y: 18 }
+	},
+
+	skateboard: {
+		position: { x: 1350, y: 550 },
+		a_top: { x: 0, y: 173 },
+		a_top__h: { x: 0, y: 95 },
+
+		a_1: 	  { x: 87, y: 1 },
+		a_1__h_1: { x: 39.8, y: 3.6 },
+		a_1__h_2: { x: 134, y: 3.6 },
+
+		a_2: 	  { x: 87.0255, y: 1 },
+		a_2__h_1: { x: 173, y: 3.6 },
+		a_2__h_2: { x: 173, y: 251 },
+
+		a_bot: { x: 141, y: 540 },
+		a_bot__h: { x: 145, y: 535 },
 	}
 })
 
@@ -48,7 +65,7 @@ export const useGlobalStore = defineStore('global', {
 		... JSON.parse(initialLayers)
 	}),
 	
-	persist: true,
+	// persist: true,
 
 	actions: {
 		keyDown(e) {
