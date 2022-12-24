@@ -12,7 +12,7 @@
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
         <small>hold down <span :style="{ color: store.keysDown.includes('Space') ? 'var(--c-three)' : 'currentColor' }">spacebar</span> and <span :style="{ color: store.keysDown.includes('Space') && store.mouseDown ? 'var(--c-three)' : 'currentColor' }">mouse</span> to drag the artboard</small><br/>
-        <button @click="store.rewind()" :class="{'disabled': !store.hasChanged}">reset anchors</button>
+        <button @click="store.rewind()" :class="{'disabled': !store.anchorsHaveChanged}">reset anchors</button>
     </div>  
 
 

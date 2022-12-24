@@ -16,12 +16,12 @@ const initialLayers = JSON.stringify({
 		position: 	{ x: 760, y: 260 },
 		a1: 		{ x: 0, y: 640 },
 		a2: 		{ x: 590, y: 0 },
-		c1: 		{ x: 330, y: 800 },
+		c1: 		{ x: 360, y: 740 },
 		c2: 		{ x: 124, y: 184 },
 	},
 	
 	rectRadiusOne: {
-		position: 	{ x: 760, y: 1150 },
+		position: 	{ x: 800, y: 1150 },
 		size: 180,
 		axis: 'x',
 		h1: { x: 18, y: 0 }
@@ -35,37 +35,39 @@ const initialLayers = JSON.stringify({
 	},
 
 	skateboard: {
-		position: { x: 1350, y: 550 },
-		a_top: { x: 0, y: 173 },
-		a_top__h: { x: 0, y: 95 },
+		position:{ x: 1300, y: 550 },
+		
+		_top:	 { x: 87, y: 0 },
+		_top__h: { x: 39.8, y: 3.6 },
 
-		a_1: 	  { x: 87, y: 1 },
-		a_1__h_1: { x: 39.8, y: 3.6 },
-		a_1__h_2: { x: 134, y: 3.6 },
+		_1: 	 { x: 0, y: 173 },
+		_1__h_1: { x: 0, y: 95 },
+		_1__h_2: { x: 0, y: 251 },
 
-		a_2: 	  { x: 87.0255, y: 1 },
-		a_2__h_1: { x: 173, y: 3.6 },
-		a_2__h_2: { x: 173, y: 251 },
+		_2: 	 { x: 33, y: 540 },
+		_2__h_1: { x: 29, y: 533 },
+		_2__h_2: { x: 37, y: 547 },
 
-		a_bot: { x: 141, y: 540 },
-		a_bot__h: { x: 145, y: 535 },
+		_bot: 	 { x: 87, y: 572 },
+		_bot__h: { x: 87,  y: 572 },
 	}
 })
 
 export const useGlobalStore = defineStore('global', {
 	
 	state: () => ({ 
-		hasChanged: false,
+		anchorsHaveChanged: false,
 		activePath: undefined,
 		activeAnchor: undefined,
 		mouseDown: false,
-
+		lockedAxis: undefined,
+		joinedPoints: [],
 		mouse: null,
 		keysDown: [],
 		... JSON.parse(initialLayers)
 	}),
 	
-	// persist: true,
+	persist: true,
 
 	actions: {
 		keyDown(e) {
@@ -94,17 +96,21 @@ export const useGlobalStore = defineStore('global', {
 			this.mouse = undefined
 			this.activePath = undefined
 			this.activeAnchor = undefined
+			this.lockedAxis = []
 		},
 
-		setActiveAnchor(e, path, id) {
+		setActiveAnchor(e, path, id, lockAxis = undefined, joinedPoints = [], mirrorPoints = undefined) {
 			document.body.classList.add('dragging')
 			this.activePath = path
 			this.activeAnchor = id
+			this.lockedAxis = lockAxis
+			this.joinedPoints = joinedPoints
+			this.mirrorPoints = mirrorPoints
 		},
 		
 		rewind() {
 			
-			this.hasChanged = false
+			this.anchorsHaveChanged = false
 
 			const initial = JSON.parse(initialLayers)
 

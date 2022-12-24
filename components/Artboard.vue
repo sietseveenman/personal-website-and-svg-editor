@@ -85,9 +85,18 @@
             }
             if ( store.activePath && store.activeAnchor ) {
                 const point = store[store.activePath][store.activeAnchor]
-                store.hasChanged = true
-                point.x -= diff.x
-                point.y -= diff.y
+                if ( store.lockedAxis !== 'x' )  point.x -= diff.x
+                if ( store.lockedAxis !== 'y' )  point.y -= diff.y
+
+                if ( store.joinedPoints ) {
+                    store.joinedPoints.forEach(joinedPoint => {
+                        const jp = store[store.activePath][joinedPoint]
+                        if ( store.lockedAxis !== 'x' ) jp.x -= diff.x
+                        if ( store.lockedAxis !== 'y' ) jp.y -= diff.y
+                    });
+                } 
+
+                store.anchorsHaveChanged = true
             }
             
             else if ( store.mouseDown && store.keysDown.includes('Space')) {

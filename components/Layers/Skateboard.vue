@@ -1,5 +1,5 @@
 <template>
-    <g class="logo" :transform="`translate(${layer.position.x}, ${layer.position.y})`" fill="transparent">
+    <g class="skateboard" :transform="`translate(${layer.position.x}, ${layer.position.y})`" fill="transparent">
 
         <g style="opacity: 0.75">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M70.4031 462.193L72.7738 464.564L73.3007 464.037L70.9299 461.666L73.3007 459.296L72.7738 458.769L70.4031 461.14L68.032 458.769L67.5051 459.295L69.8762 461.666L67.5051 464.038L68.032 464.564L70.4031 462.193Z" fill="var(--c-six)"/>
@@ -17,14 +17,79 @@
         <path :d="boardPath" stroke="var(--c-six)" stroke-width="0.8"/>
 
         <rect  class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', 'a_top__h')"
-            parent="T_A"
-            fill="transparent" stroke="grey" stroke-opacity="0.8" stroke-width="0.8" 
-            width="16" height="16" :transform="`rotate(45 ${ layer.a_top__h.x } ${ layer.a_top__h.y })`"
-            :x="layer.a_top__h.x - 8" :y="layer.a_top__h.y - 8"/> 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_top', 'x', ['_top__h'])"
+            fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
+            width="12" height="12" :transform="`rotate(45 ${ layer._top.x } ${ layer._top.y })`"
+            :x="layer._top.x - 6" :y="layer._top.y - 6"/> 
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_top__h')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._top__h.x" :cy="layer._top__h.y" />
+
+
+        <rect class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1', undefined, ['_1__h_1', '_1__h_2'])"
+            fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
+            width="12" height="12" :transform="`rotate(45 ${ layer._1.x } ${ layer._1.y })`"
+            :x="layer._1.x - 6" :y="layer._1.y - 6"/> 
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_1', undefined, undefined, '_1__h_2')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._1__h_1.x" :cy="layer._1__h_1.y" />
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_2', undefined, undefined, '_1__h_1')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._1__h_2.x" :cy="layer._1__h_2.y" />
+
+
+        <rect class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2', undefined, ['_2__h_1', '_2__h_2'])"
+            fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
+            width="12" height="12" :transform="`rotate(45 ${ layer._2.x } ${ layer._2.y })`"
+            :x="layer._2.x - 6" :y="layer._2.y - 6"/> 
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_1', undefined, undefined, '_2__h_2')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._2__h_1.x" :cy="layer._2__h_1.y" />
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_2', undefined, undefined, '_2__h_1')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._2__h_2.x" :cy="layer._2__h_2.y" />
+
+
+        <rect  class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot', 'x', ['_bot__h'])"
+            fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
+            width="12" height="12" :transform="`rotate(45 ${ layer._bot.x } ${ layer._bot.y })`"
+            :x="layer._bot.x - 6" :y="layer._bot.y - 6"/> 
+
+        <circle class="handle" 
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot__h')"
+            fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
+            :cx="layer._bot__h.x" :cy="layer._bot__h.y" />
+
+
     </g>
 </template>
+<style lang="scss" scoped>
+.handle {
+    opacity: 0.2;
+    transition: opacity 0.2s ease-in-out
 
+}
+.skateboard {
+    &:hover {
+        .handle {
+            opacity: 0.9;
+        }
+    }
+}
+</style>
 <script setup>
     import { useGlobalStore } from '@/stores/globalStore'
 
@@ -32,16 +97,18 @@
     const layer = computed( () => store.skateboard )
     const boardPath = computed( () => {
         const path = store.skateboard
+        const width = path._top.x * 2 
         return `
-            M${ path.a_top.x    }  ${ path.a_top.y    }
-            C${ path.a_top__h.x }  ${ path.a_top__h.y }  ${ path.a_1__h_1.x }  ${ path.a_1__h_1.y }  ${ path.a_1.x      }  ${ path.a_1.y }
-            C${ path.a_1__h_2.x }  ${ path.a_1__h_2.y }  ${ path.a_2__h_1.x }  ${ path.a_top__h.y }  ${ path.a_2__h_1.x }  ${ path.a_top.y }
-            C${ path.a_2__h_2.x }  ${ path.a_2__h_2.y }  ${ path.a_bot__h.x }  ${ path.a_bot__h.y }  ${ path.a_bot.x    }  ${ path.a_bot.y }
+            M ${ path._top.x    }  ${ path._top.y    }
+            C ${ path._top__h.x }  ${ path._top__h.y }  ${ path._1__h_1.x }  ${ path._1__h_1.y }  ${ path._1.x   }  ${ path._1.y   }
+            C ${ path._1__h_2.x }  ${ path._1__h_2.y }  ${ path._2__h_1.x }  ${ path._2__h_1.y }  ${ path._2.x   }  ${ path._2.y   }
+            C ${ path._2__h_2.x }  ${ path._2__h_2.y }  ${ path._bot__h.x }  ${ path._bot__h.y }  ${ path._bot.x }  ${ path._bot.y }
             
-            C136.879 547.083 ${ path.a_1.x } 572.787 ${ path.a_1.x } 572.787
-            C${ path.a_1.x } 572.787 37.2042 547.083 33.0956 ${ path.a_bot.y }
-            C28.9871 ${ path.a_bot__h.y } 0.649801 ${ path.a_2__h_2.y } ${ path.a_top.x } ${ path.a_top.y }Z
+            C ${ width - path._bot__h.x }  ${ path._bot__h.y }  ${ width - path._2__h_2.x }  ${ path._2__h_2.y }  ${ width - path._2.x   }  ${ path._2.y   }
+            C ${ width - path._2__h_1.x }  ${ path._2__h_1.y }  ${ width - path._1__h_2.x }  ${ path._1__h_2.y }  ${ width - path._1.x   }  ${ path._1.y   }
+            C ${ width - path._1__h_1.x }  ${ path._1__h_1.y }  ${ width - path._top__h.x }  ${ path._top__h.y }  ${ width - path._top.x }  ${ path._top.y }
         `
+    
     })
 
 
