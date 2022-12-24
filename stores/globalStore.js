@@ -23,15 +23,15 @@ const initialLayers = JSON.stringify({
 	rectRadiusOne: {
 		position: 	{ x: 800, y: 1150 },
 		size: 180,
-		axis: 'x',
-		h1: { x: 18, y: 0 }
+		axis: 'y',
+		h1: { x: 0, y: 18 }
 	},
 	
 	rectRadiusTwo: {
 		position: 	{ x: 500, y: 1000 },
 		size: 140,
-		axis: 'y',
-		h1: { x: 0, y: 18 }
+		axis: 'x',
+		h1: { x: 18, y: 0 }
 	},
 
 	skateboard: {
@@ -67,7 +67,7 @@ export const useGlobalStore = defineStore('global', {
 		... JSON.parse(initialLayers)
 	}),
 	
-	persist: true,
+	// persist: true,
 
 	actions: {
 		keyDown(e) {
