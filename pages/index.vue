@@ -8,8 +8,8 @@
         <h2 class="tags">[Dude, Dutch, Dad, <span class="strike">Designer</span>, Developer, ...]</h2>
         <div class="follow" style="color:{ $colors.two }">
             <span>Find me on</span>
-            <span><a href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
-            <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
+            <span><a aria-label="Visit my LinkedIn account" target="_blank" href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
+            <span><a aria-label="Visit my Instagram account" target="_blank" href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
         <small>hold down <span :style="{ color: store.keysDown.includes('Space') ? 'var(--c-three)' : 'currentColor' }">spacebar</span> and <span :style="{ color: store.keysDown.includes('Space') && store.mouseDown ? 'var(--c-three)' : 'currentColor' }">mouse</span> to drag the artboard</small><br/>
         <small>hold down <span :style="{ color: store.keysDown.includes('AltLeft') ? 'var(--c-three)' : 'currentColor' }">left Alt</span> to unlock mirrored handles</small><br/>
