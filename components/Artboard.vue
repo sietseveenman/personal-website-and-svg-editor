@@ -4,7 +4,7 @@
         
             <LayersLogo />
             
-            <LayersNose />
+            <LayersLine pathName="lineOne"/>
 
             <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-three)"/>
 

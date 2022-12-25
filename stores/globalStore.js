@@ -12,7 +12,7 @@ const initialLayers = JSON.stringify({
 		a1: { x: 506, y: 218.168 }
 	},
 
-	nose: {
+	lineOne: {
 		position: 	{ x: 760, y: 260 },
 		a1: 		{ x: 0, y: 640 },
 		a2: 		{ x: 590, y: 0 },
@@ -138,7 +138,7 @@ export const useGlobalStore = defineStore('global', {
 										end = obj[subProperty],
 										diff = end - start,
 										duration = 1 + Math.abs(diff*0.0005)
-										
+
 									let tween = gsap.to( obj, {
 										[subProperty]: end,
 										duration: duration,
