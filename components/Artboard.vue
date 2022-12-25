@@ -78,15 +78,25 @@
         }
         
         if ( prev ) {
+
             let diff = {
                 x: prev.x - mx,
                 y: prev.y - my,
-
             }
+
             if ( store.activePath && store.activeAnchor ) {
+
                 const point = store[store.activePath][store.activeAnchor]
+
                 if ( store.lockedAxis !== 'x' )  point.x -= diff.x
                 if ( store.lockedAxis !== 'y' )  point.y -= diff.y
+
+                if ( store.mirrorPoint && ! store.keysDown.includes('AltLeft') ) {
+                    const mPoint = store[store.activePath][store.mirrorPoint]
+
+                    if ( store.lockedAxis !== 'x' ) mPoint.x += diff.x
+                    if ( store.lockedAxis !== 'y' ) mPoint.y += diff.y
+                } 
 
                 if ( store.joinedPoints ) {
                     store.joinedPoints.forEach(joinedPoint => {
@@ -95,7 +105,8 @@
                         if ( store.lockedAxis !== 'y' ) jp.y -= diff.y
                     });
                 } 
-
+       
+                
                 store.anchorsHaveChanged = true
             }
             

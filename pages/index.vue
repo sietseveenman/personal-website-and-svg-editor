@@ -12,6 +12,7 @@
             <span><a href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
         <small>hold down <span :style="{ color: store.keysDown.includes('Space') ? 'var(--c-three)' : 'currentColor' }">spacebar</span> and <span :style="{ color: store.keysDown.includes('Space') && store.mouseDown ? 'var(--c-three)' : 'currentColor' }">mouse</span> to drag the artboard</small><br/>
+        <small>hold down <span :style="{ color: store.keysDown.includes('AltLeft') ? 'var(--c-three)' : 'currentColor' }">left Alt</span> to unlock mirrored handles</small><br/>
         <button @click="store.rewind()" :class="{'disabled': !store.anchorsHaveChanged}">reset anchors</button>
     </div>  
 

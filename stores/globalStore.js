@@ -57,17 +57,20 @@ export const useGlobalStore = defineStore('global', {
 	
 	state: () => ({ 
 		anchorsHaveChanged: false,
+
 		activePath: undefined,
 		activeAnchor: undefined,
-		mouseDown: false,
 		lockedAxis: undefined,
 		joinedPoints: [],
+		mirrorPoint: undefined,
+				
 		mouse: null,
+		mouseDown: false,
 		keysDown: [],
 		... JSON.parse(initialLayers)
 	}),
 	
-	// persist: true,
+	persist: true,
 
 	actions: {
 		keyDown(e) {
@@ -99,13 +102,13 @@ export const useGlobalStore = defineStore('global', {
 			this.lockedAxis = []
 		},
 
-		setActiveAnchor(e, path, id, lockAxis = undefined, joinedPoints = [], mirrorPoints = undefined) {
+		setActiveAnchor(e, path, anchorId, lockAxis = undefined, joinedPoints = [], mirrorPoint = undefined) {
 			document.body.classList.add('dragging')
 			this.activePath = path
-			this.activeAnchor = id
+			this.activeAnchor = anchorId
 			this.lockedAxis = lockAxis
 			this.joinedPoints = joinedPoints
-			this.mirrorPoints = mirrorPoints
+			this.mirrorPoint = mirrorPoint
 		},
 		
 		rewind() {
@@ -159,8 +162,8 @@ export const useGlobalStore = defineStore('global', {
 	},
 })
 
-// window.addEventListener('blur', () => useGlobalStore().keysDown = []);
-// document.addEventListener('load', useGlobalStore().keysDown = []);
+window.addEventListener('blur', () => useGlobalStore().keysDown = []);
+document.addEventListener('load', useGlobalStore().keysDown = []);
 
 function easeInOutExpo (t, b, c, d) {
     if (t == 0) return b
