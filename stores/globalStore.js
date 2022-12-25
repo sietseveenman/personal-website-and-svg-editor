@@ -132,13 +132,13 @@ export const useGlobalStore = defineStore('global', {
 							if ( 'number' === typeof obj[subProperty] ) {
 								
 								if ( obj[subProperty] !== this[layer][property][subProperty] ) {
-									
-									
 
-									const start = this[layer][property][subProperty]
-									const end = obj[subProperty]
-									const diff = end - start
-									const duration = 1 + Math.abs(diff*0.0005)
+									const 
+										start = this[layer][property][subProperty],
+										end = obj[subProperty],
+										diff = end - start,
+										duration = 1 + Math.abs(diff*0.0005)
+										
 									let tween = gsap.to( obj, {
 										[subProperty]: end,
 										duration: duration,
