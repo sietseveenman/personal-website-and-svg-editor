@@ -91,15 +91,15 @@
                 if ( store.lockedAxis !== 'x' )  point.x -= diff.x
                 if ( store.lockedAxis !== 'y' )  point.y -= diff.y
 
-                if ( store.mirrorPoint && ! store.keysDown.includes('AltLeft') ) {
-                    const mPoint = store[store.activePath][store.mirrorPoint]
+                if ( point.mirror && ! store.keysDown.includes('AltLeft') ) {
+                    const mPoint = store[store.activePath][point.mirror]
 
                     if ( store.lockedAxis !== 'x' ) mPoint.x += diff.x
                     if ( store.lockedAxis !== 'y' ) mPoint.y += diff.y
                 } 
 
-                if ( store.joinedPoints ) {
-                    store.joinedPoints.forEach(joinedPoint => {
+                if ( point.joined ) {
+                    point.joined.forEach(joinedPoint => {
                         const jp = store[store.activePath][joinedPoint]
                         if ( store.lockedAxis !== 'x' ) jp.x -= diff.x
                         if ( store.lockedAxis !== 'y' ) jp.y -= diff.y

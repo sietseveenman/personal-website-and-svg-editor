@@ -11,11 +11,10 @@
             <span><a aria-label="Visit my LinkedIn account" target="_blank" href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a aria-label="Visit my Instagram account" target="_blank" href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
         </div>
-        <small>hold down <span :style="{ color: store.keysDown.includes('Space') ? 'var(--c-three)' : 'currentColor' }">spacebar</span> and <span :style="{ color: store.keysDown.includes('Space') && store.mouseDown ? 'var(--c-three)' : 'currentColor' }">mouse</span> to drag the artboard</small><br/>
-        <small>hold down <span :style="{ color: store.keysDown.includes('AltLeft') ? 'var(--c-three)' : 'currentColor' }">left Alt</span> to unlock mirrored handles</small><br/>
-        <button @click="store.rewind()" :class="{'disabled': !store.anchorsHaveChanged}">reset anchors</button>
+       
     </div>  
 
+    <Menu></Menu>
 
 </template>
 <script setup>
@@ -50,25 +49,5 @@
         padding: 330px 10px 30px 30px;
         z-index: 2;
     }
-    small {
-        color: var(--c-two);
-        opacity: 0.8;
-    }
-    button {
-        border: none;
-        background: transparent;
-        color: var(--c-two);
-        font-family: inherit;
-        pointer-events: all;
-        transition: opacity 0.4s ease-in-out;
-        opacity: 0.8;
 
-        &:not(.disabled):hover {
-            cursor: pointer;
-            color: red;
-        }
-        &.disabled {
-            opacity: 0.15;
-        }
-    }
 </style>

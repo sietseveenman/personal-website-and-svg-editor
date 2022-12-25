@@ -21,14 +21,14 @@ const initialLayers = JSON.stringify({
 	},
 	
 	rectRadiusOne: {
-		position: 	{ x: 800, y: 1150 },
+		position: 	{ x: 800, y: 1120 },
 		size: 180,
 		axis: 'y',
 		h1: { x: 0, y: 18 }
 	},
 	
 	rectRadiusTwo: {
-		position: 	{ x: 500, y: 1000 },
+		position: 	{ x: 500, y: 950 },
 		size: 140,
 		axis: 'x',
 		h1: { x: 18, y: 0 }
@@ -37,18 +37,18 @@ const initialLayers = JSON.stringify({
 	skateboard: {
 		position:{ x: 1300, y: 550 },
 		
-		_top:	 { x: 87, y: 0 },
+		_top:	 { x: 87, y: 0, joined: ['_top__h'] },
 		_top__h: { x: 39.8, y: 3.6 },
 
-		_1: 	 { x: 0, y: 173 },
-		_1__h_1: { x: 0, y: 95 },
-		_1__h_2: { x: 0, y: 251 },
+		_1: 	 { x: 0, y: 173, joined: ['_1__h_1', '_1__h_2'] },
+		_1__h_1: { x: 0, y: 95, mirror: '_1__h_2' },
+		_1__h_2: { x: 0, y: 251, mirror: '_1__h_1' },
 
-		_2: 	 { x: 33, y: 540 },
-		_2__h_1: { x: 29, y: 533 },
-		_2__h_2: { x: 37, y: 547 },
+		_2: 	 { x: 33, y: 540, joined: ['_2__h_1', '_2__h_2']  },
+		_2__h_1: { x: 29, y: 533, mirror: '_2__h_2' },
+		_2__h_2: { x: 37, y: 547, mirror: '_2__h_1' },
 
-		_bot: 	 { x: 87, y: 572 },
+		_bot: 	 { x: 87, y: 572, joined: ['_bot__h']  },
 		_bot__h: { x: 87,  y: 572 },
 	}
 })
@@ -61,7 +61,6 @@ export const useGlobalStore = defineStore('global', {
 		activePath: undefined,
 		activeAnchor: undefined,
 		lockedAxis: undefined,
-		joinedPoints: [],
 		mirrorPoint: undefined,
 				
 		mouse: null,
@@ -102,13 +101,11 @@ export const useGlobalStore = defineStore('global', {
 			this.lockedAxis = []
 		},
 
-		setActiveAnchor(e, path, anchorId, lockAxis = undefined, joinedPoints = [], mirrorPoint = undefined) {
+		setActiveAnchor(e, path, anchorId, lockAxis = undefined) {
 			document.body.classList.add('dragging')
 			this.activePath = path
 			this.activeAnchor = anchorId
 			this.lockedAxis = lockAxis
-			this.joinedPoints = joinedPoints
-			this.mirrorPoint = mirrorPoint
 		},
 		
 		rewind() {

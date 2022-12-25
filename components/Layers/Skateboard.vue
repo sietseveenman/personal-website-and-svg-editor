@@ -29,41 +29,41 @@
 
 
         <rect class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1', undefined, ['_1__h_1', '_1__h_2'])"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1', undefined)"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._1.x } ${ layer._1.y })`"
             :x="layer._1.x - 6" :y="layer._1.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_1', undefined, undefined, '_1__h_2')"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_1', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._1__h_1.x" :cy="layer._1__h_1.y" />
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_2', undefined, undefined, '_1__h_1')"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_2', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._1__h_2.x" :cy="layer._1__h_2.y" />
 
 
         <rect class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2', undefined, ['_2__h_1', '_2__h_2'])"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2', undefined)"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._2.x } ${ layer._2.y })`"
             :x="layer._2.x - 6" :y="layer._2.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_1', undefined, undefined, '_2__h_2')"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_1', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._2__h_1.x" :cy="layer._2__h_1.y" />
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_2', undefined, undefined, '_2__h_1')"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_2', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._2__h_2.x" :cy="layer._2__h_2.y" />
 
 
         <rect  class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot', 'x', ['_bot__h'])"
+            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot', 'x')"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._bot.x } ${ layer._bot.y })`"
             :x="layer._bot.x - 6" :y="layer._bot.y - 6"/> 
