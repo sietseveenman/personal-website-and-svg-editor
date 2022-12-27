@@ -70,7 +70,7 @@ export const useGlobalStore = defineStore('global', {
 		... JSON.parse(initialLayers)
 	}),
 	
-	// persist: true,
+	persist: true,
 
 	actions: {
 		keyDown(e) {
