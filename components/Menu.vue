@@ -9,14 +9,21 @@
         
         <div class="content" ref="content">
             <div class="wrap">
-                <small>My name is Sietse Veenman</small>.<small> I'm a designer turned <br/>developer from the Netherlands</small>.<small> Currently working<br/> as  fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a></small>.<br/>
+                <small>Hey there<span class="o">!</span> My name is Sietse Veenman and I am a designer turned fullstack developer<span class="o">,</span> currently working at <a href="https://wearejust.com/nl" target="_blank">JUST</a> in the Netherlands<span class="o">.</span>
+                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong foundation in technologies such as HTML5<span class="o">,</span> (S)CSS<span class="o">,</span> JS (Vanilla<span class="o">,</span> Vue<span class="o">,</span> jQuery<span class="o">,</span> Gsap)<span class="o">,</span> Gulp<span class="o">,</span> Webpack<span class="o">,</span> Vite<span class="o">,</span> PHP (Kirby<span class="o">,</span> Laravel<span class="o">,</span> Symfony<span class="o">,</span> Statamic<span class="o">,</span> Wordpress)<span class="o">,</span> Twig<span class="o">,</span> Blade<span class="o">,</span> SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte<span class="o">,</span> React and ThreeJS<span class="o">,</span> and even dabbled in 3D modeling with Blender<span class="o">.</span>
                 <br/>
-                <small>This website is probably the most useless and<br/> inefficient vector editor on the web</small>.<br/>
-                <small style="color: currentColor">How does it work</small>:<br/>
-                <small>Hold down <span :class="{'highlight': store.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': store.keysDown.includes('Space') && store.mouseDown}">Mouse</span> to drag the canvas</small>.<br/>
-                <small>Grab anchor points and handles to manipulate shapes</small>.<br/>
-                <small>Hold down <span :class="{'highlight': store.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles</small>.<br/>
-                <small>Your edits are saved for the next time you visit</small>.<br/><small>If you want, click the reset button to start over</small>.<br/>
+                <br/>
+                This website is probably the most useless and inefficient vector editor on the web</small><span class="o">.</span>
+                <br/>
+                <br/>
+                <small style="color: currentColor">What can you do:</small><br/>
+                <small>Hold down <span :class="{'highlight': store.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': store.keysDown.includes('Space') && store.mouseDown}">Mouse</span> to drag the canvas</small>.
+                <br/>
+                <small>Grab anchor points and handles to manipulate shapes</small>.
+                <br/>
+                <small>Hold down <span :class="{'highlight': store.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles</small>.
+                <br/>
+                <small>Your edits are saved for the next time you visit</small>.<small>If you want, click the reset button to start over</small>.
             </div>
         </div>
 
@@ -40,7 +47,7 @@ import gsap from 'gsap'
             width: 'auto',
             duration: 0.16
         })
-        .to(content.value,{
+        .to(content.value, {
             height: 'auto',
             duration: 0.26
         }, '-=0.09')
@@ -48,7 +55,7 @@ import gsap from 'gsap'
             opacity: 0,
             y: -4,
             duration: 0.17
-        }, '-=0.15')
+        }, '-=0.16')
 
     })
 
@@ -66,7 +73,6 @@ import gsap from 'gsap'
         position: fixed;
         right: 50px;
         top: 50px;
-
         --toggle-size: 32px;
     }
 
@@ -98,19 +104,23 @@ import gsap from 'gsap'
 
     }
     .content {
-        // direction: rtl;
-        overflow: hidden;
+        // overflow: hidden;
         width: var(--toggle-size);
         height: var(--toggle-size);
         color: var(--c-four);
         border: 1px solid currentColor;
         border-radius: 10px;
-        backdrop-filter: blur(3px) brightness(111%);
-        white-space: nowrap;
+        backdrop-filter: blur(3px) brightness(85%);
         z-index: 3;
+        max-width: 80vw;
+        .o {
+            color: var(--c-four);
+        }
     }
     .wrap {
         padding: 30px 35px 35px 30px;
+        width: 520px;
+        max-width: 80vw;
     }
     
     small {

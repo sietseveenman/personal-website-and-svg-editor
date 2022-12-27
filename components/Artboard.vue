@@ -58,7 +58,7 @@
 
     function handleMouseDown(e) {
         if (e.target.closest('.handle')) return
-        e.preventDefault()
+        // e.preventDefault()
         if ( store.keysDown.includes('Space') ) document.body.classList.add('dragging')
         store.mouseDown = true
     }
