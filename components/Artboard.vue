@@ -51,6 +51,9 @@
 
         window.addEventListener('keydown',(e)=> store.keyDown(e))
         window.addEventListener('keyup',(e)=> store.keyUp(e))
+
+        window.addEventListener('blur', () => store.keysDown = []);
+        document.addEventListener('load', store.keysDown = []);
     })
 
     function handleMouseDown(e) {

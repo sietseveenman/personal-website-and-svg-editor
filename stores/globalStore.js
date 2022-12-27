@@ -21,17 +21,17 @@ const initialLayers = JSON.stringify({
 	},
 	
 	rectRadiusOne: {
-		position: 	{ x: 800, y: 1120 },
+		position: 	{ x: 800, y: 1130 },
 		size: 180,
 		axis: 'y',
-		h1: { x: 0, y: 18 }
+		h1: { x: 18, y: 0 }
 	},
 	
 	rectRadiusTwo: {
 		position: 	{ x: 500, y: 950 },
 		size: 140,
 		axis: 'x',
-		h1: { x: 18, y: 0 }
+		h1: { x: 0, y: 30 }
 	},
 
 	skateboard: {
@@ -44,12 +44,12 @@ const initialLayers = JSON.stringify({
 		_1__h_1: { x: 0, y: 95, mirror: '_1__h_2' },
 		_1__h_2: { x: 0, y: 251, mirror: '_1__h_1' },
 
-		_2: 	 { x: 33, y: 540, joined: ['_2__h_1', '_2__h_2']  },
-		_2__h_1: { x: 29, y: 533, mirror: '_2__h_2' },
-		_2__h_2: { x: 37, y: 547, mirror: '_2__h_1' },
+		_2: 	 { x: 33, y: 550, joined: ['_2__h_1', '_2__h_2']  },
+		_2__h_1: { x: 29, y: 543, mirror: '_2__h_2' },
+		_2__h_2: { x: 37, y: 557, mirror: '_2__h_1' },
 
-		_bot: 	 { x: 87, y: 572, joined: ['_bot__h']  },
-		_bot__h: { x: 87,  y: 572 },
+		_bot: 	 { x: 87, y: 520, joined: ['_bot__h']  },
+		_bot__h: { x: 78,  y: 520 },
 	}
 })
 
@@ -158,9 +158,6 @@ export const useGlobalStore = defineStore('global', {
 		},
 	},
 })
-
-window.addEventListener('blur', () => useGlobalStore().keysDown = []);
-document.addEventListener('load', useGlobalStore().keysDown = []);
 
 function easeInOutExpo (t, b, c, d) {
     if (t == 0) return b
