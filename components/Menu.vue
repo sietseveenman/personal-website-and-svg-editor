@@ -9,21 +9,29 @@
         
         <div class="content" ref="content">
             <div class="wrap">
-                <small>Hey there<span class="o">!</span> My name is Sietse Veenman and I am a designer turned fullstack developer<span class="o">,</span> currently working at <a href="https://wearejust.com/nl" target="_blank">JUST</a> in the Netherlands<span class="o">.</span>
-                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong foundation in technologies such as HTML5<span class="o">,</span> (S)CSS<span class="o">,</span> JS (Vanilla<span class="o">,</span> Vue<span class="o">,</span> jQuery<span class="o">,</span> Gsap)<span class="o">,</span> Gulp<span class="o">,</span> Webpack<span class="o">,</span> Vite<span class="o">,</span> PHP (Kirby<span class="o">,</span> Laravel<span class="o">,</span> Symfony<span class="o">,</span> Statamic<span class="o">,</span> Wordpress)<span class="o">,</span> Twig<span class="o">,</span> Blade<span class="o">,</span> SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte<span class="o">,</span> React and ThreeJS<span class="o">,</span> and even dabbled in 3D modeling with Blender<span class="o">.</span>
+                <small>Hi there<span class="o">!</span> My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
+                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong foundation in technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span> And have also dabbled in 3D modeling with Blender<span class="o">.</span>
                 <br/>
                 <br/>
-                This website is probably the most useless and inefficient vector editor on the web</small><span class="o">.</span>
+                This site is probably the most useless, desktop only, vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
                 <br/>
                 <br/>
-                <small style="color: currentColor">What can you do:</small><br/>
-                <small>Hold down <span :class="{'highlight': store.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': store.keysDown.includes('Space') && store.mouseDown}">Mouse</span> to drag the canvas</small>.
-                <br/>
-                <small>Grab anchor points and handles to manipulate shapes</small>.
-                <br/>
-                <small>Hold down <span :class="{'highlight': store.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles</small>.
-                <br/>
-                <small>Your edits are saved for the next time you visit</small>.<small>If you want, click the reset button to start over</small>.
+                <small style="color: var(--c-five)">How it works:</small><br/>
+                <ul>
+                    <li>
+                        <small>Hold down <span :class="{'highlight': store.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': store.keysDown.includes('Space') && store.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
+                    </li>
+                    <li>
+                        <small>Grab anchor points or handles to manipulate paths<span class="o">.</span></small>
+                    </li>
+                    <li>
+                        <small>Hold down <span :class="{'highlight': store.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></small>
+                    </li>
+                    <li>
+                        <small>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></small>
+                    </li>
+                </ul>
+                
             </div>
         </div>
 
@@ -76,8 +84,9 @@ import gsap from 'gsap'
         --toggle-size: 32px;
     }
 
+
     .toggle {
-        z-index: 1;
+        z-index: 4;
         transform: scale(0.88);
         display: flex;
         align-items: center;
@@ -104,7 +113,8 @@ import gsap from 'gsap'
 
     }
     .content {
-        // overflow: hidden;
+        overflow: hidden;
+        position: relative;
         width: var(--toggle-size);
         height: var(--toggle-size);
         color: var(--c-four);
@@ -122,7 +132,20 @@ import gsap from 'gsap'
         width: 520px;
         max-width: 80vw;
     }
-    
+    ul {
+        padding-top: 0.25em;
+        list-style: none;
+    }
+    li {
+        display: flex;
+        line-height: 1.4;
+        &:before {
+            content: '•';
+            color: var(--c-five);
+            margin-right: 0.4em ;
+            transform: translateY(-0.05em);
+        }
+    }
     small {
         color: var(--c-three);
         opacity: 0.8;
@@ -146,17 +169,18 @@ import gsap from 'gsap'
         color: var(--c-four);
         font-size: 1.2rem;
         transition: opacity 0.4s ease-in-out;
-        opacity: 0.65;
+        opacity: 1;
         padding: 0.4em 1em 0.65em;
         height: var(--toggle-size);
         border-radius: 10px;
-        border: 1px solid currentColor;
-        
+        border: 1px solid var(--c-four);
+        z-index: 1;
         &:not(.disabled):hover {
             cursor: pointer;
             color: var(--c-two);
         }
         &.disabled {
+            cursor: auto;
             opacity: 0.3;
         }
     }
