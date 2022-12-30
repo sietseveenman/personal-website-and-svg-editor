@@ -1,13 +1,18 @@
 - DoubleClick to move a layer
 - Layer sidebar?
 - Pen tool
-- Seperate stores
-    - persisted base layers 
+- Add more stuff to the artboard
+✓ Seperate stores
+    ✓ persisted base layers 
     - persisted state (theme)
     - persisted custom layers
-    - app state
+    ✓ app state
 
-- Blog
+- Add a Blog
 
 
-✓
+Ideas
+------------
+
+- Circle that fills by moving and anchor
+- Mirrored line (like the skateboard but without a preset, maybe option to add points?)
