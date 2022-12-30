@@ -5,7 +5,7 @@
         </g>
 
         <circle class="handle" id="c1"
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,pathName, 'c1')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c1')"
             fill="transparent" 
             stroke="var(--c-two)" 
             stroke-opacity="1" 
@@ -13,7 +13,7 @@
             :cx="path.c1.x" :cy="path.c1.y" />
     
         <circle class="handle" id="c2"
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,pathName, 'c2')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c2')"
             fill="transparent"
             stroke="var(--c-two)"
             stroke-opacity="1" 
@@ -24,7 +24,7 @@
             width="14" height="14"  
             :x="path.a1.x - 7" :y="path.a1.y - 7" 
             :transform="`rotate(45 ${ path.a1.x } ${ path.a1.y })`"
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,pathName, 'a1')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a1')"
             stroke="var(--c-three)"
             stroke-opacity="1" 
             stroke-width="1"/>
@@ -33,7 +33,7 @@
             width="14" height="14"  
             :x="path.a2.x - 7" :y="path.a2.y - 7" 
             :transform="`rotate(45 ${ path.a2.x } ${ path.a2.y })`"
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,pathName, 'a2')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a2')"
             stroke="var(--c-three)"
             stroke-opacity="1" 
             stroke-width="1"/>
@@ -41,15 +41,12 @@
 </template>
 
 <script setup>
-    import { useGlobalStore } from '@/stores/globalStore'
+    import { useAppState } from '@/stores/appState'
+    import { useBaseLayers } from '@/stores/baseLayers'
 
-    const store = useGlobalStore()
+    const appState = useAppState()
+    const layers = useBaseLayers()
 
-    const props = defineProps({
-        pathName: String
-    })
-
-    const path = computed( () => store[props.pathName] )
-    
-
+    const props = defineProps({ pathName: String })
+    const path = computed( () => layers[props.pathName] )
 </script>

@@ -5,7 +5,7 @@
             <div>{{ open ? '—' : 'i' }}</div>
         </button>
         
-        <button class="btn" @click="store.rewind()" :class="{'disabled': !store.anchorsHaveChanged}">reset</button>
+        <button class="btn" @click="baseLayers.rewind()" :class="{'disabled': !baseLayers.isAltered}">reset</button>
         
         <div class="content" ref="content">
             <div class="wrap">
@@ -19,13 +19,13 @@
                 <small style="color: var(--c-five)">How it works:</small><br/>
                 <ul>
                     <li>
-                        <small>Hold down <span :class="{'highlight': store.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': store.keysDown.includes('Space') && store.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
+                        <small>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.keysDown.includes('Space') && appState.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
                     </li>
                     <li>
                         <small>Grab anchor points or handles to manipulate paths<span class="o">.</span></small>
                     </li>
                     <li>
-                        <small>Hold down <span :class="{'highlight': store.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></small>
+                        <small>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></small>
                     </li>
                     <li>
                         <small>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></small>
@@ -40,10 +40,13 @@
 
 <script setup>
 
-import gsap from 'gsap'
-    import { useGlobalStore } from '@/stores/globalStore'
+    import gsap from 'gsap'
+    import { useAppState } from '@/stores/appState'
+    import { useBaseLayers } from '@/stores/baseLayers'
     
-    const store = useGlobalStore()
+    const appState = useAppState()
+    const baseLayers = useBaseLayers()
+
     const open = ref(false)
     
     const content = ref(null)
@@ -51,15 +54,15 @@ import gsap from 'gsap'
 
     onMounted(() => {
         tween = gsap.timeline({paused: true, ease: "power4.inOut"})
-        .to(content.value,{
+        .to(content,{
             width: 'auto',
             duration: 0.16
         })
-        .to(content.value, {
+        .to(content, {
             height: 'auto',
             duration: 0.26
         }, '-=0.09')
-        .from(content.value.firstElementChild, {
+        .from(content.firstElementChild, {
             opacity: 0,
             y: -4,
             duration: 0.17
@@ -69,8 +72,8 @@ import gsap from 'gsap'
 
     function toggle() {
         if ( tween ) tween.play()
-        open.value = !open.value
-        tween[open.value ? 'play':'reverse']()
+        open = !open
+        tween[open ? 'play':'reverse']()
     }
 </script>
 

@@ -3,15 +3,15 @@
 </template>
 
 <script> 
-    import { useGlobalStore } from '@/stores/globalStore'
+    import { useAppState } from '@/stores/appState'
 
     export default {
         setup() {
-            const store = useGlobalStore()
+            const store = useAppState()
             return { store }
         },
         computed: {
-            artboardPos() { return this.store.artBoardPosition }
+            artboardPos() { return this.store.userPosition }
         },  
         mounted() {
             setTimeout(() => {

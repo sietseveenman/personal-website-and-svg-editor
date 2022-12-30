@@ -17,59 +17,59 @@
         <path :d="boardPath" stroke="var(--c-six)" stroke-width="0.8"/>
 
         <rect  class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_top', 'x', ['_top__h'])"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_top', 'x', ['_top__h'])"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._top.x } ${ layer._top.y })`"
             :x="layer._top.x - 6" :y="layer._top.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_top__h')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_top__h')"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._top__h.x" :cy="layer._top__h.y" />
 
 
         <rect class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_1', undefined)"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._1.x } ${ layer._1.y })`"
             :x="layer._1.x - 6" :y="layer._1.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_1', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_1__h_1', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._1__h_1.x" :cy="layer._1__h_1.y" />
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_1__h_2', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_1__h_2', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._1__h_2.x" :cy="layer._1__h_2.y" />
 
 
         <rect class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_2', undefined)"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._2.x } ${ layer._2.y })`"
             :x="layer._2.x - 6" :y="layer._2.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_1', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_2__h_1', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._2__h_1.x" :cy="layer._2__h_1.y" />
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_2__h_2', undefined)"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_2__h_2', undefined)"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._2__h_2.x" :cy="layer._2__h_2.y" />
 
 
         <rect  class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot', 'x')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_bot', 'x')"
             fill="transparent" stroke="var(--c-two)" stroke-opacity="0.8" stroke-width="0.8" 
             width="12" height="12" :transform="`rotate(45 ${ layer._bot.x } ${ layer._bot.y })`"
             :x="layer._bot.x - 6" :y="layer._bot.y - 6"/> 
 
         <circle class="handle" 
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'skateboard', '_bot__h')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_bot__h')"
             fill="transparent" stroke="var(--c-three)" stroke-opacity="0.8" stroke-width="0.8" r="6"
             :cx="layer._bot__h.x" :cy="layer._bot__h.y" />
 
@@ -91,12 +91,16 @@
 }
 </style>
 <script setup>
-    import { useGlobalStore } from '@/stores/globalStore'
+    import { useAppState } from '@/stores/appState'
+    import { useBaseLayers } from '@/stores/baseLayers'
 
-    const store = useGlobalStore()
-    const layer = computed( () => store.skateboard )
+    const appState = useAppState()
+    const layers = useBaseLayers()
+
+    const layer = computed( () => layers.skateboard )
+
     const boardPath = computed( () => {
-        const path = store.skateboard
+        const path = layers.skateboard
         const width = path._top.x * 2 
         return `
             M ${ path._top.x    }  ${ path._top.y    }
@@ -108,8 +112,5 @@
             C ${ width - path._2__h_1.x }  ${ path._2__h_1.y }  ${ width - path._1__h_2.x }  ${ path._1__h_2.y }  ${ width - path._1.x   }  ${ path._1.y   }
             C ${ width - path._1__h_1.x }  ${ path._1__h_1.y }  ${ width - path._top__h.x }  ${ path._top__h.y }  ${ width - path._top.x }  ${ path._top.y }
         `
-    
     })
-
-
 </script>

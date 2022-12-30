@@ -22,7 +22,7 @@
             :x="logo.a1.x - 7" :y="logo.a1.y - 7"
             :transform="`rotate(45 ${logo.a1.x} ${logo.a1.y})`"
             stroke-opacity="1"
-            @mousedown.prevent="(e)=>store.setActiveAnchor(e,'logo', 'a1')"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'logo', 'a1')"
             stroke-width="1"
             stroke="var(--c-three)"
             id="a1"/>
@@ -34,42 +34,33 @@
         outline: 0.5px solid rgba(white, 0.2);
     }
 </style>
-<script>
 
-    import { useGlobalStore } from '@/stores/globalStore'
+<script setup>
+    import { useAppState } from '@/stores/appState'
+    import { useBaseLayers } from '@/stores/baseLayers'
 
-    export default {
-        setup() {
-            const store = useGlobalStore()
-            const clickCount = ref(0)
-            const delay = 250
-            const clickTimer = ref(null)
+    const appState = useAppState()
+    const layers = useBaseLayers()
 
-            function handleClick(e) {
-                e.preventDefault();
+    const logo = computed( () => layers.logo )
 
-                clickCount.value++;
-           
-                if (clickCount.value === 1) {
-                    clickTimer.value = setTimeout(() => {
-                    clickCount.value = 0;
-                    }, delay);
-                    
-                } else if (clickCount.value === 2) {
-                    clearTimeout(clickTimer.value);
-                    clickCount.value = 0;
-                    store.logo.selected = true
-                }
-            }
+    const clickCount = ref(0)
+    const clickTimer = ref(null)
+    const delay = 250
 
-            return { store, handleClick }
-        },
-        
-        computed: {
-            logo(){ return this.store.logo }
-        },
-        mounted() {
-            // console.log(this.logo)
+    function handleClick(e) {
+        e.preventDefault()
+        clickCount++
+        if (clickCount === 1) {
+
+            clickTimer = setTimeout(() => {
+                clickCount = 0
+            }, delay)
+            
+        } else if (clickCount === 2) {
+            clearTimeout(clickTimer)
+            clickCount = 0
+            layers.logo.selected = true
         }
     }
  </script>

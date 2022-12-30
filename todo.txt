@@ -1,0 +1,13 @@
+- DoubleClick to move a layer
+- Layer sidebar?
+- Pen tool
+- Seperate stores
+    - persisted base layers 
+    - persisted state (theme)
+    - persisted custom layers
+    - app state
+
+- Blog
+
+
+✓

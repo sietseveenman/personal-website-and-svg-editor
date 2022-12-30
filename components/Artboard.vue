@@ -10,120 +10,88 @@
 
             <LayersRectRadius pathName="rectRadiusTwo"/>
         
-
-            <!-- 
-                Circel waarvan je alleen de straal als lijn zichtbaar is. Die straal kun je rond draggen om de circel vol te laten lopen
-                <PieSlice />
-            -->
-
-            <!-- 
-               Lijn met een aantal anker punten, als je die versleept gebeurt het zelfde aan de spiegel zijde (zelfde als board)
-                <Mirror />
-            -->
-
-
             <LayersSkateboard />
 
-            <!-- <RectStretch originalCoords={{x: 460, y: 1190}} />
-        
-        
-            <Board originalCoords={{x:920, y:1290}} /> -->
-        
         </svg>
     </div>
 </template>
 
 <script setup>
 
-
-    // TODO: Double click to move layers
-
     import { onMounted } from 'vue'
-    import { useGlobalStore } from '@/stores/globalStore'
+    import { useAppState } from '@/stores/appState'
+    import { useBaseLayers } from '@/stores/baseLayers'
 
-    const store = useGlobalStore()
-    let prev = null
+    const appState = useAppState()
+    const baseLayers = useBaseLayers()
+
+    let prevMouse = null
 
     onMounted(() => {
-        document.addEventListener('mouseup', resetDrag)
-        document.addEventListener('mousedown', handleMouseDown)
-        document.addEventListener('mousemove', handleDrag )
+        document.addEventListener( 'mouseup', handleMouseUp )
+        document.addEventListener( 'mousedown', handleMouseDown )
+        document.addEventListener( 'mousemove', handleMouseMove )
 
-        window.addEventListener('keydown',(e)=> store.keyDown(e))
-        window.addEventListener('keyup',(e)=> store.keyUp(e))
-
-        window.addEventListener('blur', () => store.keysDown = []);
-        document.addEventListener('load', store.keysDown = []);
+        window.addEventListener( 'keydown', (e) => appState.keyDown(e) )
+        window.addEventListener( 'keyup', (e) => appState.keyUp(e) )
+        window.addEventListener( 'blur', () => appState.keysDown = [] )
     })
 
-    function handleMouseDown(e) {
-        if (e.target.closest('.handle')) return
-        // e.preventDefault()
-        if ( store.keysDown.includes('Space') ) document.body.classList.add('dragging')
-        store.mouseDown = true
+    function handleMouseDown (e) {
+        appState.mouseDown = true
     }
 
-    function resetDrag (e) {
-        e.target.classList.remove('dragging')
-        document.body.classList.remove('dragging')
-        store.resetDrag(undefined)
-        store.mouseDown = false
-        prev = null
+    function handleMouseUp (e) {
+        appState.resetDrag()
+        appState.mouseDown = false
+        prevMouse = null
     }
     
-    function handleDrag (e) {
-        const mx = e.clientX
-        const my = e.clientY
+    function handleMouseMove(e) {
+        const mx = e.clientX, my = e.clientY
+        appState.mouse = { x: mx, y: my }
         
-        store.mouse = {
-            x: mx,
-            y: my
-        }
-        
-        if ( prev ) {
-
-            let diff = {
-                x: prev.x - mx,
-                y: prev.y - my,
-            }
-
-            if ( store.activePath && store.activeAnchor ) {
-
-                const point = store[store.activePath][store.activeAnchor]
-
-                if ( store.lockedAxis !== 'x' )  point.x -= diff.x
-                if ( store.lockedAxis !== 'y' )  point.y -= diff.y
-
-                if ( point.mirror && ! store.keysDown.includes('AltLeft') ) {
-                    const mPoint = store[store.activePath][point.mirror]
-
-                    if ( store.lockedAxis !== 'x' ) mPoint.x += diff.x
-                    if ( store.lockedAxis !== 'y' ) mPoint.y += diff.y
-                } 
-
-                if ( point.joined ) {
-                    point.joined.forEach(joinedPoint => {
-                        const jp = store[store.activePath][joinedPoint]
-                        if ( store.lockedAxis !== 'x' ) jp.x -= diff.x
-                        if ( store.lockedAxis !== 'y' ) jp.y -= diff.y
-                    });
-                } 
-       
+        if ( prevMouse && appState.mouseDown ) {
                 
-                store.anchorsHaveChanged = true
-            }
+            const diff = { x: prevMouse.x - mx, y: prevMouse.y - my }
             
-            else if ( store.mouseDown && store.keysDown.includes('Space')) {
-                store.artBoardPosition.x += diff.x
-                store.artBoardPosition.y += diff.y
-                window.scrollTo(store.artBoardPosition.x, store.artBoardPosition.y)
+            if ( appState.keysDown.includes('Space') ) {
+                appState.userPosition.x += diff.x
+                appState.userPosition.y += diff.y
+                window.scrollTo(appState.userPosition.x, appState.userPosition.y)
+            }
+
+            else if ( appState.activePath ) {
+                const point = baseLayers[appState.activePath][appState.activeAnchor]
+                handleDrag(point, diff)
+                baseLayers.isAltered = true
             }
         }
 
-        prev = {
-            x: mx,
-            y: my
+        prevMouse = { x: mx, y: my }
+    }
+
+    function handleDrag(point, diff) {
+
+        movePoint(point, diff)
+
+        if ( point.joined ) {
+            point.joined.forEach(joinedPoint => {
+                const point = baseLayers[appState.activePath][joinedPoint]
+                movePoint(point, diff)
+            })
         }
+
+        if ( point.mirror && ! appState.keysDown.includes('AltLeft') ) {
+            const mirrorPoint = baseLayers[appState.activePath][point.mirror]
+            if ( point.lockedAxis !== 'x' ) mirrorPoint.x += diff.x
+            if ( point.lockedAxis !== 'y' ) mirrorPoint.y += diff.y
+        } 
+    }
+
+    function movePoint(point, diff) {
+        if ( point.lockedAxis !== 'x' )  point.x -= diff.x
+        if ( point.lockedAxis !== 'y' )  point.y -= diff.y
     }
 
 </script>

@@ -17,12 +17,7 @@
     <Menu></Menu>
 
 </template>
-<script setup>
 
-    import { useGlobalStore } from '@/stores/globalStore'
-    const store = useGlobalStore()
-    
-</script>
 <style lang="scss">
     .follow {
         padding: 0.75em 0 1.35em 0.075em;
