@@ -1,16 +1,16 @@
 <template>
-    <div class="artboard">
+    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab}">
         <svg width="2800" height="2560" viewBox="0 0 2800 2560" fill="" xmlns="http://www.w3.org/2000/svg">
-        
-            <LayersLogo />
             
             <LayersLine pathName="lineOne"/>
-
+            
             <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-three)"/>
-
+            
             <LayersRectRadius pathName="rectRadiusTwo"/>
-        
+            
             <LayersSkateboard />
+            
+            <LayersLogo />
 
         </svg>
     </div>
@@ -26,6 +26,9 @@
     const baseLayers = useBaseLayers()
 
     let prevMouse = null
+
+    const isGrabbing = computed( () => appState.mouseDown && (appState.activeAnchor || appState.keysDown.includes('Space')) )
+    const canGrab = computed( () => ! appState.mouseDown && appState.keysDown.includes('Space') )
 
     onMounted(() => {
         document.addEventListener( 'mouseup', handleMouseUp )
@@ -59,6 +62,7 @@
                 appState.userPosition.x += diff.x
                 appState.userPosition.y += diff.y
                 window.scrollTo(appState.userPosition.x, appState.userPosition.y)
+                appState.userPositionAltered = true
             }
 
             else if ( appState.activePath ) {
@@ -102,6 +106,13 @@
         height: 100%;
         position: relative;
         z-index: 2;
+
+        &.can-grab {
+            * { cursor: grab !important; }
+        }
+        &.grabbing {
+            * { cursor: grabbing !important; }
+        }
     }
 
     .handle {

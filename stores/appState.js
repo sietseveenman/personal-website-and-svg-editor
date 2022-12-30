@@ -1,14 +1,19 @@
 import { defineStore } from 'pinia'
+import gsap from 'gsap'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
+gsap.registerPlugin(ScrollToPlugin )
+
+const initialPosition = JSON.stringify({
+	x: 375,
+	y: 355
+})
 
 export const useAppState = defineStore('app', {
     state: () => ({ 
         
-        userPosition: {
-            x: 375,
-            y: 355
-        },
-
+        userPosition: useLocalStorage('piniaPosition', JSON.parse(initialPosition)),
+		userPositionAltered: useLocalStorage('piniaPositionAltered', false),
 		activePath: undefined,
 		activeAnchor: undefined,
 				
@@ -18,6 +23,15 @@ export const useAppState = defineStore('app', {
 	}),
 
 	actions: {
+		resetUserPosition() {
+			this.userPositionAltered = false
+			gsap.to(window, {
+				duration: 1, 
+				ease: "power4.inOut", 
+				scrollTo: JSON.parse(initialPosition),
+				onComplete: () => { this.userPosition = JSON.parse(initialPosition) }
+			})
+		},
 
 		keyDown(e) {
 	        // prevent scrolling on space press

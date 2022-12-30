@@ -2,11 +2,14 @@
     <div class="menu">
 
         <button class="toggle" @click="toggle" :class="{'is-open':open}">
-            <div>{{ open ? '—' : 'i' }}</div>
+            <div>{{ open ? 'close' : 'info' }}</div>
         </button>
-        
-        <button class="btn" @click="baseLayers.rewind()" :class="{'disabled': !baseLayers.isAltered}">reset</button>
-        
+
+        <div class="buttons">
+            <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">home</button>
+            <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
+        </div>
+
         <div class="content" ref="content">
             <div class="wrap">
                 <small>Hi there<span class="o">!</span> My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
@@ -84,7 +87,8 @@
         position: fixed;
         right: 50px;
         top: 50px;
-        --toggle-size: 32px;
+        --toggle-width: 60px;
+        --toggle-height: 32px;
     }
 
 
@@ -95,8 +99,8 @@
         align-items: center;
         justify-content: center;
         font-size: 1.4rem;
-        width: var(--toggle-size);
-        height: var(--toggle-size);
+        width: var(--toggle-width);
+        height: var(--toggle-height);
         position: absolute;
         right: 0;
         top: 0;
@@ -118,8 +122,8 @@
     .content {
         overflow: hidden;
         position: relative;
-        width: var(--toggle-size);
-        height: var(--toggle-size);
+        width: var(--toggle-width);
+        height: var(--toggle-height);
         color: var(--c-four);
         border: 1px solid currentColor;
         border-radius: 10px;
@@ -163,21 +167,28 @@
     .highlight {
         color: var(--c-five);
     }
-    .btn {
+
+    .buttons {
         position: absolute;
         right: 0;
-        top: 30px;
+        top: 32px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+    .btn {
         white-space: nowrap;
-        margin-top: 1.25em;
+        margin-top: 10px;
         color: var(--c-four);
         font-size: 1.2rem;
-        transition: opacity 0.4s ease-in-out;
+        transition: 0.23s ease-in-out;
         opacity: 1;
         padding: 0.4em 1em 0.65em;
-        height: var(--toggle-size);
+        height: var(--toggle-height);
         border-radius: 10px;
         border: 1px solid var(--c-four);
         z-index: 1;
+
         &:not(.disabled):hover {
             cursor: pointer;
             color: var(--c-two);
@@ -185,6 +196,18 @@
         &.disabled {
             cursor: auto;
             opacity: 0.3;
+        }
+        &.is-active {
+            color: var(--c-two);
+            border-color: var(--c-two);
+            
+        }
+        &.pen {
+            opacity: 0.7;
+            &.is-active,
+            &:hover  {
+                opacity: 1;
+            }
         }
     }
 </style>

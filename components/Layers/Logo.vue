@@ -44,8 +44,8 @@
 
     const logo = computed( () => layers.logo )
 
-    const clickCount = ref(0)
-    const clickTimer = ref(null)
+    let clickCount = 0
+    let clickTimer = null
     const delay = 250
 
     function handleClick(e) {
