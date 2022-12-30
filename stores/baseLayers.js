@@ -61,10 +61,8 @@ export const useBaseLayers = defineStore('base-layers', {
 			this.isAltered = false
 			const initial = JSON.parse(initialLayers)
 			
-			// TODO Reset state after animation
-			setTimeout(() => {
-				this.$reset()
-			}, 1200);
+			// TODO Reset the state in a better way (after last rewind animation has played)
+			setTimeout(() => { this.$reset()}, 1100)
 
 			for (const layer in initial) {
 			
