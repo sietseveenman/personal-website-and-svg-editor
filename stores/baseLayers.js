@@ -15,6 +15,14 @@ const initialLayers = JSON.stringify({
 		c2: 		{ x: 124, y: 184 },
 	},
 	
+	lineTwo: {
+		position: 	{ x: 210, y: 1260 },
+		a1: 		{ x: 0, y: 115 },
+		a2: 		{ x: 260, y: 115 },
+		c1: 		{ x: 50, y: 0 },
+		c2: 		{ x: 210, y: 0 },
+	},
+	
 	rectRadiusOne: {
 		position: 	{ x: 800, y: 1130 },
 		size: 180,
@@ -54,7 +62,7 @@ export const useBaseLayers = defineStore('base-layers', {
 		... JSON.parse( initialLayers )
 	}),
 	
-	persist: true,
+	// persist: true,
 
 	actions: {
 		rewind() {

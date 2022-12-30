@@ -1,13 +1,13 @@
 <template>
     <g :transform="`translate(${path.position.x}, ${path.position.y})`" fill="transparent">
        <g class="shape">
-            <path :d="`M${path.a2.x} ${path.a2.y} C${path.c2.x} ${path.c2.y} ${path.c1.x} ${path.c1.y} ${path.a1.x} ${path.a1.y}`" stroke="var(--c-one)"/>
+            <path :d="`M${path.a2.x} ${path.a2.y} C${path.c2.x} ${path.c2.y} ${path.c1.x} ${path.c1.y} ${path.a1.x} ${path.a1.y}`" :stroke="lineColor"/>
         </g>
 
         <circle class="handle" id="c1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c1')"
             fill="transparent" 
-            stroke="var(--c-two)" 
+            :stroke="handleColor" 
             stroke-opacity="1" 
             stroke-width="1" r="16"
             :cx="path.c1.x" :cy="path.c1.y" />
@@ -15,7 +15,7 @@
         <circle class="handle" id="c2"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c2')"
             fill="transparent"
-            stroke="var(--c-two)"
+            :stroke="handleColor"
             stroke-opacity="1" 
             stroke-width="1" r="16"
             :cx="path.c2.x" :cy="path.c2.y" />
@@ -47,6 +47,20 @@
     const appState = useAppState()
     const layers = useBaseLayers()
 
-    const props = defineProps({ pathName: String })
+    const props = defineProps({ 
+        pathName: String,
+        palet: String
+    })
+    const palets = {
+        1: 'var(--c-one)',
+        2: 'var(--c-two)',
+        3: 'var(--c-three)',
+        4: 'var(--c-four)',
+        5: 'var(--c-five)',
+        6: 'var(--c-six)',
+    }
     const path = computed( () => layers[props.pathName] )
+    const lineColor = computed( () => palets[props.palet]  )
+    const handleColor = computed( () => Number(props.palet) >= 5  ? palets[1] : palets[Number(props.palet)+1]  )
+
 </script>
