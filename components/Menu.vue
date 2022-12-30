@@ -48,21 +48,21 @@
     const baseLayers = useBaseLayers()
 
     const open = ref(false)
-    
     const content = ref(null)
+    
     let tween = null
 
     onMounted(() => {
         tween = gsap.timeline({paused: true, ease: "power4.inOut"})
-        .to(content,{
+        .to(content.value,{
             width: 'auto',
             duration: 0.16
         })
-        .to(content, {
+        .to(content.value, {
             height: 'auto',
             duration: 0.26
         }, '-=0.09')
-        .from(content.firstElementChild, {
+        .from(content.value.firstElementChild, {
             opacity: 0,
             y: -4,
             duration: 0.17
@@ -72,8 +72,8 @@
 
     function toggle() {
         if ( tween ) tween.play()
-        open = !open
-        tween[open ? 'play':'reverse']()
+        open.value = !open.value
+        tween[open.value ? 'play':'reverse']()
     }
 </script>
 
