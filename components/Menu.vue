@@ -6,8 +6,10 @@
         </button>
 
         <div class="buttons">
-            <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">home</button>
+            <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">center</button>
             <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
+            <button class="btn" @click="downloadSvg">save svg</button>
+            <!-- <a class="btn" @click="downloadSvg">save svg</a> -->
         </div>
 
         <div class="content" ref="content">
@@ -77,6 +79,24 @@
         if ( tween ) tween.play()
         open.value = !open.value
         tween[open.value ? 'play':'reverse']()
+    }
+
+    const colors = ['--c-background', '--c-one', '--c-two', '--c-three', '--c-four', '--c-five', '--c-six']
+    
+    function downloadSvg() {
+        const rootStyles = window.getComputedStyle(document.documentElement)
+        const artboard = document.getElementById('artboard')
+        let templateString =`${artboard.outerHTML}`
+        colors.forEach(color => {
+            templateString = templateString.replaceAll(`var(${color})`, rootStyles.getPropertyValue(color))
+        })
+        let blob = new Blob([templateString], {type: 'image/svg+xml'})
+        let url = URL.createObjectURL(blob)
+        let link = document.createElement('a')
+        link.href = url
+        link.download = 'Sietse Veenman.svg'
+        link.click()
+        URL.revokeObjectURL(url)
     }
 </script>
 

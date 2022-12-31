@@ -1,6 +1,7 @@
 <template>
     <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab}">
-        <svg width="2800" height="2560" viewBox="0 0 2800 2560" fill="" xmlns="http://www.w3.org/2000/svg">
+        <svg width="2800" height="2560" viewBox="0 0 2800 2560" xmlns="http://www.w3.org/2000/svg" id="artboard">
+            <rect width="100%" height="100%" fill="var(--c-background)"></rect>
             
             <LayersLine pathName="lineOne" palet="1"/>
 
