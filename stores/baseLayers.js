@@ -62,7 +62,7 @@ const initialLayers = JSON.stringify({
 	
 	rectRadiusOne: {
 		position: 	{ x: 800, y: 1130 },
-		size: 180,
+		size: 200,
 		axis: 'y',
 		h1: { x: 0, y: 12 }
 	},

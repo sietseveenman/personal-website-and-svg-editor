@@ -2,7 +2,7 @@
     <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab}">
         <svg width="2800" height="2560" viewBox="0 0 2800 2560" fill="" xmlns="http://www.w3.org/2000/svg">
             
-            <LayersLine pathName="lineOne" palet="1"/>
+            <LayersLine pathName="lineOne" palet="1" speed="0.5" reverse="true"/>
 
             <LayersLine pathName="lineTwo" palet="4"/>
 

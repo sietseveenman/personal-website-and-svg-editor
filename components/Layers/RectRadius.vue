@@ -4,7 +4,10 @@
             :width="path.size" :height="path.size" :rx="radius <= 0 ? 0 : radius"
             :transform-origin="`${half} ${half}`"
             transform="rotate(-45  0 0)"
-            stroke="var(--c-five)" />
+            stroke="var(--c-five)"
+            :stroke-dasharray="dashArray"
+            :stroke-dashoffset="dashOffset"
+            :stroke-width="strokeWidth" />
         
         <circle class="handle handle--s"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'h1')"
@@ -35,7 +38,23 @@
     const layers = useBaseLayers()
 
     const props = defineProps({
-        pathName: String
+        pathName: String,
+        strokeWidth: {
+            type: Number,
+            default: 1,
+        },
+        reverse: {
+            type: Boolean,
+            default: false
+        },
+        speed: {
+            type: Number,
+            default: 1
+        },
+        dashArray: {
+            type: String,
+            default: undefined
+        },
     })
     
     const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
@@ -47,4 +66,14 @@
         let path = layers[props.pathName]
         return clamp( path.h1[path.axis], 0, path.size)
     }) 
+
+    const dashOffset = ref(0)
+    function loop() {
+        props.reverse 
+            ? (dashOffset.value += Number(props.speed))
+            : (dashOffset.value -= Number(props.speed))
+        requestAnimationFrame(loop)
+    }
+    if( props.dashArray ) loop()
+
 </script>
