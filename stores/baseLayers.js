@@ -9,10 +9,10 @@ const initialLayers = JSON.stringify({
 
 	lineOne: {
 		position: 	{ x: 810, y: 260 },
-		a1: 		{ x: 0, y: 640 },
-		a2: 		{ x: 590, y: 0 },
-		c1: 		{ x: 360, y: 740 },
-		c2: 		{ x: 124, y: 184 },
+		a1: 		{ x: -30, y: 642 },
+		a2: 		{ x: 633, y: 144 },
+		c1: 		{ x: 352, y: 798 },
+		c2: 		{ x: 100, y: 99 },
 	},
 	
 	lineTwo: {
@@ -75,7 +75,7 @@ const initialLayers = JSON.stringify({
 	},
 
 	skateboard:  {
-		position:{ x: 1320, y: 570 },
+		position:{ x: 1310, y: 600 },
 		
 		_top:	 { x: 87, y: 0, joined: ['_top__h'], lockedAxis: 'x' },
 		_top__h: { x: 39.8, y: 3.6 },
