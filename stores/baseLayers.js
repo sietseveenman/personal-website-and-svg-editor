@@ -37,10 +37,9 @@ const initialLayers = JSON.stringify({
 		_3: 		{ x: 745, y: 580 , joined: ['_3__h_1'] },
 		
 	},
-	
 
 	boobs: {
-		position: 	{ x: 1250, y: 1400 },
+		position: 	{ x: 1390, y: 1550 },
 		
 		_1: 		{ x: 0, y: 0, joined: ['_1__h_2'] },
 		_1__h_2: 	{ x: 0, y: 25 },
@@ -76,7 +75,7 @@ const initialLayers = JSON.stringify({
 	},
 
 	skateboard: {
-		position:{ x: 1300, y: 550 },
+		position:{ x: 1320, y: 570 },
 		
 		_top:	 { x: 87, y: 0, joined: ['_top__h'], lockedAxis: 'x' },
 		_top__h: { x: 39.8, y: 3.6 },
@@ -99,7 +98,7 @@ export const useBaseLayers = defineStore('base-layers', {
         isAltered: false,
 		... JSON.parse( initialLayers )
 	}),
-	// persist: true,
+	persist: true,
 	actions: {
 		rewind() {
 			this.isAltered = false
