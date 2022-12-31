@@ -12,11 +12,11 @@
 
         <div class="content" ref="content">
             <div class="wrap">
-                <small>Hi there<span class="o">!</span> My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
-                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong foundation in technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span> And have also dabbled in 3D modeling with Blender<span class="o">.</span>
+                <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
+                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong undestanding of technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span>
                 <br/>
                 <br/>
-                This site is probably the most useless, desktop only, vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
+                This site is probably the most pointless and useless (desktop only) vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
                 <br/>
                 <br/>
                 <small style="color: var(--c-five)">How it works:</small><br/>
@@ -136,7 +136,7 @@
     }
     .wrap {
         padding: 30px 35px 35px 30px;
-        width: 520px;
+        width: 510px;
         max-width: 80vw;
     }
     ul {
