@@ -1,7 +1,8 @@
 - DoubleClick to move a layer
 - Layer sidebar?
 - Pen tool
-- Add more stuff to the artboard
+- Zoom buttons 
+✓ Add more stuff to the artboard
 ✓ Seperate stores
     ✓ persisted base layers 
     - persisted state (theme)
