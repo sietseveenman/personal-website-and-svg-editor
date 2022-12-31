@@ -1,9 +1,10 @@
 <template>
     <g :transform="`translate(${path.position.x}, ${path.position.y})`" fill="transparent">
        <g class="shape">
-            <path :d="`M${path.a2.x} ${path.a2.y} C${path.c2.x} ${path.c2.y} ${path.c1.x} ${path.c1.y} ${path.a1.x} ${path.a1.y}`" :stroke="lineColor"/>
+            <path :d="`
+                M ${path.a2.x} ${path.a2.y} 
+                C ${path.c2.x} ${path.c2.y} ${path.c1.x} ${path.c1.y} ${path.a1.x} ${path.a1.y}`" :stroke="lineColor"/>
         </g>
-
         <circle class="handle" id="c1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c1')"
             fill="transparent" 

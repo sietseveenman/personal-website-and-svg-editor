@@ -8,7 +8,7 @@ const initialLayers = JSON.stringify({
 	},
 
 	lineOne: {
-		position: 	{ x: 760, y: 260 },
+		position: 	{ x: 810, y: 260 },
 		a1: 		{ x: 0, y: 640 },
 		a2: 		{ x: 590, y: 0 },
 		c1: 		{ x: 360, y: 740 },
@@ -21,6 +21,44 @@ const initialLayers = JSON.stringify({
 		a2: 		{ x: 260, y: 115 },
 		c1: 		{ x: 50, y: 0 },
 		c2: 		{ x: 210, y: 0 },
+	},
+
+	curveOne: {
+		position: 	{ x: 1700, y: 560 },
+		
+		_1: 		{ x: 0, y: 0, joined: ['_1__h_2'] },
+		_1__h_2: 	{ x: 190, y: 35 },
+		
+		_2__h_1: 	{ x: 65, y: 310, mirror: ['_2__h_2']  },
+		_2: 		{ x: 335, y: 295,joined: ['_2__h_1', '_2__h_2' ] },
+		_2__h_2: 	{ x: 600, y: 270, mirror: ['_2__h_1'] },
+		
+		_3__h_1: 	{ x: 480, y: 565 },
+		_3: 		{ x: 745, y: 580 , joined: ['_3__h_1'] },
+		
+	},
+	
+
+	boobs: {
+		position: 	{ x: 1250, y: 1400 },
+		
+		_1: 		{ x: 0, y: 0, joined: ['_1__h_2'] },
+		_1__h_2: 	{ x: 0, y: 25 },
+		
+		_2__h_1: 	{ x: 25, y: 135, mirror: ['_2__h_2', '_4__h_2'], joined: ['_4__h_1']  },
+		_2: 		{ x: 135, y: 135, joined: ['_2__h_1', '_2__h_2', '_4', '_4__h_1', '_4__h_2'] },
+		_2__h_2: 	{ x: 245, y:  135, mirror: ['_2__h_1', '_4__h_1'], joined: ['_4__h_2'] },
+		
+		_3__h_1: 	{ x: 260, y: 0, mirror: ['_3__h_2'] },
+		_3: 		{ x: 270, y: 0, joined: ['_3__h_1', '_3__h_2'] },
+		_3__h_2: 	{ x: 280, y: 0 , mirror: ['_3__h_1']},
+
+		_4__h_1: 	{ x: 295, y: 135, mirror: ['_4__h_2', '_2__h_2'], joined: ['_2__h_1'] },
+		_4: 		{ x: 405, y: 135, joined: ['_4__h_1', '_4__h_2', '_2', '_2__h_1', '_2__h_2'] },
+		_4__h_2: 	{ x: 515, y: 135, mirror: ['_4__h_1', '_2__h_1'], joined: ['_2__h_2'] },
+		
+		_5__h_1: 	{ x: 540, y: 25 },
+		_5: 		{ x: 540, y: 0, joined: ['_5__h_1'] },
 	},
 	
 	rectRadiusOne: {
@@ -44,12 +82,12 @@ const initialLayers = JSON.stringify({
 		_top__h: { x: 39.8, y: 3.6 },
 
 		_1: 	 { x: 0, y: 173, joined: ['_1__h_1', '_1__h_2'] },
-		_1__h_1: { x: 0, y: 95, mirror: '_1__h_2' },
-		_1__h_2: { x: 0, y: 251, mirror: '_1__h_1' },
+		_1__h_1: { x: 0, y: 95, mirror: ['_1__h_2'] },
+		_1__h_2: { x: 0, y: 251, mirror: ['_1__h_1'] },
 
 		_2: 	 { x: 33, y: 550, joined: ['_2__h_1', '_2__h_2']  },
-		_2__h_1: { x: 29, y: 543, mirror: '_2__h_2' },
-		_2__h_2: { x: 37, y: 557, mirror: '_2__h_1' },
+		_2__h_1: { x: 29, y: 543, mirror: ['_2__h_2'] },
+		_2__h_2: { x: 37, y: 557, mirror: ['_2__h_1'] },
 
 		_bot: 	 { x: 87, y: 520, joined: ['_bot__h'], lockedAxis: 'x' },
 		_bot__h: { x: 78,  y: 520 },
@@ -61,9 +99,7 @@ export const useBaseLayers = defineStore('base-layers', {
         isAltered: false,
 		... JSON.parse( initialLayers )
 	}),
-	
 	// persist: true,
-
 	actions: {
 		rewind() {
 			this.isAltered = false

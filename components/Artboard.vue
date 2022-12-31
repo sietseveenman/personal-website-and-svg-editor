@@ -5,6 +5,10 @@
             <LayersLine pathName="lineOne" palet="1"/>
 
             <LayersLine pathName="lineTwo" palet="4"/>
+
+            <LayersPath pathName="curveOne" palet="3"/>
+
+            <LayersPath pathName="boobs" palet="1"/>
             
             <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-three)"/>
             
@@ -77,7 +81,10 @@
         prevMouse = { x: mx, y: my }
     }
 
+    let lockedAxis = undefined
+
     function handleDrag(point, diff) {
+        lockedAxis = point.lockedAxis
 
         movePoint(point, diff)
 
@@ -89,15 +96,17 @@
         }
 
         if ( point.mirror && ! appState.keysDown.includes('AltLeft') ) {
-            const mirrorPoint = baseLayers[appState.activePath][point.mirror]
-            if ( point.lockedAxis !== 'x' ) mirrorPoint.x += diff.x
-            if ( point.lockedAxis !== 'y' ) mirrorPoint.y += diff.y
+            point.mirror.forEach(mirrorPoint => {
+                const point = baseLayers[appState.activePath][mirrorPoint]
+                if ( lockedAxis !== 'x' ) point.x += diff.x
+                if ( lockedAxis !== 'y' ) point.y += diff.y
+            })
         } 
     }
 
     function movePoint(point, diff) {
-        if ( point.lockedAxis !== 'x' )  point.x -= diff.x
-        if ( point.lockedAxis !== 'y' )  point.y -= diff.y
+        if ( lockedAxis !== 'x' )  point.x -= diff.x
+        if ( lockedAxis !== 'y' )  point.y -= diff.y
     }
 
 </script>
