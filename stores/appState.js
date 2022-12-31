@@ -2,14 +2,14 @@ import { defineStore } from 'pinia'
 import gsap from 'gsap'
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
-gsap.registerPlugin(ScrollToPlugin )
+gsap.registerPlugin( ScrollToPlugin )
 
 const initialPosition = JSON.stringify({
 	x: 375,
 	y: 355
 })
 
-export const useAppState = defineStore('app', {
+export const useAppState = defineStore('appState', {
     state: () => ({ 
         
         userPosition: useLocalStorage('piniaPosition', JSON.parse(initialPosition)),
@@ -55,7 +55,5 @@ export const useAppState = defineStore('app', {
 			this.activePath = path
 			this.activeAnchor = anchorId
 		},
-		
-		
 	},
 })

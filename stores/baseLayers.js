@@ -27,7 +27,7 @@ const initialLayers = JSON.stringify({
 		position: 	{ x: 1700, y: 560 },
 		
 		_1: 		{ x: 0, y: 0, joined: ['_1__h_2'] },
-		_1__h_2: 	{ x: 190, y: 35 },
+		_1__h_2: 	{ x: 190, y: 35 }, 
 		
 		_2__h_1: 	{ x: 65, y: 310, mirror: ['_2__h_2']  },
 		_2: 		{ x: 335, y: 295,joined: ['_2__h_1', '_2__h_2' ] },
@@ -74,7 +74,7 @@ const initialLayers = JSON.stringify({
 		h1: { x: 26, y: 0 }
 	},
 
-	skateboard: {
+	skateboard:  {
 		position:{ x: 1320, y: 570 },
 		
 		_top:	 { x: 87, y: 0, joined: ['_top__h'], lockedAxis: 'x' },
@@ -93,12 +93,14 @@ const initialLayers = JSON.stringify({
 	}
 })
 
-export const useBaseLayers = defineStore('base-layers', {
-    state: () => ({ 
-        isAltered: false,
+export const useBaseLayers = defineStore('baseLayers', {
+	state: () => ({ 
+        isAltered: useLocalStorage('piniaLayersAltered', false),
 		... JSON.parse( initialLayers )
 	}),
-	persist: true,
+	persist: {
+		storage: localStorage
+	},
 	actions: {
 		rewind() {
 			this.isAltered = false
