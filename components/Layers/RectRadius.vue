@@ -43,10 +43,6 @@
             type: Number,
             default: 1,
         },
-        reverse: {
-            type: Boolean,
-            default: false
-        },
         speed: {
             type: Number,
             default: 1
@@ -69,9 +65,7 @@
 
     const dashOffset = ref(0)
     function loop() {
-        props.reverse 
-            ? (dashOffset.value += Number(props.speed))
-            : (dashOffset.value -= Number(props.speed))
+        if ( document.hasFocus() ) dashOffset.value += Number(props.speed)
         requestAnimationFrame(loop)
     }
     if( props.dashArray ) loop()

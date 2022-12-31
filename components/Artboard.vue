@@ -6,7 +6,7 @@
 
             <LayersLine pathName="lineTwo" palet="4"/>
 
-            <LayersPath pathName="curveOne" palet="3" speed="0.6" dashArray="10 10 10"/>
+            <LayersPath pathName="curveOne" palet="3" speed="-0.6" dashArray="10 10 10"/>
 
             <LayersPath pathName="boobs" palet="1"/>
             
