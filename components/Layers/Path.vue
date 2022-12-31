@@ -1,7 +1,10 @@
 <template>
     <g class="this" :transform="`translate(${layer.position.x}, ${layer.position.y})`" fill="transparent">
        <g class="shape">
-            <path :d="path" :stroke="lineColor"/>
+            <path :d="path" 
+            :stroke="lineColor"
+            :stroke-dasharray="dashArray"
+            :stroke-dashoffset="dashOffset"/>
         </g>
         <g v-for="point in points" :key="point.key">
             <rect v-if="point.type === 'anchor'" 
@@ -48,7 +51,19 @@
 
     const props = defineProps({ 
         pathName: String,
-        palet: String
+        palet: String,
+        reverse: {
+            type: Boolean,
+            default: false
+        },
+        speed: {
+            type: Number,
+            default: 1
+        },
+        dashArray: {
+            type: String,
+            default: undefined
+        },
     })
     const palets = {
         1: 'var(--c-one)',
@@ -60,16 +75,26 @@
     }
     const lineColor = computed( () => palets[props.palet]  )
 
+    const dashOffset = ref(0)
+    function loop() {
+        props.reverse 
+            ? (dashOffset.value += Number(props.speed))
+            : (dashOffset.value -= Number(props.speed))
+        requestAnimationFrame(loop)
+    }
+    if( props.dashArray ) loop()
+
     const anchorColor = computed( () => {
         let nr = Number(props.palet) + 5
         nr = nr > 6 ? (nr - 6) : nr
         return palets[nr]
-    }  )
+    })
+
     const handleColor = computed( () => {
         let nr = Number(props.palet) + 1
         nr = nr > 6 ? (nr - 6) : nr
         return palets[nr]
-    } )
+    })
 
     const layer = computed(()=>layers[props.pathName])
 
