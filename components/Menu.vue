@@ -124,7 +124,7 @@
     const colors = ['--c-background', '--c-one', '--c-two', '--c-three', '--c-four', '--c-five', '--c-six']
     
     function downloadSvg() {
-        const rootStyles = window.getComputedStyle(document.documentElement)
+        const rootStyles = window.getComputedStyle(document.getElementById('theme'))
         const artboard = document.getElementById('artboard')
         let templateString =`${artboard.outerHTML}`
         colors.forEach(color => {

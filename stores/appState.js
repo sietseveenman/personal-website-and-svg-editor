@@ -18,7 +18,7 @@ export const useAppState = defineStore('appState', {
 			}, 
 			{
 				key: 'dull',
-				name: "Dim & Dusty",
+				name: "Dim",
 			}, 
 			{
 				key: 'matt',

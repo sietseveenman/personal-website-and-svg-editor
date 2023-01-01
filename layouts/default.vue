@@ -1,5 +1,5 @@
 <template>
-    <div class="theme" :class="[store.activeTheme]">
+    <div id="theme" :class="[store.activeTheme]">
         <slot />
     </div>
 </template>

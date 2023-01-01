@@ -1,5 +1,10 @@
 :root {
     --font-read: 'Roboto Mono', monospace;
+    --hover-anchor-color: white;
+    --hover-anchor-stroke-width: 0.6;
+}
+
+#theme {
     --c-black: #000C22;
     --c-background: var(--c-black);
     --c-one: fuchsia;
@@ -9,11 +14,6 @@
     --c-five: goldenrod;
     --c-six: red;
 
-    --hover-anchor-color: white;
-    --hover-anchor-stroke-width: 0.6;
-}
-
-.theme {
     &.matt {
         --c-black: #333;
         --c-background: rgb(40, 40, 40);
@@ -46,6 +46,7 @@
     }
     &.neon {
         --c-black: #212121;
+        --c-background: #000C22;
         --c-one: #ff4081;
         --c-two: #f50057;
         --c-three: #bf4c00;
