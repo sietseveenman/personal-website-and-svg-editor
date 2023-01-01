@@ -11,7 +11,22 @@ const initialPosition = JSON.stringify({
 
 export const useAppState = defineStore('appState', {
     state: () => ({ 
-        
+		themes: [
+			{
+				key: 'default',
+				name: 'default',
+			}, {
+				key: 'grim-grain',
+				name: 'grim grain',
+			}, {
+				key: 'candy-clouds',
+				name: 'candy clouds',
+			}, {
+				key: 'blue-balls',
+				name: 'blue balls',
+			},
+		],
+        activeTheme: useLocalStorage('piniaTheme', 'default'),
         userPosition: useLocalStorage('piniaPosition', JSON.parse(initialPosition)),
 		userPositionAltered: useLocalStorage('piniaPositionAltered', false),
 		activePath: undefined,

@@ -6,7 +6,7 @@
 
     <div class="me">
         <h2 class="tags">[Dude, Dutch, Dad, <span class="strike">Designer</span>, Developer, ...]</h2>
-        <div class="follow" style="color:{ $colors.two }">
+        <div class="follow">
             <span>Find me on</span>
             <span><a aria-label="Visit my LinkedIn account" target="_blank" href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>
             <span><a aria-label="Visit my Instagram account" target="_blank" href="https://www.instagram.com/sietse_veenman/"><IconsPixtagram /></a></span>
@@ -19,10 +19,16 @@
 </template>
 
 <style lang="scss">
+    .me {
+        color: var(--c-one);
+    }
     .follow {
         padding: 0.75em 0 1.35em 0.075em;
         display: flex;
         gap: 0.5em; 
+        svg path {
+            fill: var(--c-four);
+        }
         a {
             display: block;
             transform: translateY(0.04em);

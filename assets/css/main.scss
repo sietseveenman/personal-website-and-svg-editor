@@ -2,22 +2,45 @@
     --font-read: 'Roboto Mono', monospace;
     --c-black: #000C22;
     --c-background: var(--c-black);
-    --c-one: #FC5FFF;
-    --c-two: #29E818;
-    --c-three: #608CFF;
-    --c-four: #FF6F6F;
-    --c-five: #fcff55;
-    --c-six: #ff1515;
+    --c-one: fuchsia;
+    --c-two: green;
+    --c-three: blue;
+    --c-four: coral;
+    --c-five: goldenrod;
+    --c-six: red;
 
     --hover-anchor-color: white;
     --hover-anchor-stroke-width: 0.6;
+}
+
+.theme {
+    &.blue-balls {
+        --c-black: black;
+        --c-background: #88c1fa;
+        --c-one: #5C9FB3;
+        --c-two: #7E96C4;
+        --c-three: #608CFF;
+        --c-four: #0D47A1;
+        --c-five:  #3f848f;
+        --c-six: #2E5C73;
+    }
+    &.grim-grain {
+        --c-black: black;
+        --c-background: rgb(44, 44, 44);
+        --c-one: #9c9c9c;
+        --c-two: #d0d0d0;
+        --c-three: #1a191b;
+        --c-four: #717171;
+        --c-five:  #ffffff;
+        --c-six: #161719;
+    }
 }
 
 html {
     font-family: var(--font-read);
     letter-spacing: 0.025em;
     font-size: 62.5%;
-    color: var(--c-one);
+    // color: var(--c-one);
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     -moz-osx-font-smoothing: grayscale;
@@ -74,8 +97,8 @@ h1,h2,h3,h4,h5 {
     font-weight: inherit;
 }
 ::selection {
-    background: var(--c-three);
-    color: var(--c-black)!important;
+    background: black;
+    color: white!important;
     text-shadow: none;
 }
 

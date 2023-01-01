@@ -1,18 +1,31 @@
 <template>
     <div class="menu">
 
-        <button class="toggle" @click="toggle" :class="{'is-open':open}">
-            <div>{{ open ? 'close' : 'info' }}</div>
+        <button class="toggle" @click="toggleInfo" :class="{'is-open':infoOpen}">
+            <div>{{ infoOpen ? 'close' : 'info' }}</div>
         </button>
 
         <div class="buttons">
+            <button class="btn themes" @click="toggleThemes" :class="{'is-open':themesOpen}">
+                <div>{{ themesOpen ? 'close' : 'theme' }}</div>
+            </button>
             <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">center</button>
             <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
             <button class="btn" @click="downloadSvg">save svg</button>
-            <!-- <a class="btn" @click="downloadSvg">save svg</a> -->
+
+            <div class="content themes" ref="themes">
+                <div class="wrap">
+                    <ul>
+                        <li v-for="theme in appState.themes" :key="theme.key">
+                            <button :class="{ 'is-active': theme.key === appState.activeTheme }" @click="appState.$patch({ activeTheme: theme.key })">{{ theme.name }}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
-        <div class="content" ref="content">
+        <div class="content info" ref="info">
             <div class="wrap">
                 <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
                 I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong undestanding of technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span>
@@ -40,6 +53,7 @@
             </div>
         </div>
 
+
     </div>
 </template>
 
@@ -52,34 +66,60 @@
     const appState = useAppState()
     const baseLayers = useBaseLayers()
 
-    const open = ref(false)
-    const content = ref(null)
+    const infoOpen = ref(false)
+    const info = ref(null)
+
+    const themesOpen = ref(false)
+    const themes = ref(null)
     
-    let tween = null
+    let infoTween = null
+    let themesTween = null
 
     onMounted(() => {
-        tween = gsap.timeline({paused: true, ease: "power4.inOut"})
-        .to(content.value,{
-            width: 'auto',
-            duration: 0.16
-        })
-        .to(content.value, {
-            height: 'auto',
-            duration: 0.26
-        }, '-=0.09')
-        .from(content.value.firstElementChild, {
-            opacity: 0,
-            y: -4,
-            duration: 0.17
-        }, '-=0.16')
+        infoTween = gsap.timeline({paused: true, ease: "power4.inOut"})
+            .to(info.value,{
+                width: 'auto',
+                duration: 0.16
+            })
+            .to(info.value, {
+                height: 'auto',
+                duration: 0.26
+            }, '-=0.09')
+            .from(info.value.firstElementChild, {
+                opacity: 0,
+                y: -4,
+                duration: 0.17
+            }, '-=0.16')
+
+        themesTween = gsap.timeline({paused: true, ease: "power4.inOut"})
+            .to(themes.value,{
+                width: 'auto',
+                duration: 0.16
+            })
+            .to(themes.value, {
+                height: 'auto',
+                duration: 0.26
+            }, '-=0.09')
+            .from(themes.value.firstElementChild, {
+                opacity: 0,
+                y: -4,
+                duration: 0.17
+            }, '-=0.16')
+            .timeScale(1.4)
 
     })
 
-    function toggle() {
-        if ( tween ) tween.play()
-        open.value = !open.value
-        tween[open.value ? 'play':'reverse']()
+    function toggleInfo() {
+        if ( infoTween ) infoTween.play()
+        infoOpen.value = !infoOpen.value
+        infoTween[infoOpen.value ? 'play':'reverse']()
     }
+    function toggleThemes() {
+        if ( themesTween ) themesTween.play()
+        themesOpen.value = !themesOpen.value
+        themesTween[themesOpen.value ? 'play':'reverse']()
+    }
+
 
     const colors = ['--c-background', '--c-one', '--c-two', '--c-three', '--c-four', '--c-five', '--c-six']
     
@@ -150,14 +190,45 @@
         backdrop-filter: blur(3px) brightness(85%);
         z-index: 3;
         max-width: 80vw;
-        .o {
-            color: var(--c-four);
-        }
+        .o { color: var(--c-four); }
     }
     .wrap {
         padding: 30px 35px 35px 30px;
-        width: 510px;
         max-width: 80vw;
+    }
+    .info .wrap {
+        width: 510px;
+    }
+    .content.themes {
+        top: 10px;
+        position: absolute;
+        z-index: 1;
+    }
+    .themes .wrap {
+        width: 180px;
+        padding: 30px 15px 35px 30px;
+        li {
+            & + li {
+                margin-top: 0.35em;
+            }
+            &:before { display: none; }
+        }
+        button {
+            color: var(--c-three);
+            opacity: 0.35;
+            &:hover,
+            &:focus {
+                opacity: 1;
+            }
+            &.is-active {
+                opacity: 1;
+                color: var(--c-two)
+            }
+        }
+    }
+    .btn.themes {
+        z-index: 2;
+        border: none;
     }
     ul {
         padding-top: 0.25em;
