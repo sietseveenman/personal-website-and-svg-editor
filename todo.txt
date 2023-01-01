@@ -2,10 +2,12 @@
 - Layer sidebar?
 - Pen tool
 - Zoom buttons 
+- Option to save single shape
+- Close menu's on click outside or esc pres
 ✓ Add more stuff to the artboard
 ✓ Seperate stores
     ✓ persisted base layers 
-    - persisted state (theme)
+    ✓ persisted state (theme)
     - persisted custom layers
     ✓ app state
 
