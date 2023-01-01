@@ -14,16 +14,23 @@ export const useAppState = defineStore('appState', {
 		themes: [
 			{
 				key: 'default',
-				name: 'default',
-			}, {
-				key: 'grim-grain',
-				name: 'grim grain',
-			}, {
-				key: 'candy-clouds',
-				name: 'candy clouds',
-			}, {
-				key: 'blue-balls',
-				name: 'blue balls',
+				name: 'Default',
+			}, 
+			{
+				key: 'dull',
+				name: "Dim & Dusty",
+			}, 
+			{
+				key: 'matt',
+				name: 'Matt',
+			}, 
+			{
+				key: 'neon',
+				name: 'Neon Lullaby',
+			},
+			{
+				key: 'pink-panther',
+				name: 'Pink Panther',
 			},
 		],
         activeTheme: useLocalStorage('piniaTheme', 'default'),

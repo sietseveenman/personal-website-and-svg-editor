@@ -14,26 +14,44 @@
 }
 
 .theme {
-    &.blue-balls {
-        --c-black: black;
-        --c-background: #88c1fa;
-        --c-one: #5C9FB3;
-        --c-two: #7E96C4;
-        --c-three: #608CFF;
-        --c-four: #0D47A1;
-        --c-five:  #3f848f;
-        --c-six: #2E5C73;
+    &.matt {
+        --c-black: #333;
+        --c-background: rgb(40, 40, 40);
+        --c-one: #c9d6ff;
+        --c-two: #9ae69f;
+        --c-three: #00b8d4;
+        --c-four: #edafa9;
+        --c-five: #ffd180;
+        --c-six: #ff4081;
     }
-    &.grim-grain {
+    &.dull {
         --c-black: black;
         --c-background: rgb(44, 44, 44);
         --c-one: #9c9c9c;
         --c-two: #d0d0d0;
         --c-three: #ffffff;
         --c-four: #717171;
-        --c-five:  #dbdbdb;
         --c-five:  #1a191b;
         --c-six: #161719;
+    }
+    &.pink-panther {
+        --c-black: #111111;
+        --c-background: var(--c-black);
+        --c-one: #e91e94;
+        --c-two: #9c27b0;
+        --c-three: #823fb5;
+        --c-four: #fd37ec;
+        --c-five: #f50dea;
+        --c-six: #a200d4;
+    }
+    &.neon {
+        --c-black: #212121;
+        --c-one: #ff4081;
+        --c-two: #f50057;
+        --c-three: #bf4c00;
+        --c-four: #d500f9;
+        --c-five: #651fff;
+        --c-six: #3d5afe;
     }
 }
 
