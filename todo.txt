@@ -4,6 +4,7 @@
 - Zoom buttons 
 - Option to save single shape
 - Close menu's on click outside or esc pres
+- Toggle to hide anchors / handles ?
 ✓ Add more stuff to the artboard
 ✓ Seperate stores
     ✓ persisted base layers 
