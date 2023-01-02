@@ -110,21 +110,20 @@
 
         document.addEventListener('click', (e) => { 
             if ( ! e.target.closest('.menu') ) {
-                toggleInfo(false)
-                toggleThemes(false)
+                toggleInfo(e, false)
+                toggleThemes(e, false)
             }
         })
 
         document.addEventListener('keyup', (e) => { 
             if (e.code === 'Escape') {
-                toggleInfo(false)
-                toggleThemes(false)
+                toggleInfo(e, false)
+                toggleThemes(e, false)
             }
         })
     })
 
-    function toggleInfo(openOrClose = undefined) {
-        if ( infoTween ) infoTween.play()
+    function toggleInfo(e, openOrClose = undefined) {
         if ( openOrClose !== undefined ) {
             infoOpen.value = openOrClose
         } else {
@@ -132,9 +131,9 @@
         }
         infoTween[infoOpen.value ? 'play':'reverse']()
     }
-    function toggleThemes(openOrClose = undefined) {
-        if ( themesTween ) themesTween.play()
-        if ( openOrClose !== undefined  ) {
+
+    function toggleThemes(e, openOrClose = undefined) {
+        if ( openOrClose != undefined  ) {
             themesOpen.value = openOrClose
         } else {
             themesOpen.value = !themesOpen.value
@@ -301,6 +300,7 @@
         border-radius: 10px;
         border: 1px solid var(--c-four);
         z-index: 1;
+        // backdrop-filter: blur(3px) brightness(85%);
 
         &:not(.disabled):hover {
             cursor: pointer;
