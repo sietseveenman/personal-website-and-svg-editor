@@ -26,7 +26,7 @@ export const useAppState = defineStore('appState', {
 			}, 
 			{
 				key: 'neon',
-				name: 'Neon Lullaby',
+				name: 'Neon Knight',
 			},
 			{
 				key: 'pink-panther',
