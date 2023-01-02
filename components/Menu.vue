@@ -250,6 +250,7 @@
     .btn.themes {
         z-index: 2;
         border: none;
+        backdrop-filter: none;
     }
     ul {
         padding-top: 0.25em;
@@ -300,7 +301,7 @@
         border-radius: 10px;
         border: 1px solid var(--c-four);
         z-index: 1;
-        // backdrop-filter: blur(3px) brightness(85%);
+        backdrop-filter: blur(3px) brightness(85%);
 
         &:not(.disabled):hover {
             cursor: pointer;
