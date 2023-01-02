@@ -33,10 +33,11 @@
     const baseLayers = useBaseLayers()
 
     let prevMouse = null
+    let lockedAxis = undefined
 
     const isGrabbing = computed( () => appState.mouseDown && (appState.activeAnchor || appState.keysDown.includes('Space')) )
     const canGrab = computed( () => ! appState.mouseDown && appState.keysDown.includes('Space') )
-
+    
     onMounted(() => {
         document.addEventListener( 'mouseup', handleMouseUp )
         document.addEventListener( 'mousedown', handleMouseDown )
@@ -81,8 +82,6 @@
 
         prevMouse = { x: mx, y: my }
     }
-
-    let lockedAxis = undefined
 
     function handleDrag(point, diff) {
         lockedAxis = point.lockedAxis
