@@ -1,5 +1,5 @@
 <template>
-    <div class="menu">
+    <div class="menu" ref="root">
 
         <button class="toggle" @click="toggleInfo" :class="{'is-open':infoOpen}">
             <div>{{ infoOpen ? 'close' : 'info' }}</div>
@@ -69,6 +69,7 @@
     const infoOpen = ref(false)
     const info = ref(null)
 
+    const root = ref(null)
     const themesOpen = ref(false)
     const themes = ref(null)
     
@@ -107,16 +108,37 @@
             }, '-=0.16')
             .timeScale(1.4)
 
+        document.addEventListener('click', (e) => { 
+            if ( ! e.target.closest('.menu') ) {
+                toggleInfo(false)
+                toggleThemes(false)
+            }
+        })
+
+        document.addEventListener('keyup', (e) => { 
+            if (e.code === 'Escape') {
+                toggleInfo(false)
+                toggleThemes(false)
+            }
+        })
     })
 
-    function toggleInfo() {
+    function toggleInfo(openOrClose = undefined) {
         if ( infoTween ) infoTween.play()
-        infoOpen.value = !infoOpen.value
+        if ( openOrClose !== undefined ) {
+            infoOpen.value = openOrClose
+        } else {
+            infoOpen.value = !infoOpen.value
+        }
         infoTween[infoOpen.value ? 'play':'reverse']()
     }
-    function toggleThemes() {
+    function toggleThemes(openOrClose = undefined) {
         if ( themesTween ) themesTween.play()
-        themesOpen.value = !themesOpen.value
+        if ( openOrClose !== undefined  ) {
+            themesOpen.value = openOrClose
+        } else {
+            themesOpen.value = !themesOpen.value
+        }
         themesTween[themesOpen.value ? 'play':'reverse']()
     }
 
