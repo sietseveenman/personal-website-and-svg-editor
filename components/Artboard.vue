@@ -86,8 +86,11 @@
     }
     
     function handleWheel(e) {
-        // const mx = e.clientX, my = e.client
-        appState.updateUserPosition({x:e.deltaX, y:e.deltaY})
+        const strength = 0.35
+        appState.updateUserPosition({
+            x:e.deltaX*strength, 
+            y:e.deltaY*strength
+        })
     }
 
     function handleMouseMove(e) {
