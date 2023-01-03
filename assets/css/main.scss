@@ -33,6 +33,14 @@
         --c-four: #717171;
         --c-five:  #1a191b;
         --c-six: #161719;
+ 
+        .menu {
+            .btn:not(.themes),
+            .content {
+                backdrop-filter: none;
+                background: rgb(24, 24, 24);
+            }
+        }
     }
     &.pink-panther {
         --c-black: #111111;
@@ -60,6 +68,40 @@
                 filter: drop-shadow(0px 0px 6px rgb(47, 47, 255));
             }
         }
+    }
+    &.banana {
+        --c-background: #faec2c;
+        --c-one: #b58200;
+        --c-two: #8a8a12;
+        --c-three: #856300;
+        --c-four: #3e3b00;
+        --c-five: #896e00;
+        --c-six: #a98d00;
+        .menu {
+            .btn:not(.themes),
+            .content {
+                backdrop-filter: none;
+                background: var(--c-background);
+            }
+        }
+    }
+    &.white {
+        --c-background: rgb(232, 232, 232);
+        --c-one: #8e8e8e;
+        --c-two: #4f4f4f;
+        --c-three: #464646;
+        --c-four: #787878;
+        --c-five: #000000;
+        --c-six: #7a7a7a;
+
+        .menu {
+            .btn:not(.themes),
+            .content {
+                backdrop-filter: none;
+                background: var(--c-background);
+            }
+        }
+       
     }
 }
 

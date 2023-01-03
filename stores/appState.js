@@ -20,7 +20,7 @@ export const useAppState = defineStore('appState', {
 			}, 
 			{
 				key: 'dull',
-				name: "Dim",
+				name: "Dull",
 			}, 
 			{
 				key: 'matt',
@@ -31,8 +31,16 @@ export const useAppState = defineStore('appState', {
 				name: 'Neon Knight',
 			},
 			{
+				key: 'banana',
+				name: "Banana's",
+			},
+			{
 				key: 'pink-panther',
 				name: 'Pink Panther',
+			},
+			{
+				key: 'white',
+				name: 'Bleached',
 			},
 		],
         activeTheme: useLocalStorage('piniaTheme', 'default'),
