@@ -41,6 +41,13 @@
                 background: rgb(24, 24, 24);
             }
         }
+      
+        path,
+        rect,
+        circle {
+            stroke-width:1.5;
+        }
+       
     }
     &.pink-panther {
         --c-black: #111111;
@@ -51,6 +58,15 @@
         --c-four: #fd37ec;
         --c-five: #f50dea;
         --c-six: #a200d4;
+     
+        path,
+        rect,
+        circle {
+            stroke-width: 3;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        
     }
     &.neon {
         --c-black: #212121;
@@ -61,13 +77,13 @@
         --c-four: #d500f9;
         --c-five: #651fff;
         --c-six: #3d5afe;
-        svg {
-            path,
-            rect,
-            circle {
-                filter: drop-shadow(0px 0px 6px rgb(47, 47, 255));
-            }
+     
+        path,
+        rect,
+        circle {
+            filter: drop-shadow(0px 0px 6px rgb(47, 47, 255));
         }
+        
     }
     &.banana {
         --c-background: #faec2c;
@@ -84,6 +100,14 @@
                 background: var(--c-background);
             }
         }
+        path,
+        rect,
+        circle {
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+      
     }
     &.white {
         --c-background: rgb(232, 232, 232);
@@ -100,6 +124,14 @@
                 backdrop-filter: none;
                 background: var(--c-background);
             }
+        }
+      
+        path,
+        rect,
+        circle {
+            stroke-width: 6;
+            stroke-linecap: round;
+            stroke-linejoin: round;
         }
        
     }
