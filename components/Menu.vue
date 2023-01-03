@@ -7,11 +7,9 @@
 
         <div class="content info" ref="info" :tabindex="infoOpen ? 0 : 1">
             <div class="wrap">
-                <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span><br/>
-                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a solid understanding of the folowing technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span>
-                <br/>
-                <br/>
-                This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
+                <small style="color: var(--c-five)">Hi there!</small><br/>
+                <small>
+                    This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
                 <br/>
                 <br/>
                 <small style="color: var(--c-five)">How it works:</small><br/>
@@ -31,7 +29,14 @@
                     <li>
                         <small>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></small>
                     </li>
-                </ul>
+                </ul>  
+                <br/><br/> 
+                <small style="color: var(--c-five)">About me:</small><br/> 
+                <small>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span><br/>
+                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a solid understanding of the folowing technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span></small>
+                
+             
+                
                 
             </div>
         </div>
@@ -226,7 +231,7 @@
         color: var(--c-four);
         border: 1px solid currentColor;
         border-radius: 10px;
-        backdrop-filter: blur(3px) brightness(65%);
+        backdrop-filter: blur(3px) brightness(45%);
         z-index: 13;
         max-width: 92vw;
         .o { color: var(--c-four); }
