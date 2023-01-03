@@ -49,6 +49,11 @@
         width: 100%;
         padding: 330px 10px 30px 30px;
         z-index: 2;
+        
+        @media only screen and (max-width: 786px) {
+            top: 300px;
+            font-size: 12px;
+        }
     }
 
 </style>

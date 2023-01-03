@@ -11,7 +11,7 @@
             </button>
             <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">center</button>
             <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
-            <button class="btn" @click="downloadSvg">save svg</button>
+            <button class="btn save-svg" @click="downloadSvg">save svg</button>
 
             <div class="content themes" ref="themes">
                 <div class="wrap">
@@ -170,6 +170,22 @@
         top: 50px;
         --toggle-width: 60px;
         --toggle-height: 32px;
+        
+        right: 15px;
+        top: 20px;
+
+        @media only screen and (max-width: 786px) {
+            .save-svg {
+                display: none;
+            }
+            .content {
+                backdrop-filter: blur(3px) brightness(45%);
+            }
+        }
+        @media only screen and (min-width: 786px) {
+            right: 50px;
+            top: 50px;
+        }
     }
 
 
@@ -208,14 +224,14 @@
         color: var(--c-four);
         border: 1px solid currentColor;
         border-radius: 10px;
-        backdrop-filter: blur(3px) brightness(85%);
+        backdrop-filter: blur(3px) brightness(65%);
         z-index: 3;
-        max-width: 80vw;
+        max-width: 92vw;
         .o { color: var(--c-four); }
     }
     .wrap {
         padding: 30px 35px 35px 30px;
-        max-width: 80vw;
+        max-width: 92vw;
     }
     .info .wrap {
         width: 510px;
@@ -301,7 +317,7 @@
         border-radius: 10px;
         border: 1px solid var(--c-four);
         z-index: 1;
-        backdrop-filter: blur(3px) brightness(85%);
+        backdrop-filter: blur(3px) brightness(80%);
 
         &:not(.disabled):hover {
             cursor: pointer;

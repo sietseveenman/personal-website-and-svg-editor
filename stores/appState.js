@@ -4,8 +4,9 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 gsap.registerPlugin( ScrollToPlugin )
 
+console.log(window.innerWidth)
 const initialPosition = JSON.stringify({
-	x: 375,
+	x: window.innerWidth >= 786 ? 375 : 410,
 	y: 355
 })
 
