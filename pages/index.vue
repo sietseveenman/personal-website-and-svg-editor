@@ -5,7 +5,7 @@
     <Artboard></Artboard>
 
     <div class="me">
-        <h2 class="tags">[Dude, Dutch, Dad, <span class="strike">Designer</span>, Developer, ...]</h2>
+        <h2 class="tags">[Dude, Dutch, Dad, Daft, <span class="strike">Designer</span>, Developer, ...]</h2>
         <div class="follow">
             <span>Find me on</span>
             <span><a aria-label="Visit my LinkedIn account" target="_blank" href="https://www.linkedin.com/in/sietse-veenman-6b791136/"><IconsPixedin /></a></span>

@@ -7,17 +7,20 @@
 
         <div class="content info" ref="info" :tabindex="infoOpen ? 0 : 1">
             <div class="wrap">
-                <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
-                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong undestanding of technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span>
+                <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span><br/>
+                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a solid understanding of the folowing technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span>
                 <br/>
                 <br/>
-                This site is probably the most pointless and useless (desktop only) vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
+                This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
                 <br/>
                 <br/>
                 <small style="color: var(--c-five)">How it works:</small><br/>
                 <ul>
                     <li>
                         <small>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.keysDown.includes('Space') && appState.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
+                    </li>
+                    <li>
+                        <small>Or use two fingers to swipe and move the canvas<span class="o">.</span></small>
                     </li>
                     <li>
                         <small>Grab anchor points or handles to manipulate paths<span class="o">.</span></small>
@@ -233,7 +236,7 @@
         max-width: 92vw;
     }
     .info .wrap {
-        width: 510px;
+        width: 520px;
     }
     .content.themes {
         top: 10px;
