@@ -4,11 +4,12 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
 
 gsap.registerPlugin( ScrollToPlugin )
 
-console.log(window.innerWidth)
 const initialPosition = JSON.stringify({
 	x: window.innerWidth >= 786 ? 375 : 410,
 	y: 355
 })
+
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
 export const useAppState = defineStore('appState', {
     state: () => ({ 
@@ -46,6 +47,20 @@ export const useAppState = defineStore('appState', {
 	}),
 
 	actions: {
+
+		updateUserPosition(diff) {
+			if ( ! diff ) {
+				console.error('No coordinates provided')
+				return
+			}
+			this.userPositionAltered = true
+			const x = this.userPosition.x + diff.x
+			const y = this.userPosition.y + diff.y
+			this.userPosition.x = clamp(x, 0, 2800)
+			this.userPosition.y = clamp(y, 0, 2560)
+			window.scrollTo(this.userPosition.x, this.userPosition.y)
+		},
+
 		resetUserPosition() {
 			this.userPositionAltered = false
 			gsap.to(window, {
@@ -77,6 +92,6 @@ export const useAppState = defineStore('appState', {
 		setActiveAnchor(e, path, anchorId) {
 			this.activePath = path
 			this.activeAnchor = anchorId
-		},
+		}
 	},
 })

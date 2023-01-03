@@ -39,10 +39,37 @@
     const canGrab = computed( () => ! appState.mouseDown && appState.keysDown.includes('Space') )
     
     onMounted(() => {
-        document.addEventListener( 'mouseup', handleMouseUp )
+
+        // Handle Mouse
+        // ---------------------
         document.addEventListener( 'mousedown', handleMouseDown )
         document.addEventListener( 'mousemove', handleMouseMove )
+        document.addEventListener( 'mouseup', handleMouseUp )
 
+
+        // Handle Touch
+        // ---------------------
+
+        // document.querySelector('.artboard').addEventListener('touchmove', (event) => {
+        //     // Get the touch points
+        //     const touch1 = event.touches[0];
+        //     const touch2 = event.touches[1];
+
+        //     // Calculate the distance between the two touch points
+        //     const distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) +
+        //         Math.pow(touch2.clientY - touch1.clientY, 2));
+
+        //     console.log(distance);
+        // });
+
+
+        // Handle Trackpad
+        // ---------------------
+        document.addEventListener('wheel', handleWheel);
+
+
+        // Hanlde Keys
+        // ---------------------
         window.addEventListener( 'keydown', (e) => appState.keyDown(e) )
         window.addEventListener( 'keyup', (e) => appState.keyUp(e) )
         window.addEventListener( 'blur', () => appState.keysDown = [] )
@@ -58,6 +85,11 @@
         prevMouse = null
     }
     
+    function handleWheel(e) {
+        // const mx = e.clientX, my = e.client
+        appState.updateUserPosition({x:e.deltaX, y:e.deltaY})
+    }
+
     function handleMouseMove(e) {
         const mx = e.clientX, my = e.clientY
         appState.mouse = { x: mx, y: my }
@@ -67,10 +99,7 @@
             const diff = { x: prevMouse.x - mx, y: prevMouse.y - my }
             
             if ( appState.keysDown.includes('Space') ) {
-                appState.userPosition.x += diff.x
-                appState.userPosition.y += diff.y
-                window.scrollTo(appState.userPosition.x, appState.userPosition.y)
-                appState.userPositionAltered = true
+                appState.updateUserPosition(diff)
             }
 
             else if ( appState.activePath ) {
