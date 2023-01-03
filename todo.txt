@@ -5,6 +5,9 @@
 - Option to save single shape
 - Close menu's on click outside or esc pres
 - Toggle to hide anchors / handles ?
+- Better filter dropshadow inside the svg (theme)
+    https://css-tricks.com/adding-shadows-to-svg-icons-with-css-and-svg-filters/
+
 ✓ Add more stuff to the artboard
 ✓ Seperate stores
     ✓ persisted base layers 
