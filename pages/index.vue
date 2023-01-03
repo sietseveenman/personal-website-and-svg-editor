@@ -33,8 +33,16 @@
             display: block;
             transform: translateY(0.04em);
             pointer-events: all;
-            &:hover svg path {
-                fill: var(--c-one);
+            &:hover{
+                svg path {
+                    fill: var(--c-one);
+                }
+            }
+            &:focus {
+                outline: none;
+                svg path {
+                    fill: red;
+                }
             }
         }
     }

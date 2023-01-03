@@ -5,27 +5,7 @@
             <div>{{ infoOpen ? 'close' : 'info' }}</div>
         </button>
 
-        <div class="buttons">
-            <button class="btn themes" @click="toggleThemes" :class="{'is-open':themesOpen}">
-                <div>{{ themesOpen ? 'close' : 'theme' }}</div>
-            </button>
-            <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">center</button>
-            <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
-            <button class="btn save-svg" @click="downloadSvg">save svg</button>
-
-            <div class="content themes" ref="themes">
-                <div class="wrap">
-                    <ul>
-                        <li v-for="theme in appState.themes" :key="theme.key">
-                            <button :class="{ 'is-active': theme.key === appState.activeTheme }" @click="appState.$patch({ activeTheme: theme.key })">{{ theme.name }}</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="content info" ref="info">
+        <div class="content info" ref="info" :tabindex="infoOpen ? 0 : 1">
             <div class="wrap">
                 <small>Hi there<span class="o">!</span><br/>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span>
                 I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a strong undestanding of technologies such as HTML5, (S)CSS, JS (Vanilla, Vue, jQuery, Gsap), Gulp, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, Wordpress), Twig, Blade, SQL and Git<span class="o">.</span> In addition I have dipped my toes into other libraries such as Svelte, React and ThreeJS<span class="o">.</span>
@@ -51,6 +31,24 @@
                 </ul>
                 
             </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn themes" @click="toggleThemes" :class="{'is-open':themesOpen}">
+                <div>{{ themesOpen ? 'close' : 'theme' }}</div>
+            </button>
+            <div class="content themes" ref="themes" :tabindex="themesOpen ? 0 : 1">
+                <div class="wrap">
+                    <ul>
+                        <li v-for="theme in appState.themes" :key="theme.key">
+                            <button :class="{ 'is-active': theme.key === appState.activeTheme }" @click="appState.$patch({ activeTheme: theme.key })">{{ theme.name }}</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <button class="btn" @click="appState.resetUserPosition()" :class="{ 'disabled': !appState.userPositionAltered }">center</button>
+            <button class="btn" @click="baseLayers.rewind()" :class="{ 'disabled': !baseLayers.isAltered }">reset</button>
+            <button class="btn save-svg" @click="downloadSvg">save svg</button>
         </div>
 
 
@@ -190,7 +188,7 @@
 
 
     .toggle {
-        z-index: 4;
+        z-index: 14;
         transform: scale(0.88);
         display: flex;
         align-items: center;
@@ -207,9 +205,10 @@
             transform: translateY(-0.07em);
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
             color: var(--c-two);
-            transform: scale(0.88);
+            // transform: scale(0.88);
             & + .content {
                 color: var(--c-two);
             }
@@ -225,7 +224,7 @@
         border: 1px solid currentColor;
         border-radius: 10px;
         backdrop-filter: blur(3px) brightness(65%);
-        z-index: 3;
+        z-index: 13;
         max-width: 92vw;
         .o { color: var(--c-four); }
     }
@@ -239,7 +238,7 @@
     .content.themes {
         top: 10px;
         position: absolute;
-        z-index: 1;
+        z-index: 10;
     }
     .themes .wrap {
         width: 180px;
@@ -264,7 +263,7 @@
         }
     }
     .btn.themes {
-        z-index: 2;
+        z-index: 11 ;
         border: none;
         backdrop-filter: none;
     }
@@ -319,9 +318,16 @@
         z-index: 1;
         backdrop-filter: blur(3px) brightness(80%);
 
-        &:not(.disabled):hover {
-            cursor: pointer;
-            color: var(--c-two);
+        &:hover,
+        &:focus {
+            color: rgba(red,1);
+        }
+        
+        &:not(.disabled) {
+            &:hover,
+            &:focus {
+                color: var(--c-two);
+            }
         }
         &.disabled {
             cursor: auto;
