@@ -65,7 +65,7 @@
 
         // Handle Trackpad
         // ---------------------
-        document.addEventListener('wheel', handleWheel);
+        // document.addEventListener('wheel', handleWheel)
 
 
         // Hanlde Keys

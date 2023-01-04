@@ -17,9 +17,9 @@
                     <li>
                         <small>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.keysDown.includes('Space') && appState.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
                     </li>
-                    <li>
+                    <!-- <li>
                         <small>Or use two fingers to swipe and move the canvas<span class="o">.</span></small>
-                    </li>
+                    </li> -->
                     <li>
                         <small>Grab anchor points or handles to manipulate paths<span class="o">.</span></small>
                     </li>
