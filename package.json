@@ -19,6 +19,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.4.6",
     "gsap": "^3.11.3",
-    "pinia": "^2.0.27"
+    "pinia": "^2.0.27",
+    "vue-gtag-next": "^1.14.0"
   }
 }
