@@ -1,11 +1,11 @@
 <template>
     <div class="menu" ref="root">
 
-        <button class="toggle" @click="toggleInfo" :class="{'is-open':infoOpen}">
+        <button tabindex="1" class="toggle" @click="toggleInfo" :class="{'is-open':infoOpen}">
             <div>{{ infoOpen ? 'close' : 'info' }}</div>
         </button>
 
-        <div class="content info" ref="info" :tabindex="infoOpen ? 0 : 1">
+        <div class="content info" ref="info">
             <div class="wrap">
                 <small style="color: var(--c-five)">Hi there!</small><br/>
                 <small>
@@ -32,8 +32,8 @@
                 </ul>  
                 <br/><br/> 
                 <small style="color: var(--c-five)">About me:</small><br/> 
-                <small>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank">JUST</a><span class="o">.</span><br/>
-                I ❤️ <a href="https://vuejs.org/" target="__blank">VueJS</a> and <a href="https://getkirby.com/" target="_blank">Kirby</a><span class="o">,</span> and have a solid understanding of the folowing technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span></small>
+                <small>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank" :tabindex="infoOpen ? '0' : '-1'">JUST</a><span class="o">.</span><br/>
+                I ❤️ <a href="https://vuejs.org/" target="__blank" :tabindex="infoOpen ? '0' : '-1'">VueJS</a> and <a href="https://getkirby.com/" target="_blank" :tabindex="infoOpen ? '0' : '-1'">Kirby</a><span class="o">,</span> and have a solid understanding of the following technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span></small>
                 
              
                 
@@ -42,14 +42,14 @@
         </div>
 
         <div class="buttons">
-            <button class="btn themes" @click="toggleThemes" :class="{'is-open':themesOpen}">
+            <button tabindex="2" class="btn themes" @click="toggleThemes" :class="{'is-open':themesOpen}">
                 <div>{{ themesOpen ? 'close' : 'theme' }}</div>
             </button>
-            <div class="content themes" ref="themes" :tabindex="themesOpen ? 0 : 1">
+            <div class="content themes" ref="themes">
                 <div class="wrap">
                     <ul>
                         <li v-for="theme in appState.themes" :key="theme.key">
-                            <button :class="{ 'is-active': theme.key === appState.activeTheme }" @click="appState.$patch({ activeTheme: theme.key })">{{ theme.name }}</button>
+                            <button :class="{ 'is-active': theme.key === appState.activeTheme }" @click="appState.$patch({ activeTheme: theme.key })" :tabindex="themesOpen ? '0' : '-1'">{{ theme.name }}</button>
                         </li>
                     </ul>
                 </div>
@@ -274,6 +274,13 @@
         z-index: 11 ;
         border: none;
         backdrop-filter: none;
+        &:hover,
+        &:focus {
+            & + .content {
+                color: var(--c-two);
+                border-color: currentColor;
+            }
+        }
     }
     ul {
         padding-top: 0.25em;
@@ -295,7 +302,8 @@
 
         a {
             color: currentColor;
-            &:hover {
+            &:hover,
+            &:focus {
                 color: var(--c-five);
             }
         }
@@ -326,12 +334,13 @@
         z-index: 1;
         backdrop-filter: blur(3px) brightness(80%);
 
-        &:hover,
-        &:focus {
-            color: rgba(red,1);
-        }
+        // &:hover,
+        // &:focus {
+        //     color: rgba(red,1);
+        // }
         
         &:not(.disabled) {
+            outline: none;
             &:hover,
             &:focus {
                 color: var(--c-two);
