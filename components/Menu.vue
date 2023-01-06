@@ -7,36 +7,34 @@
 
         <div class="content info" ref="info">
             <div class="wrap">
-                <small style="color: var(--c-five)">Hi there!</small><br/>
-                <small>
-                    This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span></small>
-                <br/>
-                <br/>
-                <small style="color: var(--c-five)">How it works:</small><br/>
+                <h3>Hi there!</h3>
+                <p>
+                    This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span>
+                </p>
+
+                <h3>How it works:</h3>
                 <ul>
                     <li>
-                        <small>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.keysDown.includes('Space') && appState.mouseDown}">Mouse</span> to drag the canvas<span class="o">.</span></small>
-                    </li>
-                    <!-- <li>
-                        <small>Or use two fingers to swipe and move the canvas<span class="o">.</span></small>
-                    </li> -->
-                    <li>
-                        <small>Grab anchor points or handles to manipulate paths<span class="o">.</span></small>
+                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.mouseDown }">Mouse</span> to drag the canvas<span class="o">.</span></span>
                     </li>
                     <li>
-                        <small>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></small>
+                        <span>Or use two fingers to swipe and move the canvas<span class="o">.</span></span>
                     </li>
                     <li>
-                        <small>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></small>
+                        <span>Grab and drag anchor points <svg width="12px" height="12px"  fill="transparent" style="transform: translateY(0.06em) rotate(45deg);"><rect width="12" height="12" x="0" y="0" stroke="var(--c-three)" stroke-width="2" ></rect></svg> or handles <svg width="16" height="16" fill="transparent" style="transform: translateY(0.25em);"><circle  stroke="var(--c-three)" stroke-width="1" r="7" cx="8" cy="8"></circle></svg> to manipulate paths<span class="o">.</span></span>
+                    </li>
+                    <li>
+                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
+                    </li>
+                    <li>
+                        <span>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></span>
                     </li>
                 </ul>  
-                <br/><br/> 
-                <small style="color: var(--c-five)">About me:</small><br/> 
-                <small>My name is Sietse Veenman and I am a designer turned web developer from the Netherlands<span class="o">.</span> Currently I am holding the position of fullstack developer at <a href="https://wearejust.com/nl" target="_blank" :tabindex="infoOpen ? '0' : '-1'">JUST</a><span class="o">.</span><br/>
-                I ❤️ <a href="https://vuejs.org/" target="__blank" :tabindex="infoOpen ? '0' : '-1'">VueJS</a> and <a href="https://getkirby.com/" target="_blank" :tabindex="infoOpen ? '0' : '-1'">Kirby</a><span class="o">,</span> and have a solid understanding of the following technologies: [HTML5, (S)CSS, JavaScript (Vanilla, Vue, <span style="text-decoration: line-through;">jQuery</span>, Gsap), <span style="text-decoration: line-through;">Gulp</span>, Webpack, Vite, PHP (Kirby, Laravel, Symfony, Statamic, <span style="text-decoration: line-through;">Wordpress</span>), Twig, Blade, SQL and Git]<span class="o">.</span> In addition I have dabbled with other JS libraries such as Svelte, React and ThreeJS<span class="o">.</span></small>
-                
-             
-                
+
+                <h3>About me:</h3>
+                <p>
+                    My name is Sietse Veenman<span class="o">.</span> I am a designer turned developer from the Netherlands<span class="o">,</span> currently holding the position of fullstack developer at <a href="https://wearejust.com/en" target="_blank" :tabindex="infoOpen ? '0' : '-1'">JUST</a><span class="o">.</span> I ❤️ working with <a href="https://vuejs.org/" target="__blank" :tabindex="infoOpen ? '0' : '-1'">VueJS</a> and <a href="https://getkirby.com/" target="_blank" :tabindex="infoOpen ? '0' : '-1'">Kirby</a><span class="o">.</span> When I am not writing code you can find me on my skateboard, playing video games and mostly just spending time with the family<span class="o">.</span>
+                </p>
                 
             </div>
         </div>
@@ -168,6 +166,43 @@
 </script>
 
 <style lang="scss" scoped>
+    h3, p, ul {
+        font-size: 1.33rem;
+        line-height: 1.575;
+    }
+    li + li {
+        padding-top: 0.15em;
+    }
+    h3 {
+        color: var(--c-five);
+    }
+    p {
+        a {
+            color: currentColor;
+            &:hover,
+            &:focus {
+                color: var(--c-five);
+            }
+        }
+        
+        
+    }
+    p, ul {
+        color: var(--c-three);
+        &:not(:last-child) {
+            padding-bottom: 1.45em;
+        }
+    }
+    li span {
+        line-height: 1.5;
+        circle {
+            stroke-width: 1!important;
+        }
+        rect {
+            stroke-width: 2!important;
+        }
+    }
+    .o { color: var(--c-four); }
 
     .menu {
         z-index: 10;
@@ -201,7 +236,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
         width: var(--toggle-width);
         height: var(--toggle-height);
         position: absolute;
@@ -234,7 +268,7 @@
         backdrop-filter: blur(3px) brightness(45%);
         z-index: 13;
         max-width: 92vw;
-        .o { color: var(--c-four); }
+        
     }
     .wrap {
         padding: 30px 35px 35px 30px;
@@ -296,18 +330,7 @@
             transform: translateY(-0.05em);
         }
     }
-    small {
-        color: var(--c-three);
-        opacity: 0.8;
-
-        a {
-            color: currentColor;
-            &:hover,
-            &:focus {
-                color: var(--c-five);
-            }
-        }
-    }
+   
     .highlight {
         color: var(--c-five);
     }

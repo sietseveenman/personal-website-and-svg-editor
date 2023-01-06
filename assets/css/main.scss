@@ -21,7 +21,9 @@
                 --c-three: green;
                 backdrop-filter: none;
                 background: var(--c-background);
-              
+                svg {
+                    --c-three: blue;
+                }
             }
         }
     }
