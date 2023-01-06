@@ -174,8 +174,8 @@ body {
     overscroll-behavior: contain;
     background: var(--background);
     position: relative;
-    min-width: 101vw;
-    min-height: 101vh;
+    min-width: 100vw;
+    min-height: 100vh;
     overflow: hidden;
     
     &.grabbable {

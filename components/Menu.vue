@@ -33,7 +33,7 @@
 
                 <h3>About me:</h3>
                 <p>
-                    My name is Sietse Veenman<span class="o">.</span> I am a designer turned developer from the Netherlands<span class="o">,</span> currently holding the position of fullstack developer at <a href="https://wearejust.com/en" target="_blank" :tabindex="infoOpen ? '0' : '-1'">JUST</a><span class="o">.</span> I ❤️ working with <a href="https://vuejs.org/" target="__blank" :tabindex="infoOpen ? '0' : '-1'">VueJS</a> and <a href="https://getkirby.com/" target="_blank" :tabindex="infoOpen ? '0' : '-1'">Kirby</a><span class="o">.</span> When I am not writing code you can find me on my skateboard, playing video games and mostly just spending time with the family<span class="o">.</span>
+                    My name is Sietse Veenman<span class="o">.</span> I am a designer turned developer from the Netherlands<span class="o">,</span> currently holding the position of fullstack developer at <a href="https://wearejust.com/en" target="_blank" :tabindex="infoOpen ? '0' : '-1'">JUST</a><span class="o">.</span> I ❤️ working with <a href="https://vuejs.org/" target="__blank" :tabindex="infoOpen ? '0' : '-1'">VueJS</a> and <a href="https://getkirby.com/" target="_blank" :tabindex="infoOpen ? '0' : '-1'">Kirby</a><span class="o">.</span> When I am not writing code you can find me on my skateboard<span class="o">,</span> playing video games and mostly just spending time with the family<span class="o">.</span>
                 </p>
                 
             </div>

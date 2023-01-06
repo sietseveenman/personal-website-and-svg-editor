@@ -8,6 +8,11 @@ const initialLayers = JSON.stringify({
 		a2: { x: 1, y: 84 },
 	},
 
+	logoMark: {
+		position: { x: 2580, y: 2450 },
+		a: { x: 213.134, y: 367.023 },
+	},
+
 	lineOne: {
 		position: 	{ x: 810, y: 260 },
 		a1: 		{ x: -30, y: 642 },
@@ -40,7 +45,7 @@ const initialLayers = JSON.stringify({
 	},
 
 	boobs: {
-		position: 	{ x: 1390, y: 1550 },
+		position: 	{ x: 1390, y: 1620 },
 		
 		_1: 		{ x: 0, y: 0, joined: ['_1__h_2'] },
 		_1__h_2: 	{ x: 0, y: 25 },
@@ -99,9 +104,9 @@ export const useBaseLayers = defineStore('baseLayers', {
         isAltered: useLocalStorage('piniaLayersAltered', false),
 		... JSON.parse( initialLayers )
 	}),
-	persist: {
-		storage: localStorage
-	},
+	// persist: {
+	// 	storage: localStorage
+	// },
 	actions: {
 		rewind() {
 			this.isAltered = false

@@ -5,7 +5,7 @@
         @mouseup.prevent="handleMouseUp"
         @wheel.prevent="handleWheel"
         >
-        <svg width="2800" height="2560" viewBox="0 0 2800 2560" xmlns="http://www.w3.org/2000/svg" id="artboard">
+        <svg width="3200" height="3200" viewBox="0 0 3200 3200" xmlns="http://www.w3.org/2000/svg" id="artboard">
             <rect width="100%" height="100%" fill="var(--c-background)"></rect>
             
             <LayersLine pathName="lineOne" palet="1"/>
@@ -22,6 +22,8 @@
             
             <LayersSkateboard />
             
+            <LayersLogoMark />
+
             <LayersLogo />
 
         </svg>
@@ -148,12 +150,16 @@
         height: 100%;
         position: relative;
         z-index: 2;
-
+        
         &.can-grab {
             * { cursor: grab !important; }
         }
         &.grabbing {
             * { cursor: grabbing !important; }
+        }
+        
+        svg {
+            display: block;
         }
     }
 
