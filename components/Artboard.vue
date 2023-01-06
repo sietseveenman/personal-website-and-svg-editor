@@ -4,6 +4,8 @@
         @mousemove.prevent="handleMouseMove"
         @mouseup.prevent="handleMouseUp"
         @wheel.prevent="handleWheel"
+
+        @touchmove.prevent="handleTouchMove"
         >
         <svg width="3200" height="3200" viewBox="0 0 3200 3200" xmlns="http://www.w3.org/2000/svg" id="artboard">
             <rect width="100%" height="100%" fill="var(--c-background)"></rect>
@@ -12,7 +14,7 @@
 
             <LayersLine pathName="lineTwo" palet="4"/>
 
-            <LayersPath pathName="curveOne" palet="3" speed="-0.6" dashArray="10 10 10"/>
+            <LayersPath pathName="curveOne" palet="3" :speed="-0.6" dashArray="10 10 10"/>
 
             <LayersPath pathName="boobs" palet="1"/>
             
@@ -76,6 +78,10 @@
         window.addEventListener( 'blur', () => appState.keysDown = [] )
     })
 
+    function handleTouchMove () {
+        console.log('touchmove')
+    }
+
     function handleMouseDown (e) {
         appState.mouseDown = true
     }
@@ -87,6 +93,7 @@
     }
     
     function handleWheel(e) {
+        if ( appState.activeAnchor ) return
         const strength = 0.35
         appState.updateUserPosition({
             x:e.deltaX*strength, 

@@ -104,9 +104,9 @@ export const useBaseLayers = defineStore('baseLayers', {
         isAltered: useLocalStorage('piniaLayersAltered', false),
 		... JSON.parse( initialLayers )
 	}),
-	// persist: {
-	// 	storage: localStorage
-	// },
+	persist: {
+		storage: localStorage
+	},
 	actions: {
 		rewind() {
 			this.isAltered = false
