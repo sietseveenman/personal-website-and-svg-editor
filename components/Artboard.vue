@@ -1,5 +1,10 @@
 <template>
-    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab }">
+    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab }"
+        @mousedown.prevent="handleMouseDown"
+        @mousemove.prevent="handleMouseMove"
+        @mouseup.prevent="handleMouseUp"
+        @wheel.prevent="handleWheel"
+        >
         <svg width="2800" height="2560" viewBox="0 0 2800 2560" xmlns="http://www.w3.org/2000/svg" id="artboard">
             <rect width="100%" height="100%" fill="var(--c-background)"></rect>
             
@@ -40,38 +45,32 @@
     
     onMounted(() => {
 
-        // Handle Mouse
-        // ---------------------
-        document.addEventListener( 'mousedown', handleMouseDown )
-        document.addEventListener( 'mousemove', handleMouseMove )
-        document.addEventListener( 'mouseup', handleMouseUp )
-
 
         // Handle Touch
         // ---------------------
 
-        // document.querySelector('.artboard').addEventListener('touchmove', (event) => {
-        //     // Get the touch points
-        //     const touch1 = event.touches[0];
-        //     const touch2 = event.touches[1];
+        // document.addEventListener('touchmove', (event) => {
+        //     console.log(event)
+            // Get the touch points
+            // const touch1 = event.touches[0];
+            // const touch2 = event.touches[1];
 
-        //     // Calculate the distance between the two touch points
-        //     const distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) +
-        //         Math.pow(touch2.clientY - touch1.clientY, 2));
+            // // Calculate the distance between the two touch points
+            // const distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) +
+            //     Math.pow(touch2.clientY - touch1.clientY, 2));
 
-        //     console.log(distance);
+            // console.log(distance);
         // });
-
 
         // Handle Trackpad
         // ---------------------
         // document.addEventListener('wheel', handleWheel)
 
-
         // Hanlde Keys
         // ---------------------
         window.addEventListener( 'keydown', (e) => appState.keyDown(e) )
         window.addEventListener( 'keyup', (e) => appState.keyUp(e) )
+
         window.addEventListener( 'blur', () => appState.keysDown = [] )
     })
 
