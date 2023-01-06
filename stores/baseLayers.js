@@ -4,7 +4,8 @@ import gsap from 'gsap'
 const initialLayers = JSON.stringify({
 	logo: {
 		position: { x: 430, y: 460 },
-		a1: { x: 506, y: 218.168 }
+		a1: { x: 506, y: 218.168 },
+		a2: { x: 1, y: 84 },
 	},
 
 	lineOne: {

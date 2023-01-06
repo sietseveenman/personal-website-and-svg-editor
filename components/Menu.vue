@@ -112,12 +112,12 @@
             }, '-=0.16')
             .timeScale(1.4)
 
-        document.addEventListener('click', (e) => { 
-            if ( ! e.target.closest('.menu') ) {
-                toggleInfo(e, false)
-                toggleThemes(e, false)
-            }
-        })
+        // document.addEventListener('click', (e) => { 
+        //     if ( ! e.target.closest('.menu') ) {
+        //         toggleInfo(e, false)
+        //         toggleThemes(e, false)
+        //     }
+        // })
 
         document.addEventListener('keyup', (e) => { 
             if (e.code === 'Escape') {
