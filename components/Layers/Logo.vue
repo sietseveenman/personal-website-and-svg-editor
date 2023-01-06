@@ -43,7 +43,13 @@
 
     const logo = computed( () => layers.logo )
     const scale = ref( window.innerWidth >= 786 ? 1 : 0.6 )
-    window.addEventListener("resize", (e) => { scale.value = window.innerWidth >= 786 ? 1 : 0.6 });
+
+    window.addEventListener("resize", (e) => { 
+        appState.windowSize.width = window.innerWidth
+        appState.windowSize.height = window.innerHeight
+        scale.value = appState.windowSize.width >= 786 ? 1 : 0.6 
+    });
+    
     let clickCount = 0
     let clickTimer = null
     const delay = 250

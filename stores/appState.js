@@ -52,6 +52,11 @@ export const useAppState = defineStore('appState', {
 		mouse: null,
 		mouseDown: false,
 		keysDown: [],
+
+		windowSize: {
+			width: window.innerWidth,
+			height: window.innerHeight
+		}
 	}),
 
 	actions: {
@@ -64,8 +69,8 @@ export const useAppState = defineStore('appState', {
 			this.userPositionAltered = true
 			const x = this.userPosition.x + diff.x
 			const y = this.userPosition.y + diff.y
-			this.userPosition.x = clamp(x, 0, 2800)
-			this.userPosition.y = clamp(y, 0, 2560)
+			this.userPosition.x = clamp(x, 0, 2800-this.windowSize.width)
+			this.userPosition.y = clamp(y, 0, 2560-this.windowSize.height)
 			window.scrollTo(this.userPosition.x, this.userPosition.y)
 		},
 
