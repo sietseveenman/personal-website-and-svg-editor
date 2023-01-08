@@ -18,7 +18,9 @@ export default defineNuxtConfig({
       charset: 'UTF-8',
       viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0, user-scalable=no"',
       title: '<SietseVeenman />',
-      description:`"{ "name": "Sietse Veenman", "gender": "Male", "age": 36, "job": "Developer" }"`,
+      meta: [
+        { name: 'description', content: 'Hi there! I am a designer turned developer from the Netherlands. This site is the most pointless and useless vector editor on the web. Please have fun with it.' }
+      ],
       link: [
         {
           rel: 'preconnect',
