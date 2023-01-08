@@ -18,6 +18,7 @@
             :transform="`rotate(45 ${logo.a.x} ${logo.a.y})`"
             stroke-opacity="1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'logoMark', 'a')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,'logoMark', 'a')"
             stroke-width="1"
             stroke="var(--c-three)"/>
 
@@ -41,15 +42,11 @@
 
     const color = ref('--c-six')
     const colors = ['--c-one','--c-two', '--c-three', '--c-four', '--c-five', '--c-six' ]
-    setInterval(() => {
-        color.value = colors[Math.floor(Math.random() * (5 - 0 + 1) + 0)]
-    }, 3500)
-
-    // function easeInOutCirc(t, b, c, d) {
-    //     t /= d/2
-    //     if (t < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b
-    //     t -= 2
-    //     return c/2 * (Math.sqrt(1 - t*t) + 1) + b
-    // }
+    
+    if( window.innerWidth >= 786 ) {
+        setInterval(() => {
+            color.value = colors[Math.floor(Math.random() * (5 - 0 + 1) + 0)]
+        }, 3500)
+    }
 
  </script>

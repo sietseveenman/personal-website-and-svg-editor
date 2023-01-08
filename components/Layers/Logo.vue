@@ -16,21 +16,23 @@
         </g>
             <path :d="`M464.096 227.528H445.088V177.848C445.088 172.952 444.512 169.16 443.36 166.472C442.208 163.784 440.384 161.432 437.888 159.416L453.728 148.328C457.28 151.208 459.92 154.52 461.648 158.264C468.752 151.544 473.744 148.184 476.624 148.184C479.6 148.184 484.016 150.872 489.872 156.248C495.824 161.528 498.8 166.76 498.8 171.944V199.736C498.8 204.632 499.376 208.424 500.528 211.112C501.68 213.8 503.504 216.152 ${ logo.a1.x } ${ logo.a1.y }L490.16 229.256C483.248 223.784 479.792 216.008 479.792 205.928V173.96C479.792 172.328 478.928 170.648 477.2 168.92C475.472 167.096 473.84 166.184 472.304 166.184C470.864 166.184 468.128 168.2 464.096 172.232V227.528Z`" stroke="var(--c-two)"/>
     
-        <rect class="handle" width="14" height="14"
+        <rect class="handle" :width="rectSize" :height="rectSize"
             style="--hover-anchor-color: white; --hover-anchor-stroke-width: 0.4"
-            :x="logo.a2.x - 7" :y="logo.a2.y - 7"
+            :x="logo.a2.x - (rectSize/2)" :y="logo.a2.y - (rectSize/2)"
             :transform="`rotate(45 ${logo.a2.x} ${logo.a2.y})`"
             stroke-opacity="1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'logo', 'a2')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,'logo', 'a2')"
             stroke-width="1"
             stroke="var(--c-three)"/>
 
-        <rect class="handle" width="14" height="14"
+        <rect class="handle" :width="rectSize" :height="rectSize"
             style="--hover-anchor-color: white; --hover-anchor-stroke-width: 0.4"
-            :x="logo.a1.x - 7" :y="logo.a1.y - 7"
+            :x="logo.a1.x - (rectSize/2)" :y="logo.a1.y - (rectSize/2)"
             :transform="`rotate(45 ${logo.a1.x} ${logo.a1.y})`"
             stroke-opacity="1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'logo', 'a1')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,'logo', 'a1')"
             stroke-width="1"
             stroke="var(--c-three)"/>
     </g>
@@ -50,13 +52,13 @@
     const layers = useBaseLayers()
 
     const logo = computed( () => layers.logo )
-    const scale = ref( window.innerWidth >= 786 ? 1 : 0.6 )
+    const scale = computed( () => appState.windowSize.width >= 786 ? 1 : 0.7 )
+    const rectSize =  computed(  () => appState.windowSize.width < 786 ? 22 : 7 )
 
     window.addEventListener("resize", (e) => { 
         appState.windowSize.width = window.innerWidth
         appState.windowSize.height = window.innerHeight
-        scale.value = appState.windowSize.width >= 786 ? 1 : 0.6 
-    });
+    })
     
     let clickCount = 0
     let clickTimer = null

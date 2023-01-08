@@ -177,6 +177,7 @@ body {
     min-width: 100vw;
     min-height: 100vh;
     overflow: hidden;
+    -webkit-overflow-scrolling: touch;
     
     &.grabbable {
         cursor: grab;

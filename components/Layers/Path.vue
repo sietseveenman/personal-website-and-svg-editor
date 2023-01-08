@@ -10,8 +10,9 @@
             <rect v-if="point.type === 'anchor'" 
                 class="handle anchor"
                 @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, point.key)"
-                width="14" height="14"
-                :x="point.data.x - 7" :y="point.data.y - 7"
+                @touchstart.prevent="(e)=>appState.setActiveAnchor(e, pathName, point.key)"
+                :width="rectSize" :height="rectSize"
+                :x="point.data.x - (rectSize/2)" :y="point.data.y - (rectSize/2)"
                 :transform="`rotate(45 ${ point.data.x } ${ point.data.y })`"
                 :stroke="anchorColor"
                 stroke-opacity="1"
@@ -21,10 +22,11 @@
             <circle v-if="point.type === 'handle'"
                 class="handle"
                 @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, point.key)"
+                @touchstart.prevent="(e)=>appState.setActiveAnchor(e, pathName, point.key)"
                 fill="transparent"
                 :stroke="handleColor"
                 stroke-opacity="1" 
-                stroke-width="0.6" r="7"
+                stroke-width="0.6" :r="circleSize"
                 :cx="point.data.x" :cy="point.data.y" />
         </g>
     </g>
@@ -71,13 +73,16 @@
     }
     const lineColor = computed( () => palets[props.palet]  )
     
+    const rectSize =  computed(  () => appState.windowSize.width < 786 ? 24 : 14 )
+    const circleSize =  computed(  () => appState.windowSize.width < 786 ? 16 : 7 )
+    
     const dashOffset = ref(0)
 
     function loop() {
         if ( document.hasFocus() ) dashOffset.value += Number(props.speed)
         requestAnimationFrame(loop)
     }
-    if( props.dashArray ) loop()
+    if( props.dashArray && window.innerWidth >= 786 ) loop()
 
     const anchorColor = computed( () => {
         let nr = Number(props.palet) + 5

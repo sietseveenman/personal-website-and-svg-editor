@@ -11,6 +11,7 @@
         
         <circle class="handle handle--s"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'h1')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'h1')"
             fill="transparent"
             stroke="var(--c-four)"
             stroke-opacity="1"

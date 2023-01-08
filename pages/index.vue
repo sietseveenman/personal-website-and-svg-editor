@@ -58,7 +58,7 @@
         z-index: 2;
         
         @media only screen and (max-width: 786px) {
-            top: 300px;
+            top: 320px;
             font-size: 12px;
         }
     }

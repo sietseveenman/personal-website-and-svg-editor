@@ -12,6 +12,7 @@
         </g>
         <circle class="handle" id="c1"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c1')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c1')"
             fill="transparent" 
             :stroke="handleColor" 
             stroke-opacity="1" 
@@ -20,6 +21,7 @@
     
         <circle class="handle" id="c2"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c2')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'c2')"
             fill="transparent"
             :stroke="handleColor"
             stroke-opacity="1" 
@@ -27,20 +29,24 @@
             :cx="path.c2.x" :cy="path.c2.y" />
     
         <rect class="handle" id="a1"    
-            width="14" height="14"  
-            :x="path.a1.x - 7" :y="path.a1.y - 7" 
+        :width="rectSize" :height="rectSize"  
+            :x="path.a1.x - (rectSize/2)" :y="path.a1.y - (rectSize/2)" 
             :transform="`rotate(45 ${ path.a1.x } ${ path.a1.y })`"
+            fill="transparent"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a1')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a1')"
             stroke="var(--c-three)"
             stroke-opacity="1" 
             stroke-width="1"/>
 
-            <rect class="handle" id="a2"    
-            width="14" height="14"  
-            :x="path.a2.x - 7" :y="path.a2.y - 7" 
+        <rect class="handle" id="a2"    
+            :width="rectSize" :height="rectSize"  
+            :x="path.a2.x - (rectSize/2)" :y="path.a2.y - (rectSize/2)" 
             :transform="`rotate(45 ${ path.a2.x } ${ path.a2.y })`"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a2')"
+            @touchstart.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'a2')"
             stroke="var(--c-three)"
+            fill="transparent"
             stroke-opacity="1" 
             stroke-width="1"/>
     </g>
@@ -52,6 +58,8 @@
 
     const appState = useAppState()
     const layers = useBaseLayers()
+
+    const rectSize =  computed(  () => appState.windowSize.width < 786 ? 24 : 14 )
 
     const props = defineProps({ 
         pathName: String,

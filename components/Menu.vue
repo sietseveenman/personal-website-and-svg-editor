@@ -15,19 +15,19 @@
                 <h3>How it works:</h3>
                 <ul>
                     <li>
-                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.mouseDown }">Mouse</span> to drag the canvas<span class="o">.</span></span>
+                        <span>On desktop: hold down <span :class="{'highlight': appState.keysDown.includes('Space')}">Space</span> and <span :class="{'highlight': appState.mouseDown }">Mouse</span> to drag around the canvas<span class="o">.</span></span>
                     </li>
                     <li>
-                        <span>Or use two fingers to swipe and move the canvas<span class="o">.</span></span>
+                        <span>On a touch device: use two fingers to drag around the canvas <span class="o">.</span></span>
                     </li>
                     <li>
                         <span>Grab and drag anchor points <svg width="12px" height="12px"  fill="transparent" style="transform: translateY(0.06em) rotate(45deg);"><rect width="12" height="12" x="0" y="0" stroke="var(--c-three)" stroke-width="2" ></rect></svg> or handles <svg width="16" height="16" fill="transparent" style="transform: translateY(0.25em);"><circle  stroke="var(--c-three)" stroke-width="1" r="7" cx="8" cy="8"></circle></svg> to manipulate paths<span class="o">.</span></span>
                     </li>
                     <li>
-                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
+                        <span>On desktop: Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
                     </li>
                     <li>
-                        <span>Edits are saved for the next time you visit<span class="o">.</span><br/>Click the reset button to start over<span class="o">.</span></span>
+                        <span>Edits are saved for the next time you visit<span class="o">.</span> Click the reset button to clear all edits<span class="o">.</span></span>
                     </li>
                 </ul>  
 
@@ -216,9 +216,9 @@
         top: 20px;
 
         @media only screen and (max-width: 786px) {
-            .save-svg {
-                display: none;
-            }
+            // .save-svg {
+            //     display: none;
+            // }
             .content {
                 backdrop-filter: blur(3px) brightness(45%);
             }
@@ -276,6 +276,9 @@
     }
     .info .wrap {
         width: 520px;
+        ul {
+            max-width: 300px;
+        }
     }
     .content.themes {
         top: 10px;

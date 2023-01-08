@@ -53,12 +53,16 @@ export const useAppState = defineStore('appState', {
 		mouseDown: false,
 		keysDown: [],
 
+		ongoingTouches: [],
+
 		windowSize: {
 			width: window.innerWidth,
 			height: window.innerHeight
 		}
 	}),
-
+	getters: {
+		fingers: (state) => state.ongoingTouches.length
+	},
 	actions: {
 
 		updateUserPosition(diff) {

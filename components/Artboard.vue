@@ -4,8 +4,6 @@
         @mousemove.prevent="handleMouseMove"
         @mouseup.prevent="handleMouseUp"
         @wheel.prevent="handleWheel"
-
-        @touchmove.prevent="handleTouchMove"
         >
         <svg width="3200" height="3200" viewBox="0 0 3200 3200" xmlns="http://www.w3.org/2000/svg" id="artboard">
             <rect width="100%" height="100%" fill="var(--c-background)"></rect>
@@ -41,7 +39,7 @@
     const appState = useAppState()
     const baseLayers = useBaseLayers()
 
-    let prevMouse = null
+    let prevClient = null
     let lockedAxis = undefined
 
     const isGrabbing = computed( () => appState.mouseDown && (appState.activeAnchor || appState.keysDown.includes('Space')) )
@@ -49,26 +47,16 @@
     
     onMounted(() => {
 
-
         // Handle Touch
         // ---------------------
 
-        // document.addEventListener('touchmove', (event) => {
-        //     console.log(event)
-            // Get the touch points
-            // const touch1 = event.touches[0];
-            // const touch2 = event.touches[1];
-
-            // // Calculate the distance between the two touch points
-            // const distance = Math.sqrt(Math.pow(touch2.clientX - touch1.clientX, 2) +
-            //     Math.pow(touch2.clientY - touch1.clientY, 2));
-
-            // console.log(distance);
-        // });
-
+        document.addEventListener('touchstart', handleTouchStart )
+        document.addEventListener('touchmove', handleTouchMove )
+        document.addEventListener('touchend', handleTouchEnd )
+      
         // Handle Trackpad
         // ---------------------
-        // document.addEventListener('wheel', handleWheel)
+        document.addEventListener('wheel', handleWheel)
 
         // Hanlde Keys
         // ---------------------
@@ -78,8 +66,60 @@
         window.addEventListener( 'blur', () => appState.keysDown = [] )
     })
 
-    function handleTouchMove () {
-        console.log('touchmove')
+    function handleTouchStart (e) {
+        e.preventDefault()
+        const touches = e.changedTouches   
+        for (let i = 0; i < touches.length; i++) {
+            appState.ongoingTouches.push( copyTouch(touches[i]) )
+        }
+    }
+
+    function handleTouchMove (e) {
+        // e.preventDefault()
+        const touches = e.changedTouches
+        const one = appState.ongoingTouches[ongoingTouchIndexById(touches[0].identifier)]
+
+        if ( touches.length === 2 ) {
+            const two = appState.ongoingTouches[ongoingTouchIndexById(touches[1].identifier)]
+            const distance = {
+                x: - ((touches[0].clientX - one.clientX) + (touches[1].clientX - two.clientX)) / 2,
+                y: - ((touches[0].clientY - one.clientY) + (touches[1].clientY - two.clientY)) / 2,
+            }
+            appState.updateUserPosition(distance)
+        }
+
+        else if ( appState.activePath ) {
+            const point = baseLayers[appState.activePath][appState.activeAnchor]
+            const distance = {
+                x: - (touches[0].clientX - one.clientX),
+                y: - (touches[0].clientY - one.clientY),
+            }
+            handleDrag(point, distance)
+            baseLayers.isAltered = true
+        }
+
+        for (let i = 0; i < touches.length; i++) {
+            const idx = ongoingTouchIndexById(touches[i].identifier)
+            if (idx >= 0) appState.ongoingTouches.splice(idx, 1, copyTouch(touches[i]))
+        }
+    }
+  
+    function handleTouchEnd(e) {
+        // e.preventDefault()
+        appState.ongoingTouches.length = 0
+        appState.resetDrag()
+    }
+
+    function copyTouch({ identifier, clientX, clientY }) {
+        return { identifier, clientX, clientY }
+    }
+
+    function ongoingTouchIndexById(idToFind) {
+        for (let i = 0; i < appState.ongoingTouches.length; i++) {
+            const id = appState.ongoingTouches[i].identifier
+            if (id === idToFind) return i
+        }
+        return -1
     }
 
     function handleMouseDown (e) {
@@ -89,7 +129,7 @@
     function handleMouseUp (e) {
         appState.resetDrag()
         appState.mouseDown = false
-        prevMouse = null
+        prevClient = null
     }
     
     function handleWheel(e) {
@@ -105,9 +145,9 @@
         const mx = e.clientX, my = e.clientY
         appState.mouse = { x: mx, y: my }
         
-        if ( prevMouse && appState.mouseDown ) {
+        if ( prevClient && appState.mouseDown ) {
                 
-            const diff = { x: prevMouse.x - mx, y: prevMouse.y - my }
+            const diff = { x: prevClient.x - mx, y: prevClient.y - my }
             
             if ( appState.keysDown.includes('Space') ) {
                 appState.updateUserPosition(diff)
@@ -120,7 +160,7 @@
             }
         }
 
-        prevMouse = { x: mx, y: my }
+        prevClient = { x: mx, y: my }
     }
 
     function handleDrag(point, diff) {
@@ -167,6 +207,10 @@
         
         svg {
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: hidden;
         }
     }
 

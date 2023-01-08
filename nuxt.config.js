@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     rootId: '__cake', // replacing __nuxt id on root element
     head: {
       charset: 'UTF-8',
-      viewport: 'width=device-width, initial-scale=1, minimum-scale=1',
+      viewport: 'width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1.0, user-scalable=no"',
       title: '<SietseVeenman />',
       description:`"{ "name": "Sietse Veenman", "gender": "Male", "age": 36, "job": "Developer" }"`,
       link: [
