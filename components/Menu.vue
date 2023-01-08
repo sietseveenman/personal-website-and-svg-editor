@@ -9,7 +9,7 @@
             <div class="wrap">
                 <h3>Hi there!</h3>
                 <p>
-                    This site is definitely the most pointless and useless vector editor on the web<span class="o">.</span> Please have fun with it<span class="o">.</span>
+                    This website is the most pointless and useless vector editor out there<span class="o">.</span> Please have fun with it<span class="o">.</span> Use it on a desktop device for the best experience<span class="o">.</span>
                 </p>
 
                 <h3>How it works:</h3>
