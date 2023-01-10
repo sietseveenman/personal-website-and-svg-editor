@@ -11,7 +11,8 @@
     --c-two: green;
     --c-three: blue;
     --c-four: coral;
-    --c-five: goldenrod;
+    // --c-five: goldenrod;
+    --c-five: yellow;
     --c-six: red;
 
     &.default {
@@ -62,7 +63,8 @@
                 background: rgb(24, 24, 24);
             }
         }
-      
+        
+        line,
         path,
         rect,
         circle {
@@ -80,6 +82,7 @@
         --c-five: #f50dea;
         --c-six: #a200d4;
      
+        line,
         path,
         rect,
         circle {
@@ -99,6 +102,7 @@
         --c-five: #651fff;
         --c-six: #3d5afe;
      
+        line,
         path,
         rect,
         circle {
@@ -121,6 +125,7 @@
                 background: var(--c-background);
             }
         }
+        line,
         path,
         rect,
         circle {
@@ -147,6 +152,7 @@
             }
         }
       
+        line,
         path,
         rect,
         circle {

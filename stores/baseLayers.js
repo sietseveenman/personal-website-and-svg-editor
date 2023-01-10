@@ -22,7 +22,7 @@ const initialLayers = JSON.stringify({
 	},
 	
 	lineTwo: {
-		position: 	{ x: 210, y: 1260 },
+		position: 	{ x: 210, y: 1400 },
 		a1: 		{ x: 0, y: 115 },
 		a2: 		{ x: 260, y: 115 },
 		c1: 		{ x: 50, y: 0 },
@@ -67,12 +67,17 @@ const initialLayers = JSON.stringify({
 	},
 	
 	rectRadiusOne: {
-		position: 	{ x: 800, y: 1130 },
+		position: 	{ x: 2450, y: 230 },
 		size: 200,
 		axis: 'y',
 		h1: { x: 0, y: 12 }
 	},
 	
+	pie: {
+		position: { x: 740, y: 1180 },
+		arc: { degrees: 270, handle: 360 },
+	},
+
 	rectRadiusTwo: {
 		position: 	{ x: 500, y: 950 },
 		size: 140,
@@ -81,7 +86,7 @@ const initialLayers = JSON.stringify({
 	},
 
 	skateboard:  {
-		position:{ x: 1310, y: 600 },
+		position:{ x: 1330, y: 600 },
 		
 		_top:	 { x: 87, y: 0, joined: ['_top__h'], lockedAxis: 'x' },
 		_top__h: { x: 39.8, y: 3.6 },
@@ -96,7 +101,8 @@ const initialLayers = JSON.stringify({
 
 		_bot: 	 { x: 87, y: 520, joined: ['_bot__h'], lockedAxis: 'x' },
 		_bot__h: { x: 78,  y: 520 },
-	}
+	},
+
 })
 
 export const useBaseLayers = defineStore('baseLayers', {

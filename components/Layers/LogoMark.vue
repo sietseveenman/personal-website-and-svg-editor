@@ -32,7 +32,6 @@
     }
 </style>
 <script setup>
-    import gsap from 'gsap'
     import { useAppState } from '@/stores/appState'
     import { useBaseLayers } from '@/stores/baseLayers'
 

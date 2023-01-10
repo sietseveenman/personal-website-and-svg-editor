@@ -16,13 +16,15 @@
 
             <LayersPath pathName="boobs" palet="1"/>
             
-            <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-three)"/>
+            <LayersRectRadius pathName="rectRadiusOne" style="--c-four: var(--c-six); --c-five: var(--c-two)"/>
             
             <LayersRectRadius pathName="rectRadiusTwo"/>
             
             <LayersSkateboard />
             
             <LayersLogoMark />
+
+            <LayersPie />
 
             <LayersLogo />
 
