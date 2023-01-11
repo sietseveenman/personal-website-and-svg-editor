@@ -53,7 +53,7 @@
 
     const logo = computed( () => layers.logo )
     const scale = computed( () => appState.windowSize.width >= 786 ? 1 : 0.7 )
-    const rectSize =  computed(  () => appState.windowSize.width < 786 ? 22 : 7 )
+    const rectSize =  computed(  () => appState.windowSize.width < 786 ? 22 : 10 )
 
     window.addEventListener("resize", (e) => { 
         appState.windowSize.width = window.innerWidth
