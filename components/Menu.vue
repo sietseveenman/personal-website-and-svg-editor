@@ -27,6 +27,9 @@
                         <span>On desktop: Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
                     </li>
                     <li>
+                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('ControlLeft')}">Left Control</span> to reach anchors that are blocked by overlapping paths<span class="o">.</span></span>
+                    </li>
+                    <li>
                         <span>Edits are saved for the next time you visit<span class="o">.</span> Click the reset button to clear all edits<span class="o">.</span></span>
                     </li>
                 </ul>  

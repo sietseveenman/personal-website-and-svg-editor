@@ -1,5 +1,5 @@
 <template>
-    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab }"
+    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab, 'pointer-events-stroke' : appState.keysDown.includes('ControlLeft') }"
         @mousedown.prevent="handleMouseDown"
         @mousemove.prevent="handleMouseMove"
         @mouseup.prevent="handleMouseUp"
@@ -48,6 +48,11 @@
     const canGrab = computed( () => ! appState.mouseDown && appState.keysDown.includes('Space') )
     
     onMounted(() => {
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault()
+            console.log('Trying to open context menu', e)
+        })
 
         // Handle Touch
         // ---------------------

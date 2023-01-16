@@ -4,6 +4,10 @@
     --hover-anchor-stroke-width: 0.6;
 }
 
+.pointer-events-stroke path {
+    pointer-events: stroke;
+}
+
 #theme {
     --c-black: #000C22;
     --c-background: var(--c-black);
