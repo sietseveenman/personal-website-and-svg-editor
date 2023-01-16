@@ -235,4 +235,11 @@
             stroke-width: var(--hover-anchor-stroke-width);
         }
     }
+    .layer-area {
+        transition: stroke-opacity 0.12s ease-in-out;
+        &:hover {
+            cursor: grab;
+            stroke-opacity: 0.8;
+        }
+    }
 </style>

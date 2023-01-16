@@ -10,7 +10,9 @@
             :stroke-dasharray="dashArray"
             :stroke-dashoffset="dashOffset" />
             
-        <rect fill="transparent" v-if="gotRect" @click="test"
+        <rect v-if="gotRect && appState.keysDown.includes('ShiftLeft')" 
+            fill="transparent" class="layer-area"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'position')"
             stroke-dasharray="8" stroke="var(--c-two)" :stroke-opacity="0.4"
             :width="clickabelRectSize.width" :height="clickabelRectSize.height" 
             :x="clickabelRectSize.x" :y="clickabelRectSize.y" />
@@ -116,10 +118,6 @@
         setClickable(line.value.getBoundingClientRect(), path.value.position)
         if( props.dashArray ) loop()
     })
-
-    function test () {
-        console.log('test')
-    }
 
     function setClickable(rect, pos) {
         const { width, height, top, left } = rect

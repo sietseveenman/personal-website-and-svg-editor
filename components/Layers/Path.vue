@@ -1,11 +1,18 @@
 <template>
     <g class="this" :transform="`translate(${layer.position.x}, ${layer.position.y})`" fill="transparent">
-       <g class="shape">
-            <path :d="path" 
+  
+        <path :d="path" ref="line"
             :stroke="lineColor"
             :stroke-dasharray="dashArray"
             :stroke-dashoffset="dashOffset"/>
-        </g>
+    
+        <rect v-if="gotRect && appState.keysDown.includes('ShiftLeft')" 
+            fill="transparent" class="layer-area"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e,pathName, 'position')"
+            stroke-dasharray="8" stroke="var(--c-two)" :stroke-opacity="0.4"
+            :width="clickabelRectSize.width" :height="clickabelRectSize.height" 
+            :x="clickabelRectSize.x" :y="clickabelRectSize.y" />
+
         <g v-for="point in points" :key="point.key">
             <rect v-if="point.type === 'anchor'" 
                 class="handle anchor"
@@ -76,26 +83,6 @@
     const rectSize =  computed(  () => appState.windowSize.width < 786 ? 24 : 14 )
     const circleSize =  computed(  () => appState.windowSize.width < 786 ? 16 : 7 )
     
-    const dashOffset = ref(0)
-
-    function loop() {
-        if ( document.hasFocus() ) dashOffset.value += Number(props.speed)
-        requestAnimationFrame(loop)
-    }
-    if( props.dashArray && window.innerWidth >= 786 ) loop()
-
-    const anchorColor = computed( () => {
-        let nr = Number(props.palet) + 5
-        nr = nr > 6 ? (nr - 6) : nr
-        return palets[nr]
-    })
-
-    const handleColor = computed( () => {
-        let nr = Number(props.palet) + 1
-        nr = nr > 6 ? (nr - 6) : nr
-        return palets[nr]
-    })
-
     const layer = computed(()=>layers[props.pathName])
 
     const points = computed( () => {
@@ -117,5 +104,57 @@
             return path = `${path} ${command} ${point.data.x} ${point.data.y}`
         }, 'M')
     })
+
+    const dashOffset = ref(0)
+    const line = ref(null)
+    const gotRect = ref(false)
+    
+    const clickabelRectSize = ref({
+        width:0,
+        height:0,
+        x:0,
+        y:0
+    })
+
+
+    watch(layer, () => {
+        setClickable(line.value.getBoundingClientRect(), layer.value.position)
+    }, {deep:true})
+
+
+    onMounted(() => {
+        setClickable(line.value.getBoundingClientRect(), layer.value.position)
+        if( props.dashArray && window.innerWidth >= 786 ) loop()
+    })
+
+    function setClickable(rect, pos) {
+        const { width, height, top, left } = rect
+        clickabelRectSize.value = {
+            width,
+            height,
+            x: left - (pos.x - window.scrollX),
+            y: top  - (pos.y - window.scrollY),
+        }
+        gotRect.value = true
+    }
+    
+    function loop() {
+        if ( document.hasFocus() ) dashOffset.value += Number(props.speed)
+        requestAnimationFrame(loop)
+    }
+  
+    const anchorColor = computed( () => {
+        let nr = Number(props.palet) + 5
+        nr = nr > 6 ? (nr - 6) : nr
+        return palets[nr]
+    })
+
+    const handleColor = computed( () => {
+        let nr = Number(props.palet) + 1
+        nr = nr > 6 ? (nr - 6) : nr
+        return palets[nr]
+    })
+
+   
 
 </script>
