@@ -24,13 +24,13 @@
                         <span>Grab and drag anchor points <svg width="12px" height="12px"  fill="transparent" style="transform: translateY(0.06em) rotate(45deg);"><rect width="12" height="12" x="0" y="0" stroke="var(--c-three)" stroke-width="2" ></rect></svg> or handles <svg width="16" height="16" fill="transparent" style="transform: translateY(0.25em);"><circle  stroke="var(--c-three)" stroke-width="1" r="7" cx="8" cy="8"></circle></svg> to manipulate paths<span class="o">.</span></span>
                     </li>
                     <li>
-                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
+                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('AltLeft')}">Left Alt</span> to unlock mirrored handles<span class="o">.</span></span>
                     </li>
                     <li>
                         <span>Hold down <span :class="{'highlight': appState.keysDown.includes('ControlLeft')}">Left Control</span> to reach anchors that are blocked by overlapping paths<span class="o">.</span></span>
                     </li>
                     <li>
-                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('ShiftLeft')}">Left Shift</span> to show path bounds and drag the entire path around<span class="o">.</span></span>
+                        <span>Hold down <span :class="{'highlight': appState.keysDown.includes('ShiftLeft')}">Left Shift</span> to show path bounds and drag around the entire path<span class="o">.</span></span>
                     </li>
                     <li>
                         <span>Edits are saved for the next time you visit<span class="o">.</span> Click the reset button to clear all edits<span class="o">.</span></span>

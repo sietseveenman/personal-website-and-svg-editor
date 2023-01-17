@@ -11,6 +11,13 @@
         <line transform-origin="180 180"
             stroke="var(--c-six)" x1="180" y1="180" x2="360" y2="180" />
         
+        <rect v-if="appState.keysDown.includes('ShiftLeft')" 
+            fill="transparent" class="layer-area"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e, 'pie', 'position')"
+            stroke-dasharray="8" stroke="var(--c-two)" :stroke-opacity="0.4"
+            width="360" height="360" 
+            x="0" y="0" />
+
         <g :transform="`rotate(${arc})`" transform-origin="180 180">
             <line :stroke="color" x1="180" y1="180" x2="360" y2="180" />
             <circle stroke="var(--c-five)" r="10" class="handle"
@@ -19,7 +26,6 @@
                 :cx="handle" cy="180"/>
         </g>
 
-            
     </g>
 </template>
 

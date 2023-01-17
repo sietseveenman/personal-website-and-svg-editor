@@ -1,5 +1,6 @@
 <template>
     <g :transform="`translate(${path.position.x}, ${path.position.y})`">
+
         <rect x="0" y="0" fill="transparent"
             :width="path.size" :height="path.size" :rx="radius <= 0 ? 0 : radius"
             :transform-origin="`${half} ${half}`"
@@ -8,7 +9,14 @@
             :stroke-dasharray="dashArray"
             :stroke-dashoffset="dashOffset"
             :stroke-width="strokeWidth" />
-        
+
+        <rect v-if="appState.keysDown.includes('ShiftLeft')" 
+            fill="transparent" class="layer-area"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'position')"
+            stroke-dasharray="8" stroke="var(--c-two)" :stroke-opacity="0.4"
+            :width="path.size * 1.43" :height="path.size * 1.43" 
+            :x="-(path.size * 0.217)" :y="-(path.size * 0.22)" />
+            
         <circle class="handle handle--s"
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'h1')"
             @touchstart.prevent="(e)=>appState.setActiveAnchor(e, pathName, 'h1')"

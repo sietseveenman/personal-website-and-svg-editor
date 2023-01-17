@@ -14,7 +14,15 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M104.207 150.342L106.578 147.971L106.052 147.444L103.681 149.815L101.31 147.444L100.783 147.971L103.154 150.342L100.783 152.713L101.31 153.24L103.681 150.869L106.052 153.24L106.578 152.713L104.207 150.342Z" fill="var(--c-six)"/>
         </g>
 
-        <path :d="boardPath" stroke="var(--c-six)" stroke-width="0.8"/>
+                
+        <path :d="boardPath" stroke="var(--c-six)" stroke-width="0.8" ref="line"/>
+   
+        <rect v-if="gotRect && appState.keysDown.includes('ShiftLeft')" 
+            fill="transparent" class="layer-area"
+            @mousedown.prevent="(e)=>appState.setActiveAnchor(e, 'skateboard', 'position')"
+            stroke-dasharray="8" stroke="var(--c-two)" :stroke-opacity="0.4"
+            :width="clickabelRectSize.width" :height="clickabelRectSize.height" 
+            :x="clickabelRectSize.x" :y="clickabelRectSize.y" />
 
         <rect  class="handle" 
             @mousedown.prevent="(e)=>appState.setActiveAnchor(e,'skateboard', '_top', 'x', ['_top__h'])"
@@ -126,4 +134,34 @@
             C ${ width - path._1__h_1.x }  ${ path._1__h_1.y }  ${ width - path._top__h.x }  ${ path._top__h.y }  ${ width - path._top.x }  ${ path._top.y }
         `
     })
+    
+    const line = ref(null)
+    const gotRect = ref(false)
+    const clickabelRectSize = ref({
+        width:0,
+        height:0,
+        x:0,
+        y:0
+    })
+
+    watch(layer, () => {
+        setClickable(line.value.getBoundingClientRect(), layer.value.position)
+    }, {deep:true})
+
+
+    onMounted(() => {
+        setClickable(line.value.getBoundingClientRect(), layer.value.position)
+    })
+
+    function setClickable(rect, pos) {
+        const { width, height, top, left } = rect
+        clickabelRectSize.value = {
+            width,
+            height,
+            x: left - (pos.x - window.scrollX),
+            y: top  - (pos.y - window.scrollY),
+        }
+        gotRect.value = true
+    }
+
 </script>
