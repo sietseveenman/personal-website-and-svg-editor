@@ -1,11 +1,17 @@
 <template>
-    <div class="artboard" :class="{'grabbing': isGrabbing, 'can-grab': canGrab, 'pointer-events-stroke' : appState.keysDown.includes('ControlLeft') }"
+    <div class="artboard" 
+        :class="{
+            'grabbing': isGrabbing, 
+            'can-grab': canGrab, 
+            'pointer-events-stroke' : appState.keysDown.includes('ControlLeft'),
+            'pen-tool-active' : appState.penToolActive 
+        }"
         @mousedown.prevent="handleMouseDown"
         @mousemove.prevent="handleMouseMove"
         @mouseup.prevent="handleMouseUp"
         @wheel.prevent="handleWheel"
         >
-        <svg width="3200" height="3200" viewBox="0 0 3200 3200" xmlns="http://www.w3.org/2000/svg" id="artboard">
+        <svg width="3200" height="12000" viewBox="0 0 3200 12000" xmlns="http://www.w3.org/2000/svg" id="artboard">
             <rect width="100%" height="100%" fill="var(--c-background)"></rect>
             
             <LayersLine pathName="lineOne" palet="1"/>
@@ -28,7 +34,12 @@
 
             <LayersLogo />
 
+            <LayersCustom v-for="layer in customLayers.layers" :key="layer.key" :layer="layer"/>
+
+
         </svg>
+        <small class="coords">{ x: {{ appState.userPosition.x.toFixed(1) }}, y: {{ appState.userPosition.y.toFixed(1) }} }</small>
+        <PenToolButton></PenToolButton>
     </div>
 </template>
 
@@ -37,9 +48,11 @@
     import { onMounted } from 'vue'
     import { useAppState } from '@/stores/appState'
     import { useBaseLayers } from '@/stores/baseLayers'
+    import { useCustomLayers } from '@/stores/customLayers'
 
     const appState = useAppState()
     const baseLayers = useBaseLayers()
+    const customLayers = useCustomLayers()
 
     let prevClient = null
     let lockedAxis = undefined
@@ -68,10 +81,15 @@
         // Hanlde Keys
         // ---------------------
         window.addEventListener( 'keydown', (e) => appState.keyDown(e) )
-        window.addEventListener( 'keyup', (e) => appState.keyUp(e) )
+        window.addEventListener( 'keyup', (e) => handleKeyUp(e) )
 
         window.addEventListener( 'blur', () => appState.keysDown = [] )
     })
+
+    function handleKeyUp(e) {
+        customLayers.keyUp(e)
+        appState.keyUp(e)
+    }
 
     function handleTouchStart (e) {
         e.preventDefault()
@@ -131,6 +149,9 @@
 
     function handleMouseDown (e) {
         appState.mouseDown = true
+        if ( appState.penToolActive ) {
+            customLayers.addPathAnchor(e)
+        }
     }
 
     function handleMouseUp (e) {
@@ -160,9 +181,14 @@
                 appState.updateUserPosition(diff)
             }
 
+            else if ( appState.penToolActive ) {
+                const point = customLayers.layerObjects[appState.activePath][appState.activeAnchor]
+                handleDrag(point, diff, customLayers.layerObjects)
+            }
+
             else if ( appState.activePath ) {
                 const point = baseLayers[appState.activePath][appState.activeAnchor]
-                handleDrag(point, diff)
+                handleDrag(point, diff, baseLayers)
                 baseLayers.isAltered = true
             }
         }
@@ -170,21 +196,22 @@
         prevClient = { x: mx, y: my }
     }
 
-    function handleDrag(point, diff) {
+    function handleDrag(point, diff, layerSet) {
+
         lockedAxis = point.lockedAxis
 
         movePoint(point, diff)
 
         if ( point.joined ) {
             point.joined.forEach(joinedPoint => {
-                const point = baseLayers[appState.activePath][joinedPoint]
+                const point = layerSet[appState.activePath][joinedPoint]
                 movePoint(point, diff)
             })
         }
 
         if ( point.mirror && ! appState.keysDown.includes('AltLeft') ) {
             point.mirror.forEach(mirrorPoint => {
-                const point = baseLayers[appState.activePath][mirrorPoint]
+                const point = layerSet[appState.activePath][mirrorPoint]
                 if ( lockedAxis !== 'x' ) point.x += diff.x
                 if ( lockedAxis !== 'y' ) point.y += diff.y
             })
@@ -211,16 +238,17 @@
         &.grabbing {
             * { cursor: grabbing !important; }
         }
-        
+        &.pen-tool-active {
+            cursor: crosshair;
+        }
         svg {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
             overflow: hidden;
+            display: block;
         }
     }
-
+    .pen-tool-active .handle {
+        pointer-events: none;
+    }
     .handle {
         cursor: grab;
         z-index: 999;
@@ -241,5 +269,13 @@
             cursor: grab;
             stroke-opacity: 0.8;
         }
+    }
+    .coords {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 1.1rem;
+        z-index: 20;
+        color: var(--c-six);
     }
 </style>

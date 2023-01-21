@@ -46,6 +46,8 @@ export const useAppState = defineStore('appState', {
         activeTheme: useLocalStorage('piniaTheme', 'default'),
         userPosition: useLocalStorage('piniaPosition', JSON.parse(initialPosition)),
 		userPositionAltered: useLocalStorage('piniaPositionAltered', false),
+		
+		penToolActive: false,
 		activePath: undefined,
 		activeAnchor: undefined,
 				
@@ -74,7 +76,7 @@ export const useAppState = defineStore('appState', {
 			const x = this.userPosition.x + diff.x
 			const y = this.userPosition.y + diff.y
 			this.userPosition.x = clamp(x, 0, 3200-this.windowSize.width)
-			this.userPosition.y = clamp(y, 0, 3260-this.windowSize.height)
+			this.userPosition.y = clamp(y, 0, 12000-this.windowSize.height)
 			window.scrollTo(this.userPosition.x, this.userPosition.y)
 		},
 
