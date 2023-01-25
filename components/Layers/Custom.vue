@@ -1,7 +1,7 @@
 <template>
     <g :transform="`translate(${layer.data.position.x}, ${layer.data.position.y})`">
    
-        <path :d="path" ref="line" stroke="var(--c-one)" fill="transparent"/>
+        <path :d="path" ref="line" stroke="var(--c-one)" fill="transparent" stroke-width="0.6"/>
 
          <g v-for="point in points" :key="point.key">
             <rect v-if="point.type === 'anchor'" 
@@ -12,15 +12,15 @@
                 :transform="`rotate(45 ${ point.data.x } ${ point.data.y })`"
                 stroke="var(--c-five)"
                 stroke-opacity="1"
-                stroke-width="1"/>
+                stroke-width="0.8"/>
         </g>
         <g v-for="point in points" :key="point.key">
             <circle v-if="point.type === 'handle'"
                 class="handle"
                 fill="transparent"
-                stroke="var(--c-six)"
+                stroke="var(--c-two)"
                 stroke-opacity="1" 
-                stroke-width="1" :r="9"
+                stroke-width="1" :r="6"
                 :cx="point.data.x" :cy="point.data.y" />
         </g>
 

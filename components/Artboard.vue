@@ -149,15 +149,21 @@
 
     function handleMouseDown (e) {
         appState.mouseDown = true
-        if ( appState.penToolActive ) {
+        if ( appState.penToolActive && !e.target.closest('button')) {
             customLayers.addPathAnchor(e)
         }
     }
 
     function handleMouseUp (e) {
-        appState.resetDrag()
+        if ( ! appState.penToolActive ) {
+            appState.resetDrag()
+            prevClient = null
+        } else {
+            customLayers.previewNextPoint(e)
+        }
+        
         appState.mouseDown = false
-        prevClient = null
+  
     }
     
     function handleWheel(e) {
@@ -173,7 +179,7 @@
         const mx = e.clientX, my = e.clientY
         appState.mouse = { x: mx, y: my }
         
-        if ( prevClient && appState.mouseDown ) {
+        if ( prevClient && (appState.mouseDown || (appState.penToolActive && appState.activePath)) ) {
                 
             const diff = { x: prevClient.x - mx, y: prevClient.y - my }
             
@@ -276,6 +282,6 @@
         right: 10px;
         font-size: 1.1rem;
         z-index: 20;
-        color: var(--c-six);
+        color: grey;
     }
 </style>
