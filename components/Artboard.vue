@@ -4,7 +4,8 @@
             'grabbing': isGrabbing, 
             'can-grab': canGrab, 
             'pointer-events-stroke' : appState.keysDown.includes('ControlLeft'),
-            'pen-tool-active' : appState.penToolActive 
+            'pen-tool-active' : appState.penToolActive,
+            'creating-path' : customLayers.editingLayer 
         }"
         @mousedown.prevent="handleMouseDown"
         @mousemove.prevent="handleMouseMove"
@@ -246,6 +247,10 @@
         }
         &.pen-tool-active {
             cursor: crosshair;
+
+            &.creating-path {
+                cursor: none;
+            }
         }
         svg {
             overflow: hidden;
